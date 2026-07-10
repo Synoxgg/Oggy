@@ -1722,16 +1722,21 @@
                     if(!dbConfig.adminAuth) dbConfig.adminAuth = window.siteConfig.adminAuth || defaultAdminConfig.adminAuth;
                     if(!dbConfig.images) dbConfig.images = window.siteConfig.images || defaultAdminConfig.images;
                     if(!dbConfig.audio) dbConfig.audio = window.siteConfig.audio || defaultAdminConfig.audio;
+                    if(!dbConfig.trialPacks) dbConfig.trialPacks = window.siteConfig.trialPacks || defaultAdminConfig.trialPacks;
+                    if(!dbConfig.bulkPacks) dbConfig.bulkPacks = window.siteConfig.bulkPacks || defaultAdminConfig.bulkPacks;
 
                     window.siteConfig = dbConfig;
                     
-                    if(typeof window.applyUISettings === 'function') window.applyUISettings();
-                    if(typeof window.renderSitePacks === 'function') window.renderSitePacks();
-                    if(typeof window.renderAdminPacksList === 'function') window.renderAdminPacksList();
-                    if(typeof window.renderAdminRzpLinksList === 'function') window.renderAdminRzpLinksList();
-                    if(typeof window.renderAdminCreatorUidsList === 'function') window.renderAdminCreatorUidsList();
-                    if(typeof window.renderAdminFaqsList === 'function') window.renderAdminFaqsList();
-                    if(typeof window.injectDynamicStatusUI === 'function') window.injectDynamicStatusUI(); 
+                    // Delay render to ensure DOM is fully ready and avoid race conditions
+                    setTimeout(() => {
+                        if(typeof window.applyUISettings === 'function') window.applyUISettings();
+                        if(typeof window.renderSitePacks === 'function') window.renderSitePacks();
+                        if(typeof window.renderAdminPacksList === 'function') window.renderAdminPacksList();
+                        if(typeof window.renderAdminRzpLinksList === 'function') window.renderAdminRzpLinksList();
+                        if(typeof window.renderAdminCreatorUidsList === 'function') window.renderAdminCreatorUidsList();
+                        if(typeof window.renderAdminFaqsList === 'function') window.renderAdminFaqsList();
+                        if(typeof window.injectDynamicStatusUI === 'function') window.injectDynamicStatusUI();
+                    }, 100);
                     
                 } else {
                     if(window.siteConfig) {
@@ -1883,6 +1888,33 @@
     let currentUid = "";
     let currentIgn = "";
     let allowSocialProofPopup = true;
+
+    function isUpiLink(url) {
+        return url && (url.startsWith('upi://') || url.startsWith('intent://') || url.startsWith('tez://') || url.startsWith('paytmmp://') || url.startsWith('phonepe://') || url.startsWith('gpay://'));
+    }
+
+    function openPaymentUrl(url) {
+        if (!url || url === 'FREE_PACK') return null;
+        
+        if (isUpiLink(url)) {
+            // Hidden iframe approach: prevents page redirect and triggers app chooser on ALL mobile browsers
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.style.width = '0';
+            iframe.style.height = '0';
+            iframe.style.border = 'none';
+            iframe.src = url;
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+                if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+            }, 3000);
+            return null;
+        } else {
+            // Regular https Razorpay links open in new tab as before
+            return window.open(url, '_blank');
+        }
+    }
 
     function getText(key) { return window.siteConfig.texts[key] || defaultAdminConfig.texts[key]; }
     function getTgl(key) { return window.siteConfig.toggles[key] !== false; }
@@ -2303,6 +2335,7 @@
         document.getElementById('admTxtTrialModD').value = t.trialModalDesc;
         document.getElementById('admTxtRegModT').value = t.regModalTitle;
         document.getElementById('admTxtRegModD').value = t.regModalDesc;
+        
         document.getElementById('admTxtUidModT').value = t.uidModalTitle;
         document.getElementById('admTxtUidMod1').value = t.uidModalL1;
         document.getElementById('admTxtUidMod2').value = t.uidModalL2;
@@ -2794,9 +2827,14 @@
       history.replaceState({ step: 1, type: 'step' }, document.title, window.location.href);
       initParticles(); window.applyUISettings(); window.renderSitePacks(); document.getElementById('next1').disabled = true;
       setTimeout(hideInitialLoader, 2500);
+      
+      // Fallback: Re-render packs after Firebase live config loads (fixes stale default packs on first visit)
+      setTimeout(() => {
+          if(typeof window.renderSitePacks === 'function') window.renderSitePacks();
+      }, 3000);
     });
 
-    const gamingNames = [ "亗『MÂFÎÂ亗", "TOXIC彡KD", "77・playzYT", "SK๛play๛Live", "千ムＩＲＹＹ", "IQōShāDøwW", "LÙÇÍFËR〆", "Mâhïmâ", "DEMØN丨DEEPAK", "亗CZxAnurag亗", "FRSTxZGOD", "FGxWONGPLAYzzz", "GÕD〤RÚSHÈR", "IGメABHAY", "MR々ŁEGENÐ", "VÌNNÍ乂PLAYZ", "KGF๛OP亗×", "ROYALツKUNAL20", "『RÁGNÁR』", "GLXY丨DANGER", "SHADOW๛RIVEN", "會DAKU父", "LEGEND丶OPP", "SAʀDAʀJi", "HAWK么HARSH", "ZMCxSHREY", "K4气KALAAKAR", "『AIMGOD』1", "T乛Rex乛RAVAN", "Ē・ＶＥＮＯＭ", "๛『Vëgêtå", "4A乛M丨SNOW", "٭ɞALPHAʚ٭", "im๛PANDA", "SGLxShivam", "乛GameīxīOM", "・Ｄ卄マＵＶ・", "『EPC』KRXSNA", "ＦｒＯｚｅＮ", "๛Ðʀʌɢo", "ＹＡＳＨīě", "ＳＨＵ及Ｈ", "XT个『Farhan』", "D£ATH๛SLAYER", "『LAKSHYÀ』", "中ツWARRIORYT", "Vns๛Rahul", "EQZxJOKERyt", "ReFLeXツVENOM", "冬ＧＡBAʀ" ];
+    const gamingNames = [ "亗『MÂFÎÂ亗", "TOXIC彡KD", "77・playzYT", "SK๛play๛Live", "千ムＩＲＹＹ", "IQōShāDøwW", "LÙÇÍFËR〆", "Mâhïmâ", "DEMØN丨DEEPAK", "亗CZxAnurag亗", "FRSTxZGOD", "FGxWONGPLAYzzz", "GÕD〤RÚSHËR", "IGメABHAY", "MR々ŁEGENÐ", "VÌNNÍ乂PLAYZ", "KGF๛OP亗×", "ROYALツKUNAL20", "『RÁGNÁR』", "GLXY丨DANGER", "SHADOW๛RIVEN", "會DAKU父", "LEGEND丶OPP", "SAʀDAʀJi", "HAWK么HARSH", "ZMCxSHREY", "K4气KALAAKAR", "『AIMGOD』1", "T乛Rex乛RAVAN", "Ē・ＶＥＮＯＭ", "๛『Vëgêtå", "4A乛M丨SNOW", "٭ɞALPHAʚ٭", "im๛PANDA", "SGLxShivam", "乛GameīxīOM", "・Ｄ卄マＵＶ・", "『EPC』KRXSNA", "ＦｒＯｚｅＮ", "๛Ðʀʌɢo", "ＹＡＳＨīě", "ＳＨＵ及Ｈ", "XT个『Farhan』", "D£ATH๛SLAYER", "『LAKSHYÀ』", "中ツWARRIORYT", "Vns๛Rahul", "EQZxJOKERyt", "ReFLeXツVENOM", "冬ＧＡBAʀ" ];
     function getSocialUcPacks() { const tPacks = window.siteConfig.trialPacks || []; const bPacks = window.siteConfig.bulkPacks || []; return [...tPacks, ...bPacks].map(p => p.uc + " UC"); }
     function showSocialProof(){
       if(!allowSocialProofPopup) return; const ucPacksList = getSocialUcPacks(); if(ucPacksList.length === 0) return;
@@ -3077,7 +3115,7 @@
               setTimeout(() => { processSuccessfulPayment(); }, 1500);
           } else {
               if (!rzpTargetLink) { alert("Error: Admin has not configured a Razorpay link for this pack or globally."); return; }
-              razorpayWindow = window.open(rzpTargetLink, '_blank');
+              razorpayWindow = openPaymentUrl(rzpTargetLink);
           }
       };
       
