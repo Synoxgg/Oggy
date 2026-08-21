@@ -1874,154 +1874,140 @@
 
 </style>
 
-
-  <style>
-  /* ===== UCify Floating Header - New Design ===== */
-  .ucify-float-header {
-    position: sticky;
-    top: 0;
-    z-index: 10000;
-    width: 100%;
-    background: rgba(10, 10, 14, 0.72);
-    backdrop-filter: blur(22px) saturate(1.4);
-    -webkit-backdrop-filter: blur(22px) saturate(1.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.05) inset;
-    animation: floatHeaderSlide 0.6s ease-out;
-  }
-  @keyframes floatHeaderSlide {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  .ucify-float-inner {
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .ucify-float-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    user-select: none;
-    pointer-events: auto !important;
-  }
-  .ucify-float-logo {
-    height: 28px;
-    width: auto;
-    max-width: 92px;
-    object-fit: contain;
-    display: block;
-    pointer-events: auto !important;
-    filter: drop-shadow(0 0 8px rgba(255,184,0,0.25));
-    transition: transform 0.2s ease;
-  }
-  .ucify-float-left:hover .ucify-float-logo {
-    transform: scale(1.05);
-  }
-  .ucify-float-divider {
-    color: rgba(255,255,255,0.25);
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 1;
-  }
-  .ucify-float-auth {
-    font-family: var(--font-display, 'Rajdhani', sans-serif);
-    font-weight: 600;
-    font-size: 12.5px;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    white-space: nowrap;
-  }
-  .ucify-float-right {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(255,184,0,0.10);
-    border: 1px solid rgba(255,184,0,0.22);
-    padding: 6px 12px;
-    border-radius: 100px;
-    backdrop-filter: blur(8px);
-  }
-  .ucify-float-instant {
-    font-family: var(--font-display, 'Rajdhani', sans-serif);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--primary, #FFB800);
-  }
-  .ucify-float-lightning {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary, #FFB800);
-    font-size: 13px;
-    animation: lightningPulse 1.4s infinite ease-in-out;
-    filter: drop-shadow(0 0 6px rgba(255,184,0,0.7));
-  }
-  @keyframes lightningPulse {
-    0%, 100% { 
-      transform: scale(1) rotate(0deg); 
-      opacity: 1; 
-      filter: drop-shadow(0 0 6px rgba(255,184,0,0.7));
+<style>
+    /* === UCify Floating Header - Added as per request === */
+    .ucify-float-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      background: rgba(10, 10, 14, 0.82);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.05) inset;
     }
-    15% { 
-      transform: scale(1.25) rotate(-5deg); 
-      opacity: 1;
-      filter: drop-shadow(0 0 12px rgba(255,184,0,1));
+    .float-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    30% { 
-      transform: scale(0.95) rotate(5deg); 
+    .float-logo {
+      height: 28px;
+      width: auto;
+      max-width: 110px;
+      object-fit: contain;
+      cursor: pointer;
+      filter: drop-shadow(0 0 6px rgba(255,184,0,0.25));
+    }
+    .float-separator {
+      color: rgba(255, 255, 255, 0.25);
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .float-authorized {
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
       opacity: 0.9;
     }
-    45% { 
-      transform: scale(1.15) rotate(-3deg); 
-      opacity: 1;
-      filter: drop-shadow(0 0 10px rgba(255,184,0,0.9));
+    .float-right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 215, 0, 0.08);
+      border: 1px solid rgba(255, 215, 0, 0.18);
+      padding: 6px 12px;
+      border-radius: 999px;
     }
-    60% { 
-      transform: scale(1) rotate(0deg); 
+    .float-instant {
+      color: #FFD700;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
     }
-  }
-  /* Make container top padding adjust since header is sticky */
-  body {
-    padding-top: 0 !important;
-  }
-  /* Mobile tweaks */
-  @media (max-width: 360px) {
-    .ucify-float-inner { padding: 10px 14px; }
-    .ucify-float-logo { height: 24px; max-width: 80px; }
-    .ucify-float-auth { font-size: 11px; }
-    .ucify-float-right { padding: 5px 10px; }
-  }
-  </style>
-
+    .lightning-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+    }
+    .lightning-icon {
+      color: #FFD700;
+      font-size: 15px;
+      animation: lightningFlash 1.8s infinite ease-in-out;
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9));
+    }
+    @keyframes lightningFlash {
+      0%, 85%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9));
+      }
+      5% {
+        transform: scale(1.35) rotate(3deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 12px rgba(255, 215, 0, 1)) drop-shadow(0 0 20px rgba(255, 170, 0, 0.9));
+      }
+      10% {
+        transform: scale(0.92) rotate(-2deg);
+        opacity: 0.85;
+      }
+      15% {
+        transform: scale(1.28) rotate(2deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+      }
+      20% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+    /* Add top padding to body so content not hidden behind fixed header */
+    body {
+      padding-top: 56px !important;
+    }
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      .ucify-float-header { padding: 0 12px; height: 52px; }
+      body { padding-top: 52px !important; }
+      .float-logo { height: 24px; max-width: 90px; }
+      .float-authorized { font-size: 11.5px; }
+      .float-right { padding: 5px 10px; gap: 5px; }
+      .float-instant { font-size: 11px; }
+      .lightning-icon { font-size: 13px; }
+    }
+</style>
 </head>
 
 <body oncontextmenu="return false;">
-  <!-- ========== NEW FLOATING HEADER (Requested Change) ========== -->
-  <header class="ucify-float-header">
-    <div class="ucify-float-inner">
-      <div class="ucify-float-left" onclick="handleLogoClick()">
-        <img src="ucify.webp" id="dispSiteLogo" alt="UCify Logo" class="ucify-float-logo" draggable="false" onerror="this.onerror=null; this.src='ucify.webp';">
-        <span class="ucify-float-divider">|</span>
-        <span class="ucify-float-auth">Authorized Store</span>
-      </div>
-      <div class="ucify-float-right">
-        <span class="ucify-float-instant">Instant</span>
-        <span class="ucify-float-lightning">
-          <i class="fa-solid fa-bolt"></i>
-        </span>
-      </div>
+
+  <!-- UCify Floating Header - Replaces old top-card -->
+  <header class="ucify-float-header" id="ucifyFloatHeader">
+    <div class="float-left">
+      <img src="ucify.webp" id="dispSiteLogo" alt="UCify Logo" class="float-logo" draggable="false" style="pointer-events: auto !important; cursor: pointer; touch-action: manipulation;" onclick="handleLogoClick()" onerror="this.onerror=null; this.src='ucify.webp';">
+      <span class="float-separator">|</span>
+      <span class="float-authorized">Authorized Store</span>
+    </div>
+    <div class="float-right">
+      <span class="float-instant">Instant</span>
+      <span class="lightning-wrap">
+        <i class="fa-solid fa-bolt lightning-icon"></i>
+      </span>
     </div>
   </header>
+
 
 
   
@@ -2081,8 +2067,9 @@
   <div class="container">
     
     
-    <!-- top-card removed as per request - replaced with floating header -->
+    <!-- top-card removed as per request - replaced by floating header -->
     
+    </div>
 
     <div class="game-info-card">
       <div class="game-info-main">
@@ -4313,11 +4300,11 @@ tryInitRemote();
             _loaderEl.textContent = getText('loaderText');
           }
         }
-        document.getElementById('dispTagline').textContent = getText('tagline');
+        var _tagEl = document.getElementById('dispTagline'); if(_tagEl) _tagEl.textContent = getText('tagline');
         const _pt = document.getElementById('dispPartnerText'); if(_pt) _pt.textContent = getText('partnerBadge');
-        document.getElementById('dispSecureBadge').textContent = getText('secureBadge');
-        document.getElementById('dispInstantBadge').textContent = getText('instantBadge');
-        document.getElementById('dispSupportBadge').textContent = getText('supportBadge');
+        var _secEl = document.getElementById('dispSecureBadge'); if(_secEl) _secEl.textContent = getText('secureBadge');
+        var _insEl = document.getElementById('dispInstantBadge'); if(_insEl) _insEl.textContent = getText('instantBadge');
+        var _supEl = document.getElementById('dispSupportBadge'); if(_supEl) _supEl.textContent = getText('supportBadge');
         const _odt = document.getElementById('dispOrdersToday'); if(_odt) _odt.textContent = getText('ordersToday');
         
         let _st1 = document.getElementById('dispStep1Title'); if(_st1) _st1.textContent = getText('step1Title');
@@ -4391,10 +4378,10 @@ tryInitRemote();
         document.getElementById('dispIgnModalL3').textContent = getText('ignModalL3');
 
         // Toggle Displays
-        document.getElementById('dispTagline').style.display = getTgl('showTagline') ? 'block' : 'none';
-        document.getElementById('pillSecure').style.display = getTgl('showSecureBadge') ? 'flex' : 'none';
-        document.getElementById('pillInstant').style.display = getTgl('showInstantBadge') ? 'flex' : 'none';
-        document.getElementById('pillSupport').style.display = getTgl('showSupportBadge') ? 'flex' : 'none';
+        var _tagEl2 = document.getElementById('dispTagline'); if(_tagEl2) _tagEl2.style.display = getTgl('showTagline') ? 'block' : 'none';
+        var _pSec = document.getElementById('pillSecure'); if(_pSec) _pSec.style.display = getTgl('showSecureBadge') ? 'flex' : 'none';
+        var _pIns = document.getElementById('pillInstant'); if(_pIns) _pIns.style.display = getTgl('showInstantBadge') ? 'flex' : 'none';
+        var _pSup = document.getElementById('pillSupport'); if(_pSup) _pSup.style.display = getTgl('showSupportBadge') ? 'flex' : 'none';
         const _ps = document.getElementById('pillStats'); if(_ps) _ps.style.display = getTgl('showOrdersToday') ? 'flex' : 'none'; 
         
         let _s1t = document.getElementById('dispStep1Title'); if(_s1t) _s1t.style.display = getTgl('showStep1Title') ? 'block' : 'none';
