@@ -1876,6 +1876,8 @@
 
 <style>
     /* ===== UCify NEW FLOATING HEADER - Premium Hover Design ===== */
+    /* Hide old top tile - keep in DOM for safety so nothing breaks */
+    .top-card { display: none !important; }
     .ucify-floating-header-wrap {
       position: sticky;
       top: 12px;
@@ -2123,7 +2125,7 @@
   <div class="ucify-floating-header-wrap">
     <header class="ucify-floating-header">
       <div class="ufh-left">
-        <img src="ucify.webp" alt="UCify" class="ufh-logo" id="dispFloatingLogo">
+        <img src="ucify.webp" alt="UCify" class="ufh-logo">
         <span class="ufh-divider">|</span>
         <span class="ufh-authorized">
           <span class="ufh-auth-icon"><i class="fa-solid fa-circle-check"></i></span>
@@ -2143,9 +2145,19 @@
 
   <div class="container">
     
-    
-    <!-- top-card removed -->
-    
+    <div class="top-card">
+      <div class="header">
+        <img src="ucify.webp" id="dispSiteLogo" alt="UCify Logo" class="logo-img" draggable="false" style="pointer-events: auto !important; cursor: pointer; touch-action: manipulation; display:block;" onclick="handleLogoClick()" onerror="this.onerror=null; this.src='ucify.webp'; console.log('Logo fallback triggered')">
+        <p class="tagline" id="dispTagline">Instant game top-ups at affordable rates</p>
+
+        <div class="trust-strip" id="dispTrustStrip">
+          <div class="trust-pill" id="pillSecure"><i class="fa-solid fa-lock"></i> <span id="dispSecureBadge">Secure</span></div>
+          <div class="trust-pill" id="pillInstant"><i class="fa-solid fa-bolt"></i> <span id="dispInstantBadge">Instant</span></div>
+          <div class="trust-pill" id="pillSupport"><i class="fa-solid fa-headset"></i> <span id="dispSupportBadge">24/7</span></div>
+        </div>
+      
+      </div>
+    </div>
 
     <div class="game-info-card">
       <div class="game-info-main">
