@@ -1777,6 +1777,25 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    /* === FIX: Footer + Social Proof Overlap === */
+    .social-proof {
+      z-index: 95 !important; /* Above sticky bar but below modals */
+      transition: bottom 0.3s ease, transform 0.3s ease, opacity 0.3s ease !important;
+    }
+    /* Default footer padding */
+    .site-footer {
+      padding-bottom: 80px !important; /* space for social proof */
+      transition: padding-bottom 0.3s ease;
+    }
+    body.has-sticky-purchase .site-footer {
+      padding-bottom: 170px !important; /* space for sticky + popup */
+    }
+    /* When footer is in viewport, lift popup above footer */
+    body.footer-visible .social-proof {
+      opacity: 0.95;
+    }
+
+    #stickyTotalUc { color: #a0a0a0; font-family: var(--font-body); font-size: 11px; font-weight: 500; margin-top: -1px; }
     #stickyPriceText {
       color: var(--primary);
       font-family: var(--font-display);
@@ -1805,7 +1824,8 @@
       bottom: 80px !important;
     }
     @media (max-width: 360px) {
-      #stickyPriceText { font-size: 18px; }
+      #stickyTotalUc { color: #a0a0a0; font-family: var(--font-body); font-size: 11px; font-weight: 500; margin-top: -1px; }
+    #stickyPriceText { font-size: 18px; }
       #stickyPurchaseBtn { padding: 12px 14px; font-size: 14px; max-width: 180px; }
     }
 
@@ -5583,6 +5603,53 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
         }
       } catch(e) {}
     }
+
+    /* === SOCIAL PROOF + FOOTER OVERLAP FIX === */
+    (function(){
+      function updateFooterOverlap() {
+        var footer = document.querySelector('.site-footer');
+        var social = document.querySelector('.social-proof');
+        var sticky = document.getElementById('stickyPurchaseBar');
+        if(!footer || !social) return;
+        
+        var rect = footer.getBoundingClientRect();
+        var windowHeight = window.innerHeight;
+        
+        if(rect.top < windowHeight) {
+          // Footer is visible in viewport
+          document.body.classList.add('footer-visible');
+          var overlap = windowHeight - rect.top; // how much footer overlaps bottom
+          var baseBottom = (sticky && sticky.classList.contains('active')) ? 80 : 20;
+          
+          if(overlap > 0) {
+            // Lift popup above footer, so it appears OVER footer empty space, not over links
+            // Links are at top of footer, so we lift by overlap + base
+            social.style.bottom = (overlap + baseBottom + 10) + 'px';
+          }
+        } else {
+          document.body.classList.remove('footer-visible');
+          social.style.bottom = '';
+        }
+      }
+      
+      window.addEventListener('scroll', updateFooterOverlap, {passive: true});
+      window.addEventListener('resize', updateFooterOverlap);
+      // Run initially and after popup shows
+      setInterval(updateFooterOverlap, 1000);
+      
+      // Also observe when social-proof becomes visible (display changed)
+      var observer = new MutationObserver(function(){
+        setTimeout(updateFooterOverlap, 100);
+      });
+      var socialEl = document.querySelector('.social-proof');
+      if(socialEl) {
+        observer.observe(socialEl, {attributes: true, attributeFilter: ['style', 'class']});
+      }
+      
+      // Initial call
+      setTimeout(updateFooterOverlap, 500);
+    })();
+
 
     function updateProgress(){
       const steps = document.querySelectorAll('.progress-step');
