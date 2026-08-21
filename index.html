@@ -1875,144 +1875,111 @@
 </style>
 
 <style>
-    /* ===== UCify NEW FLOATING HEADER - Premium Hover Design ===== */
-    /* Hide old top tile - keep in DOM for safety so nothing breaks */
+    /* ===== UCify Full-Width Top Bar - Matching Pay Button Style ===== */
     .top-card { display: none !important; }
-    .ucify-floating-header-wrap {
+    body { padding-top: 0 !important; }
+    .ucify-topbar {
       position: sticky;
-      top: 12px;
-      z-index: 100;
+      top: 0;
+      left: 0;
+      right: 0;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      padding: 0 16px;
-      margin-bottom: 6px;
-      pointer-events: none;
-      animation: ufhFloatIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+      z-index: 999;
+      background: rgba(10, 10, 12, 0.96);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      /* hover floating effect */
+      transition: all 0.3s ease;
     }
-    @keyframes ufhFloatIn {
-      0% { transform: translateY(-20px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
+    .ucify-topbar:hover {
+      background: rgba(14, 14, 18, 0.98);
+      border-bottom-color: rgba(255,184,0,0.12);
+      box-shadow: 0 6px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,184,0,0.08) inset;
     }
-    .ucify-floating-header {
-      pointer-events: auto;
+    .ucify-topbar-inner {
       width: 100%;
       max-width: 480px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(18, 18, 22, 0.85);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 999px;
-      padding: 8px 14px 8px 14px;
-      box-shadow: 
-        0 8px 32px rgba(0,0,0,0.6),
-        0 1px 0 rgba(255,255,255,0.08) inset,
-        0 0 0 1px rgba(255,255,255,0.03) inset;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-      position: relative;
-      overflow: hidden;
+      padding: 10px 16px;
+      height: 52px;
     }
-    .ucify-floating-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.04) 40%, transparent 60%);
-      transform: translateX(-100%);
-      transition: transform 0.8s;
-      pointer-events: none;
+    .utb-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
     }
-    .ucify-floating-header:hover {
-      transform: translateY(-2px) scale(1.01);
-      background: rgba(22, 22, 28, 0.92);
-      border-color: rgba(255,184,0,0.15);
-      box-shadow: 
-        0 12px 40px rgba(0,0,0,0.7),
-        0 0 20px rgba(255,184,0,0.08),
-        0 1px 0 rgba(255,255,255,0.1) inset;
+    .utb-logo {
+      width: 72px;
+      height: 30px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(255,184,0,0.18));
+      flex-shrink: 0;
     }
-    .ucify-floating-header:hover::before {
-      transform: translateX(100%);
+    .utb-divider {
+      color: rgba(255,255,255,0.18);
+      font-weight: 300;
+      font-size: 16px;
     }
-    .ufh-left {
+    .utb-authorized {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+    }
+    .utb-tick {
+      color: #22c55e;
+      font-size: 13px;
+      filter: drop-shadow(0 0 6px rgba(34,197,94,0.6));
+      animation: tickPop 2s ease-in-out infinite;
+    }
+    @keyframes tickPop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    .utb-right {
       display: flex;
       align-items: center;
       gap: 8px;
-      min-width: 0;
-    }
-    .ufh-logo {
-      width: 68px;
-      height: 28px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(255,184,0,0.2));
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-    }
-    .ucify-floating-header:hover .ufh-logo {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 12px rgba(255,184,0,0.35));
-    }
-    .ufh-divider {
-      color: rgba(255,255,255,0.15);
-      font-weight: 300;
-      font-size: 14px;
-      margin: 0 1px;
-    }
-    .ufh-authorized {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      color: rgba(255,255,255,0.85);
-      white-space: nowrap;
-      text-transform: uppercase;
-    }
-    .ufh-auth-icon {
-      color: #22c55e;
-      font-size: 12px;
-      filter: drop-shadow(0 0 6px rgba(34,197,94,0.5));
-    }
-    .ufh-right {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .ufh-instant-pill {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      background: linear-gradient(135deg, rgba(255,184,0,0.15), rgba(255,140,0,0.12));
-      border: 1px solid rgba(255,184,0,0.22);
+      background: linear-gradient(135deg, rgba(255,184,0,0.12), rgba(255,140,0,0.08));
+      border: 1px solid rgba(255,184,0,0.18);
       border-radius: 999px;
-      padding: 5px 10px 5px 12px;
+      padding: 6px 10px 6px 12px;
+      flex-shrink: 0;
       position: relative;
       overflow: hidden;
     }
-    .ufh-instant-pill::after {
+    .utb-right::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,184,0,0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,184,0,0.12), transparent);
       transform: translateX(-100%);
-      animation: ufhShimmer 2.5s infinite;
+      animation: utbShimmer 2.2s infinite;
     }
-    @keyframes ufhShimmer {
+    @keyframes utbShimmer {
       0% { transform: translateX(-100%); }
-      60% { transform: translateX(100%); }
+      70% { transform: translateX(100%); }
       100% { transform: translateX(100%); }
     }
-    .ufh-instant-text {
+    .utb-instant {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.6px;
-      color: #FFB800;
+      letter-spacing: 0.7px;
       text-transform: uppercase;
+      color: #FFB800;
     }
-    .ufh-lightning {
+    .utb-lightning {
       width: 22px;
       height: 22px;
       background: linear-gradient(135deg, #FFB800, #FF8C00);
@@ -2022,45 +1989,31 @@
       justify-content: center;
       color: #000;
       font-size: 11px;
-      position: relative;
       box-shadow: 0 0 12px rgba(255,184,0,0.5);
-      animation: ufhLightningPulse 1.8s infinite;
+      animation: utbLightningPulse 1.7s infinite;
+      position: relative;
+      z-index: 1;
     }
-    @keyframes ufhLightningPulse {
-      0%, 100% { 
-        transform: scale(1); 
-        box-shadow: 0 0 12px rgba(255,184,0,0.5), 0 0 0 0 rgba(255,184,0,0.4);
-      }
-      50% { 
-        transform: scale(1.08); 
-        box-shadow: 0 0 18px rgba(255,184,0,0.7), 0 0 0 6px rgba(255,184,0,0);
-      }
+    @keyframes utbLightningPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 12px rgba(255,184,0,0.5); }
+      50% { transform: scale(1.1); box-shadow: 0 0 18px rgba(255,184,0,0.7), 0 0 0 5px rgba(255,184,0,0); }
     }
-    .ufh-lightning i {
-      animation: ufhBoltShake 1.8s infinite;
-      display: inline-block;
+    .utb-lightning i {
+      animation: utbBolt 1.7s infinite;
     }
-    @keyframes ufhBoltShake {
-      0%, 90%, 100% { transform: translateX(0) rotate(0deg); }
-      92% { transform: translateX(-1px) rotate(-8deg); }
-      94% { transform: translateX(1px) rotate(8deg); }
-      96% { transform: translateX(-1px) rotate(-4deg); }
-      98% { transform: translateX(1px) rotate(4deg); }
+    @keyframes utbBolt {
+      0%, 88%, 100% { transform: translateX(0) rotate(0); }
+      90% { transform: translateX(-1px) rotate(-10deg); }
+      92% { transform: translateX(1px) rotate(10deg); }
+      94% { transform: translateX(-1px) rotate(-5deg); }
+      96% { transform: translateX(1px) rotate(5deg); }
     }
-    @keyframes ufhFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-1.5px); }
+    .container { padding-top: 14px !important; }
+    @media (max-width: 360px) {
+      .utb-logo { width: 62px; }
+      .utb-authorized { font-size: 10px; }
+      .ucify-topbar-inner { padding: 8px 12px; height: 48px; }
     }
-    .ucify-floating-header-wrap {
-      animation: ufhFloatIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards, ufhFloat 4s ease-in-out 0.8s infinite;
-    }
-    @media (max-width: 380px) {
-      .ufh-logo { width: 58px; height: 24px; }
-      .ufh-authorized { font-size: 10px; }
-      .ufh-instant-text { font-size: 10px; }
-      .ucify-floating-header { padding: 7px 12px; }
-    }
-    .container { padding-top: 8px !important; }
 </style>
 </head>
 
@@ -2121,26 +2074,19 @@
   </div>
 
   
-  <!-- NEW UCify Floating Header - Premium Design -->
-  <div class="ucify-floating-header-wrap">
-    <header class="ucify-floating-header">
-      <div class="ufh-left">
-        <img src="ucify.webp" alt="UCify" class="ufh-logo">
-        <span class="ufh-divider">|</span>
-        <span class="ufh-authorized">
-          <span class="ufh-auth-icon"><i class="fa-solid fa-circle-check"></i></span>
-          Authorized Store
-        </span>
+  <!-- NEW UCify Full-Width Top Bar - Like Pay Button -->
+  <div class="ucify-topbar">
+    <div class="ucify-topbar-inner">
+      <div class="utb-left">
+        <img src="ucify.webp" alt="UCify" class="utb-logo">
+        <span class="utb-divider">|</span>
+        <span class="utb-authorized">Authorized Store <i class="fa-solid fa-circle-check utb-tick"></i></span>
       </div>
-      <div class="ufh-right">
-        <div class="ufh-instant-pill">
-          <span class="ufh-instant-text">Instant</span>
-          <span class="ufh-lightning">
-            <i class="fa-solid fa-bolt"></i>
-          </span>
-        </div>
+      <div class="utb-right">
+        <span class="utb-instant">Instant</span>
+        <span class="utb-lightning"><i class="fa-solid fa-bolt"></i></span>
       </div>
-    </header>
+    </div>
   </div>
 
   <div class="container">
