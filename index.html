@@ -1015,83 +1015,6 @@
     }
 
     .btn-row { display: flex; gap: 10px; margin-top: 20px; }
-
-    /* --- Sticky Purchase Bar for Step 2 --- */
-    .sticky-purchase-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-      background: rgba(10, 10, 12, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 184, 0, 0.2);
-      padding: 12px 16px;
-      padding-bottom: max(12px, env(safe-area-inset-bottom));
-      display: none;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s;
-      opacity: 0;
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-    }
-    .sticky-purchase-bar.show {
-      display: block;
-      transform: translateY(0);
-      opacity: 1;
-    }
-    .sticky-purchase-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-    .sticky-purchase-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-      flex: 1;
-      min-width: 0;
-    }
-    .sticky-purchase-uc {
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      font-family: var(--font-display);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-    }
-    .sticky-purchase-price {
-      color: var(--primary);
-      font-weight: 800;
-      font-size: 18px;
-      font-family: var(--font-display);
-    }
-    .sticky-purchase-btn {
-      width: auto !important;
-      min-width: 140px;
-      margin: 0 !important;
-      padding: 14px 24px !important;
-      font-size: 15px !important;
-      font-weight: 800 !important;
-      border-radius: 12px !important;
-      white-space: nowrap;
-      flex-shrink: 0;
-      animation: stickyPulse 2s infinite;
-    }
-    @keyframes stickyPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,184,0,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(255,184,0,0); }
-    }
-    /* Add bottom padding to step2 when sticky bar is visible so content not hidden */
-    #step2.step { padding-bottom: 80px; }
-    #step2.has-sticky-bar .step-content { padding-bottom: 90px; }
-
     
     .btn {
       width: 100%;
@@ -1800,6 +1723,64 @@
     #changeUidBtn { display:none; width:100%; padding:0 18px; height:42px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:12px; font-family:var(--font-display); font-weight:600; font-size:12px; cursor:pointer; }
     .success-tile { display:flex; align-items:center; gap:10px; }
     
+
+    /* STICKY PURCHASE BAR - Step 2 bottom hover */
+    .sticky-purchase-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(14, 14, 18, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 184, 0, 0.2);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transform: translateY(110%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 9999;
+      padding-bottom: calc(14px + env(safe-area-inset-bottom));
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.6);
+    }
+    .sticky-purchase-bar.show {
+      transform: translateY(0);
+    }
+    .sticky-price-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    #stickyPackUc {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+    #stickyPackPrice {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 20px;
+      line-height: 1;
+      font-family: var(--font-display);
+    }
+    .sticky-purchase-bar .sticky-purchase-btn {
+      width: auto !important;
+      min-width: 160px;
+      margin: 0 !important;
+      flex-shrink: 0;
+      padding: 12px 24px !important;
+      font-size: 15px !important;
+      min-height: 48px !important;
+      box-shadow: 0 0 20px rgba(255, 184, 0, 0.3);
+    }
+    #step2 {
+      padding-bottom: 20px;
+    }
 </style>
 
 <style>
@@ -2026,23 +2007,17 @@
             </p>
         </div>
 
-        <div class="btn-row" id="step2BtnRow">
-           <button type="button" class="btn btn-secondary" onclick="history.back()" style="width:100%;"><span id="dispBtnBack">Back</span></button>
-           <!-- Original purchase button kept hidden for logic, will be triggered by sticky bar -->
-           <button type="button" class="btn btn-primary" id="next2" disabled style="display:none !important;"><span id="dispBtnCheckout">Purchase</span></button>
+        <div class="btn-row" style="margin-bottom: 100px;">
+           <button type="button" class="btn btn-secondary" onclick="history.back()" style="width: 100%;"><span id="dispBtnBack">Back</span></button>
         </div>
-        
-        <!-- Sticky Purchase Bar - Shows only after pack selection -->
+
+        <!-- STICKY PURCHASE BAR - Shows after pack selection with price -->
         <div id="stickyPurchaseBar" class="sticky-purchase-bar">
-          <div class="sticky-purchase-inner">
-            <div class="sticky-purchase-info">
-              <span class="sticky-purchase-uc" id="stickyPackUc">-- UC</span>
-              <span class="sticky-purchase-price" id="stickyPackPrice">₹0</span>
-            </div>
-            <button type="button" class="btn btn-primary sticky-purchase-btn" id="stickyPurchaseBtn">
-              <span id="dispBtnCheckoutSticky">Purchase</span> <span id="stickyBtnPrice">₹0</span>
-            </button>
+          <div class="sticky-price-info">
+            <span id="stickyPackUc">-- UC</span>
+            <span id="stickyPackPrice">₹--</span>
           </div>
+          <button type="button" class="btn btn-primary sticky-purchase-btn" id="next2" disabled><span id="dispBtnCheckoutSticky">Purchase</span> <span id="stickyBtnPrice"></span></button>
         </div>
       </div>
     </div>
@@ -5135,66 +5110,60 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
                 this.appendChild(checkMark);
                 
                 selectedPack = JSON.parse(decodeURIComponent(this.dataset.pack));
-                document.getElementById('next2').disabled = false;
-
-                // --- NEW: Show sticky purchase bar with price ---
-                try {
-                  const stickyBar = document.getElementById('stickyPurchaseBar');
-                  const stickyUc = document.getElementById('stickyPackUc');
-                  const stickyPrice = document.getElementById('stickyPackPrice');
-                  const stickyBtnPrice = document.getElementById('stickyBtnPrice');
-                  const step2El = document.getElementById('step2');
-                  
-                  let displayText = (typeof getPackDisplayText === 'function') ? getPackDisplayText(selectedPack.uc) : (selectedPack.uc + ' UC');
-                  let priceText = selectedPack.price == 0 ? 'FREE' : '₹' + selectedPack.price;
-                  
-                  if(stickyUc) stickyUc.textContent = displayText;
-                  if(stickyPrice) stickyPrice.textContent = priceText;
-                  if(stickyBtnPrice) stickyBtnPrice.textContent = priceText;
-                  
-                  if(stickyBar) {
-                    stickyBar.style.display = 'block';
-                    // small delay for animation
-                    setTimeout(() => stickyBar.classList.add('show'), 10);
-                  }
-                  if(step2El) step2El.classList.add('has-sticky-bar');
-                } catch(e){ console.log('sticky bar error', e); }
+                var nextBtn = document.getElementById('next2');
+                if(nextBtn) nextBtn.disabled = false;
+                
+                // Show sticky purchase bar with price
+                var stickyBar = document.getElementById('stickyPurchaseBar');
+                var stickyUc = document.getElementById('stickyPackUc');
+                var stickyPrice = document.getElementById('stickyPackPrice');
+                var stickyBtnPrice = document.getElementById('stickyBtnPrice');
+                if(stickyBar && stickyUc && stickyPrice && selectedPack) {
+                    var ucText = (typeof getPackDisplayText === 'function') ? getPackDisplayText(selectedPack.uc) : (selectedPack.uc + ' UC');
+                    stickyUc.textContent = ucText;
+                    var priceVal = parseFloat(selectedPack.price);
+                    if(priceVal === 0 || isNaN(priceVal)) {
+                        stickyPrice.textContent = 'FREE';
+                        if(stickyBtnPrice) stickyBtnPrice.textContent = '';
+                    } else {
+                        stickyPrice.textContent = '₹' + selectedPack.price;
+                        if(stickyBtnPrice) stickyBtnPrice.textContent = '- ₹' + selectedPack.price;
+                    }
+                    stickyBar.classList.add('show');
+                }
             });
         });
-
-        // Sticky button triggers original purchase flow
-        const stickyBtn = document.getElementById('stickyPurchaseBtn');
-        if(stickyBtn) {
-          stickyBtn.onclick = function() {
-            const originalBtn = document.getElementById('next2');
-            if(originalBtn) originalBtn.click();
-          };
-        }
     }
-
-    // --- Helper to hide sticky purchase bar ---
-    window.hideStickyPurchaseBar = function() {
-      try {
-        const stickyBar = document.getElementById('stickyPurchaseBar');
-        const step2El = document.getElementById('step2');
-        if(stickyBar) {
-          stickyBar.classList.remove('show');
-          setTimeout(() => { stickyBar.style.display = 'none'; }, 300);
-        }
-        if(step2El) step2El.classList.remove('has-sticky-bar');
-      } catch(e){}
-    };
-
-
     
-    // Auto hide sticky bar on back buttons
+    // Hide sticky bar when going back
+    document.addEventListener('DOMContentLoaded', function(){
+        var backBtn = document.getElementById('backToDetails');
+        if(backBtn) {
+            backBtn.addEventListener('click', function(){
+                var bar = document.getElementById('stickyPurchaseBar');
+                if(bar) bar.classList.remove('show');
+            });
+        }
+        // Also hide on history back button in step2
+        var step2Back = document.querySelector('#step2 .btn-row .btn-secondary');
+        if(step2Back) {
+            step2Back.addEventListener('click', function(){
+                var bar = document.getElementById('stickyPurchaseBar');
+                if(bar) bar.classList.remove('show');
+            });
+        }
+    });
+
+
+    // Sync purchase button text to sticky button
     (function(){
-      const backBtns = [document.getElementById('backToDetails'), document.getElementById('backToDetailsStep3')];
-      backBtns.forEach(b => { if(b) b.addEventListener('click', () => { if(window.hideStickyPurchaseBar) window.hideStickyPurchaseBar(); }); });
-      // Also hide when selecting new pack? actually we show
-      // Hide on window history back (Back button in step2)
-      const step2BackBtn = document.querySelector('#step2BtnRow .btn-secondary');
-      if(step2BackBtn) step2BackBtn.addEventListener('click', () => { if(window.hideStickyPurchaseBar) window.hideStickyPurchaseBar(); });
+        var orig = document.getElementById('dispBtnCheckout');
+        var sticky = document.getElementById('dispBtnCheckoutSticky');
+        if(orig && sticky) {
+            var observer = new MutationObserver(function(){ sticky.textContent = orig.textContent; });
+            observer.observe(orig, {childList:true, characterData:true, subtree:true});
+            sticky.textContent = orig.textContent;
+        }
     })();
 
     function initParticles(){
@@ -5488,12 +5457,14 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
     function triggerHaptic(type='light'){ if(!navigator.vibrate) return; const patterns = { light:[10], medium:[20], heavy:[30], success:[10,20,10] }; navigator.vibrate(patterns[type] || [10]); }
     function generateOrderId(){ return `UCF-${Date.now().toString().slice(-6)}-${Math.floor(100 + Math.random()*900)}`; }
 
+    function hideStickyBar(){ var b=document.getElementById('stickyPurchaseBar'); if(b) b.classList.remove('show'); }
     function showStep(step, isBack = false){
       if (step === currentStep) return; 
 
       if (!isBack) { history.pushState({ step: step, type: 'step' }, document.title, window.location.href); }
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById(`step${step}`).classList.add('active'); currentStep = step; updateProgress();
+      if(step !== 2) { hideStickyBar(); }
       // FIX: If returning to step1 via back navigation, ensure verify button is not stuck in Verifying/Loading
       if (step === 1 && isBack) {
           try {
@@ -6380,8 +6351,6 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
     }
 
     document.getElementById('next2').onclick = async function() {
-      try { if(window.hideStickyPurchaseBar) window.hideStickyPurchaseBar(); } catch(e){}
-
       const btn = document.getElementById('next2');
       const origText = btn.innerHTML;
 
