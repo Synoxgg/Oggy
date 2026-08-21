@@ -1875,140 +1875,194 @@
 </style>
 
 <style>
-    /* === UCify Floating Header - Added as per request === */
-    .ucify-float-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 56px;
-      z-index: 9999;
+    /* ===== UCify NEW FLOATING HEADER - Premium Hover Design ===== */
+    .ucify-floating-header-wrap {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0 16px;
+      margin-bottom: 6px;
+      pointer-events: none;
+      animation: ufhFloatIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes ufhFloatIn {
+      0% { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .ucify-floating-header {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 480px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      background: rgba(10, 10, 14, 0.82);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.05) inset;
+      background: rgba(18, 18, 22, 0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 8px 14px 8px 14px;
+      box-shadow: 
+        0 8px 32px rgba(0,0,0,0.6),
+        0 1px 0 rgba(255,255,255,0.08) inset,
+        0 0 0 1px rgba(255,255,255,0.03) inset;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
     }
-    .float-left {
+    .ucify-floating-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.04) 40%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.8s;
+      pointer-events: none;
+    }
+    .ucify-floating-header:hover {
+      transform: translateY(-2px) scale(1.01);
+      background: rgba(22, 22, 28, 0.92);
+      border-color: rgba(255,184,0,0.15);
+      box-shadow: 
+        0 12px 40px rgba(0,0,0,0.7),
+        0 0 20px rgba(255,184,0,0.08),
+        0 1px 0 rgba(255,255,255,0.1) inset;
+    }
+    .ucify-floating-header:hover::before {
+      transform: translateX(100%);
+    }
+    .ufh-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      min-width: 0;
     }
-    .float-logo {
+    .ufh-logo {
+      width: 68px;
       height: 28px;
-      width: auto;
-      max-width: 110px;
       object-fit: contain;
-      cursor: pointer;
-      filter: drop-shadow(0 0 6px rgba(255,184,0,0.25));
+      filter: drop-shadow(0 0 8px rgba(255,184,0,0.2));
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
     }
-    .float-separator {
-      color: rgba(255, 255, 255, 0.25);
+    .ucify-floating-header:hover .ufh-logo {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 12px rgba(255,184,0,0.35));
+    }
+    .ufh-divider {
+      color: rgba(255,255,255,0.15);
       font-weight: 300;
-      font-size: 18px;
-      line-height: 1;
+      font-size: 14px;
+      margin: 0 1px;
     }
-    .float-authorized {
-      color: #ffffff;
-      font-size: 13px;
+    .ufh-authorized {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
       font-weight: 600;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
+      color: rgba(255,255,255,0.85);
       white-space: nowrap;
-      opacity: 0.9;
+      text-transform: uppercase;
     }
-    .float-right {
+    .ufh-auth-icon {
+      color: #22c55e;
+      font-size: 12px;
+      filter: drop-shadow(0 0 6px rgba(34,197,94,0.5));
+    }
+    .ufh-right {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .ufh-instant-pill {
       display: flex;
       align-items: center;
       gap: 7px;
-      background: rgba(255, 215, 0, 0.08);
-      border: 1px solid rgba(255, 215, 0, 0.18);
-      padding: 6px 12px;
+      background: linear-gradient(135deg, rgba(255,184,0,0.15), rgba(255,140,0,0.12));
+      border: 1px solid rgba(255,184,0,0.22);
       border-radius: 999px;
+      padding: 5px 10px 5px 12px;
+      position: relative;
+      overflow: hidden;
     }
-    .float-instant {
-      color: #FFD700;
-      font-size: 12.5px;
-      font-weight: 800;
+    .ufh-instant-pill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,184,0,0.15), transparent);
+      transform: translateX(-100%);
+      animation: ufhShimmer 2.5s infinite;
+    }
+    @keyframes ufhShimmer {
+      0% { transform: translateX(-100%); }
+      60% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+    .ufh-instant-text {
+      font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.6px;
+      color: #FFB800;
       text-transform: uppercase;
     }
-    .lightning-wrap {
-      position: relative;
+    .ufh-lightning {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, #FFB800, #FF8C00);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 20px;
-      height: 20px;
+      color: #000;
+      font-size: 11px;
+      position: relative;
+      box-shadow: 0 0 12px rgba(255,184,0,0.5);
+      animation: ufhLightningPulse 1.8s infinite;
     }
-    .lightning-icon {
-      color: #FFD700;
-      font-size: 15px;
-      animation: lightningFlash 1.8s infinite ease-in-out;
-      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9));
-    }
-    @keyframes lightningFlash {
-      0%, 85%, 100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9));
+    @keyframes ufhLightningPulse {
+      0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 0 12px rgba(255,184,0,0.5), 0 0 0 0 rgba(255,184,0,0.4);
       }
-      5% {
-        transform: scale(1.35) rotate(3deg);
-        opacity: 1;
-        filter: drop-shadow(0 0 12px rgba(255, 215, 0, 1)) drop-shadow(0 0 20px rgba(255, 170, 0, 0.9));
-      }
-      10% {
-        transform: scale(0.92) rotate(-2deg);
-        opacity: 0.85;
-      }
-      15% {
-        transform: scale(1.28) rotate(2deg);
-        opacity: 1;
-        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
-      }
-      20% {
-        transform: scale(1) rotate(0deg);
+      50% { 
+        transform: scale(1.08); 
+        box-shadow: 0 0 18px rgba(255,184,0,0.7), 0 0 0 6px rgba(255,184,0,0);
       }
     }
-    /* Add top padding to body so content not hidden behind fixed header */
-    body {
-      padding-top: 56px !important;
+    .ufh-lightning i {
+      animation: ufhBoltShake 1.8s infinite;
+      display: inline-block;
     }
-    /* Responsive tweaks */
-    @media (max-width: 480px) {
-      .ucify-float-header { padding: 0 12px; height: 52px; }
-      body { padding-top: 52px !important; }
-      .float-logo { height: 24px; max-width: 90px; }
-      .float-authorized { font-size: 11.5px; }
-      .float-right { padding: 5px 10px; gap: 5px; }
-      .float-instant { font-size: 11px; }
-      .lightning-icon { font-size: 13px; }
+    @keyframes ufhBoltShake {
+      0%, 90%, 100% { transform: translateX(0) rotate(0deg); }
+      92% { transform: translateX(-1px) rotate(-8deg); }
+      94% { transform: translateX(1px) rotate(8deg); }
+      96% { transform: translateX(-1px) rotate(-4deg); }
+      98% { transform: translateX(1px) rotate(4deg); }
     }
+    @keyframes ufhFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-1.5px); }
+    }
+    .ucify-floating-header-wrap {
+      animation: ufhFloatIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards, ufhFloat 4s ease-in-out 0.8s infinite;
+    }
+    @media (max-width: 380px) {
+      .ufh-logo { width: 58px; height: 24px; }
+      .ufh-authorized { font-size: 10px; }
+      .ufh-instant-text { font-size: 10px; }
+      .ucify-floating-header { padding: 7px 12px; }
+    }
+    .container { padding-top: 8px !important; }
 </style>
 </head>
 
 <body oncontextmenu="return false;">
-
-  <!-- UCify Floating Header - Replaces old top-card -->
-  <header class="ucify-float-header" id="ucifyFloatHeader">
-    <div class="float-left">
-      <img src="ucify.webp" id="dispSiteLogo" alt="UCify Logo" class="float-logo" draggable="false" style="pointer-events: auto !important; cursor: pointer; touch-action: manipulation;" onclick="handleLogoClick()" onerror="this.onerror=null; this.src='ucify.webp';">
-      <span class="float-separator">|</span>
-      <span class="float-authorized">Authorized Store</span>
-    </div>
-    <div class="float-right">
-      <span class="float-instant">Instant</span>
-      <span class="lightning-wrap">
-        <i class="fa-solid fa-bolt lightning-icon"></i>
-      </span>
-    </div>
-  </header>
-
-
 
   
   
@@ -2064,12 +2118,34 @@
     <span class="toast-text" id="toastText">Copied!</span>
   </div>
 
+  
+  <!-- NEW UCify Floating Header - Premium Design -->
+  <div class="ucify-floating-header-wrap">
+    <header class="ucify-floating-header">
+      <div class="ufh-left">
+        <img src="ucify.webp" alt="UCify" class="ufh-logo" id="dispFloatingLogo">
+        <span class="ufh-divider">|</span>
+        <span class="ufh-authorized">
+          <span class="ufh-auth-icon"><i class="fa-solid fa-circle-check"></i></span>
+          Authorized Store
+        </span>
+      </div>
+      <div class="ufh-right">
+        <div class="ufh-instant-pill">
+          <span class="ufh-instant-text">Instant</span>
+          <span class="ufh-lightning">
+            <i class="fa-solid fa-bolt"></i>
+          </span>
+        </div>
+      </div>
+    </header>
+  </div>
+
   <div class="container">
     
     
-    <!-- top-card removed as per request - replaced by floating header -->
+    <!-- top-card removed -->
     
-    </div>
 
     <div class="game-info-card">
       <div class="game-info-main">
@@ -4300,11 +4376,11 @@ tryInitRemote();
             _loaderEl.textContent = getText('loaderText');
           }
         }
-        var _tagEl = document.getElementById('dispTagline'); if(_tagEl) _tagEl.textContent = getText('tagline');
+        document.getElementById('dispTagline').textContent = getText('tagline');
         const _pt = document.getElementById('dispPartnerText'); if(_pt) _pt.textContent = getText('partnerBadge');
-        var _secEl = document.getElementById('dispSecureBadge'); if(_secEl) _secEl.textContent = getText('secureBadge');
-        var _insEl = document.getElementById('dispInstantBadge'); if(_insEl) _insEl.textContent = getText('instantBadge');
-        var _supEl = document.getElementById('dispSupportBadge'); if(_supEl) _supEl.textContent = getText('supportBadge');
+        document.getElementById('dispSecureBadge').textContent = getText('secureBadge');
+        document.getElementById('dispInstantBadge').textContent = getText('instantBadge');
+        document.getElementById('dispSupportBadge').textContent = getText('supportBadge');
         const _odt = document.getElementById('dispOrdersToday'); if(_odt) _odt.textContent = getText('ordersToday');
         
         let _st1 = document.getElementById('dispStep1Title'); if(_st1) _st1.textContent = getText('step1Title');
@@ -4378,10 +4454,10 @@ tryInitRemote();
         document.getElementById('dispIgnModalL3').textContent = getText('ignModalL3');
 
         // Toggle Displays
-        var _tagEl2 = document.getElementById('dispTagline'); if(_tagEl2) _tagEl2.style.display = getTgl('showTagline') ? 'block' : 'none';
-        var _pSec = document.getElementById('pillSecure'); if(_pSec) _pSec.style.display = getTgl('showSecureBadge') ? 'flex' : 'none';
-        var _pIns = document.getElementById('pillInstant'); if(_pIns) _pIns.style.display = getTgl('showInstantBadge') ? 'flex' : 'none';
-        var _pSup = document.getElementById('pillSupport'); if(_pSup) _pSup.style.display = getTgl('showSupportBadge') ? 'flex' : 'none';
+        document.getElementById('dispTagline').style.display = getTgl('showTagline') ? 'block' : 'none';
+        document.getElementById('pillSecure').style.display = getTgl('showSecureBadge') ? 'flex' : 'none';
+        document.getElementById('pillInstant').style.display = getTgl('showInstantBadge') ? 'flex' : 'none';
+        document.getElementById('pillSupport').style.display = getTgl('showSupportBadge') ? 'flex' : 'none';
         const _ps = document.getElementById('pillStats'); if(_ps) _ps.style.display = getTgl('showOrdersToday') ? 'flex' : 'none'; 
         
         let _s1t = document.getElementById('dispStep1Title'); if(_s1t) _s1t.style.display = getTgl('showStep1Title') ? 'block' : 'none';
