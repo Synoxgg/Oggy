@@ -1877,7 +1877,7 @@
 <style>
     /* Top Bar 90% Transparent */
     .top-card { display:none !important; }
-    .ucify-topbar { position:sticky; top:0; left:0; right:0; width:100%; z-index:999; background: rgba(10,10,12,0.10); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border-bottom:1px solid rgba(255,255,255,0.05); }
+    .ucify-topbar { position:sticky; top:0; left:0; right:0; width:100%; z-index:999; background: rgba(10,10,12,0.10); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom:1px solid rgba(255,255,255,0.05); }
     .ucify-topbar-inner { width:100%; max-width:480px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; height:52px; }
     .utb-left { display:flex; align-items:center; gap:10px; }
     .utb-logo { width:72px; height:30px; object-fit:contain; }
@@ -1889,108 +1889,62 @@
     .utb-lightning { width:22px; height:22px; background: linear-gradient(135deg, #FFB800, #FF8C00); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#000; font-size:11px; }
 
     /* Pay Bar 90% Transparent */
-    #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) saturate(160%) !important; -webkit-backdrop-filter: blur(20px) saturate(160%) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
+    #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
 
-    /* Remove background animation */
+    /* Background Normal - No Animation */
     body { background-color:#050507 !important; background-image:none !important; }
     .floating-particles, #floatingParticles, .particle { display:none !important; }
 
-    /* ===== Separation with Different Colours - My Design ===== */
-    /* Remove generic outer tiles first */
-    .game-info-card, .faq-section, #whyChooseSection {
-      background: transparent !important; border:none !important; box-shadow:none !important;
-      padding-left:0 !important; padding-right:0 !important;
+    /* ===== Separation with Lighter Black/Grey - No Tiles ===== */
+    /* Main black background remains #050507 */
+    /* Game info, FAQ, Why Choose stay black (same as body) */
+    .game-info-card,
+    .faq-section,
+    #whyChooseSection {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
 
-    /* UID Section - Step 1 - Cool Cyan / Blue Theme */
+    /* Main functions - slightly lighter for separation */
+    /* UID Section - Lighter Black #0E0E12 */
     #step1 .step-content {
-      background: linear-gradient(135deg, rgba(0, 224, 255, 0.07) 0%, rgba(0, 150, 255, 0.04) 50%, rgba(0, 224, 255, 0.02) 100%) !important;
-      border: 1px solid rgba(0, 224, 255, 0.14) !important;
-      box-shadow: 0 4px 20px rgba(0, 224, 255, 0.08), inset 0 1px 0 rgba(0, 224, 255, 0.10) !important;
-      border-radius: 20px !important;
+      background: #0E0E12 !important;
+      background-color: #0E0E12 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 16px !important;
       padding: 20px !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-    #step1 .step-content::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #00E0FF, #0096FF, transparent);
-      opacity: 0.8;
-    }
-    #step1 .step-title {
-      color: #00E0FF !important;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    #step1 .step-title::before {
-      content: '01';
-      font-size: 11px;
-      background: rgba(0,224,255,0.15);
-      border: 1px solid rgba(0,224,255,0.25);
-      color: #00E0FF;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: 800;
     }
 
-    /* Packs Section - Step 2 - Warm Gold / UC Theme */
+    /* Packs Section - Even Lighter Grey #14141A */
     #step2 .step-content {
-      background: linear-gradient(135deg, rgba(255, 184, 0, 0.08) 0%, rgba(255, 140, 0, 0.05) 50%, rgba(255, 184, 0, 0.02) 100%) !important;
-      border: 1px solid rgba(255, 184, 0, 0.18) !important;
-      box-shadow: 0 4px 24px rgba(255, 184, 0, 0.10), inset 0 1px 0 rgba(255, 184, 0, 0.12) !important;
-      border-radius: 20px !important;
+      background: #14141A !important;
+      background-color: #14141A !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 16px !important;
       padding: 20px !important;
-      position: relative !important;
-      overflow: hidden !important;
     }
-    #step2 .step-content::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #FFB800, #FF8C00, transparent);
-      opacity: 0.9;
+
+    /* Step 3 Payment - Slightly lighter #101014 */
+    #step3 .step-content {
+      background: #101014 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 16px !important;
+      padding: 20px !important;
     }
-    #step2 .step-title {
-      color: #FFB800 !important;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    #step2 .step-title::before {
-      content: '02';
-      font-size: 11px;
-      background: rgba(255,184,0,0.15);
-      border: 1px solid rgba(255,184,0,0.25);
-      color: #FFB800;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: 800;
-    }
-    /* Add subtle section labels */
-    #step1 .step-content::after {
-      content: 'PLAYER VERIFICATION';
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      font-size: 9px;
-      letter-spacing: 1.2px;
-      color: rgba(0,224,255,0.45);
-      font-weight: 700;
-    }
-    #step2 .step-content::after {
-      content: 'SELECT UC PACK';
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      font-size: 9px;
-      letter-spacing: 1.2px;
-      color: rgba(255,184,0,0.45);
-      font-weight: 700;
+
+    /* Success step also */
+    #step4 .step-content {
+      background: #0E0E12 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 16px !important;
     }
 
     .container { padding-top: 12px !important; }
