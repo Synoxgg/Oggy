@@ -1895,59 +1895,68 @@
     body { background-color:#050507 !important; background-image:none !important; }
     .floating-particles, #floatingParticles, .particle { display:none !important; }
 
-    /* ===== Separation with Lighter Black/Grey - No Tiles ===== */
-    /* Main black background remains #050507 */
-    /* Game info, FAQ, Why Choose stay black (same as body) */
+    /* ===== Separation via Background Colour Only - NO Tile Look ===== */
+    .container {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: 480px !important;
+    }
+    /* Game info, FAQ, Why Choose stay pure black */
     .game-info-card,
     .faq-section,
     #whyChooseSection {
       background: transparent !important;
-      background-color: transparent !important;
       border: none !important;
       box-shadow: none !important;
+      margin-left: 20px !important;
+      margin-right: 20px !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
 
-    /* Main functions - slightly lighter for separation */
-    /* UID Section - Lighter Black #0E0E12 */
-    #step1 .step-content {
+    /* Main Steps - Background Colour Bands, NOT Tiles */
+    .step {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      width: 100% !important;
+    }
+    .step .step-content {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 24px 20px !important;
+      margin: 0 !important;
+    }
+
+    /* UID Section - Lighter Black Band #0E0E12 */
+    #step1 {
       background: #0E0E12 !important;
       background-color: #0E0E12 !important;
-      border: none !important;
-      box-shadow: none !important;
-      border-radius: 16px !important;
-      padding: 20px !important;
     }
 
-    /* Packs Section - Even Lighter Grey #14141A */
-    #step2 .step-content {
+    /* Packs Section - Slightly Lighter Grey Band #14141A */
+    #step2 {
       background: #14141A !important;
       background-color: #14141A !important;
-      border: none !important;
-      box-shadow: none !important;
-      border-radius: 16px !important;
-      padding: 20px !important;
     }
 
-    /* Step 3 Payment - Slightly lighter #101014 */
-    #step3 .step-content {
+    /* Payment Section - #101014 */
+    #step3 {
       background: #101014 !important;
-      border: none !important;
-      box-shadow: none !important;
-      border-radius: 16px !important;
-      padding: 20px !important;
+      background-color: #101014 !important;
     }
 
-    /* Success step also */
-    #step4 .step-content {
+    #step4 {
       background: #0E0E12 !important;
-      border: none !important;
-      box-shadow: none !important;
-      border-radius: 16px !important;
     }
 
-    .container { padding-top: 12px !important; }
+    /* Remove any remaining card styling inside */
+    .form-group, .packs-grid { background: transparent !important; }
 </style>
 </head>
 
