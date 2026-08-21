@@ -1724,63 +1724,77 @@
     .success-tile { display:flex; align-items:center; gap:10px; }
     
 
-    /* STICKY PURCHASE BAR - Step 2 bottom hover */
+
+    /* === STICKY PURCHASE BAR - Step 2 === */
     .sticky-purchase-bar {
       position: fixed;
       bottom: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(110%);
+      width: 100%;
+      max-width: 480px;
       background: rgba(14, 14, 18, 0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(255, 184, 0, 0.2);
-      padding: 14px 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--surface-border);
+      border-bottom: none;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 12px 16px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      transform: translateY(110%);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 9999;
-      padding-bottom: calc(14px + env(safe-area-inset-bottom));
-      box-shadow: 0 -8px 32px rgba(0,0,0,0.6);
+      gap: 12px;
+      z-index: 98;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06) inset;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), bottom 0.35s ease;
+      will-change: transform, bottom;
     }
-    .sticky-purchase-bar.show {
-      transform: translateY(0);
+    .sticky-purchase-bar.visible {
+      transform: translateX(-50%) translateY(0);
     }
-    .sticky-price-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .sticky-purchase-info {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
     }
-    #stickyPackUc {
+    .sticky-pack-name {
       font-family: var(--font-display);
+      font-size: 13px;
       font-weight: 700;
       color: #fff;
-      font-size: 14px;
-      line-height: 1;
-      letter-spacing: 0.5px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    #stickyPackPrice {
-      color: var(--primary);
+    .sticky-pack-price {
+      font-family: var(--font-body);
+      font-size: 16px;
       font-weight: 800;
-      font-size: 20px;
-      line-height: 1;
-      font-family: var(--font-display);
+      color: var(--primary);
+      margin-top: 2px;
     }
-    .sticky-purchase-bar .sticky-purchase-btn {
-      width: auto !important;
-      min-width: 160px;
-      margin: 0 !important;
+    .sticky-purchase-bar .btn-primary {
+      width: auto;
       flex-shrink: 0;
-      padding: 12px 24px !important;
-      font-size: 15px !important;
-      min-height: 48px !important;
-      box-shadow: 0 0 20px rgba(255, 184, 0, 0.3);
+      padding: 12px 22px;
+      min-height: 46px;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(255,184,0,0.3);
     }
-    #step2 {
-      padding-bottom: 20px;
+    .sticky-purchase-bar .btn-primary:disabled {
+      opacity: 0.5;
     }
+    body.has-sticky-purchase {
+      padding-bottom: 90px;
+    }
+    @media (max-width: 480px) {
+      .sticky-purchase-bar {
+        border-radius: 16px 16px 0 0;
+      }
+    }
+
 </style>
 
 <style>
@@ -1850,7 +1864,19 @@
   
   <div class="floating-particles" id="floatingParticles"></div>
 
-  <div class="social-proof" id="socialProof">
+  
+  <!-- STICKY PURCHASE BAR - Step 2 -->
+  <div id="stickyPurchaseBar" class="sticky-purchase-bar">
+    <div class="sticky-purchase-info">
+      <div class="sticky-pack-name" id="stickyPackName">-- UC</div>
+      <div class="sticky-pack-price" id="stickyPackPrice">₹0</div>
+    </div>
+    <button type="button" class="btn btn-primary" id="next2" disabled>
+      <span id="dispBtnCheckout">Purchase</span> <span id="stickyBtnPrice" style="margin-left:6px; font-weight:800;">₹0</span>
+    </button>
+  </div>
+
+<div class="social-proof" id="socialProof">
     <div class="social-proof-avatar" id="socialAvatar"><img src="profile-pic.webp" alt="Profile" onerror="this.onerror=null; if(this.src.endsWith('.webp')){this.src=this.src.replace('.webp','.png');}else{this.style.display='none';}"></div>
     <div class="social-proof-text">
       <div id="socialName" style="font-weight: 600; color: #fff;">Player</div>
@@ -2007,17 +2033,8 @@
             </p>
         </div>
 
-        <div class="btn-row" style="margin-bottom: 100px;">
-           <button type="button" class="btn btn-secondary" onclick="history.back()" style="width: 100%;"><span id="dispBtnBack">Back</span></button>
-        </div>
-
-        <!-- STICKY PURCHASE BAR - Shows after pack selection with price -->
-        <div id="stickyPurchaseBar" class="sticky-purchase-bar">
-          <div class="sticky-price-info">
-            <span id="stickyPackUc">-- UC</span>
-            <span id="stickyPackPrice">₹--</span>
-          </div>
-          <button type="button" class="btn btn-primary sticky-purchase-btn" id="next2" disabled><span id="dispBtnCheckoutSticky">Purchase</span> <span id="stickyBtnPrice"></span></button>
+        <div class="btn-row">
+           <button type="button" class="btn btn-secondary" onclick="history.back()"><span id="dispBtnBack">Back</span></button>
         </div>
       </div>
     </div>
@@ -5100,6 +5117,57 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
         attachPackListeners();
     }
 
+    function updateStickyPurchaseBar(pack){
+      try{
+        const nameEl = document.getElementById('stickyPackName');
+        const priceEl = document.getElementById('stickyPackPrice');
+        const btnPriceEl = document.getElementById('stickyBtnPrice');
+        const btn = document.getElementById('next2');
+        if(!pack) return;
+        const displayName = (typeof getPackDisplayText === 'function') ? getPackDisplayText(pack.uc) : (pack.uc + ' UC');
+        const priceText = Number(pack.price) === 0 ? 'FREE' : ('₹' + pack.price);
+        if(nameEl) nameEl.textContent = displayName;
+        if(priceEl) priceEl.textContent = priceText;
+        if(btnPriceEl) btnPriceEl.textContent = priceText;
+        if(btn) btn.disabled = false;
+      }catch(e){}
+    }
+    function showStickyPurchaseBar(){
+      const bar = document.getElementById('stickyPurchaseBar');
+      if(!bar) return;
+      bar.classList.add('visible');
+      document.body.classList.add('has-sticky-purchase');
+      if(typeof updateStickyBarPosition === 'function') updateStickyBarPosition();
+    }
+    function hideStickyPurchaseBar(){
+      const bar = document.getElementById('stickyPurchaseBar');
+      if(!bar) return;
+      bar.classList.remove('visible');
+      document.body.classList.remove('has-sticky-purchase');
+      // keep bottom default for next show
+      bar.style.bottom = '0px';
+    }
+    function updateStickyBarPosition(){
+      const bar = document.getElementById('stickyPurchaseBar');
+      const footer = document.querySelector('.site-footer');
+      const proof = document.getElementById('socialProof');
+      if(!bar || !footer) return;
+      const footerRect = footer.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      let baseBottom = 0;
+      // If proof is visible, keep bar below proof? Actually proof should be above bar, so we keep bar at 0 and proof will be pushed
+      // But if footer visible, push bar above footer
+      if(footerRect.top < viewportH){
+        const overlap = viewportH - footerRect.top;
+        baseBottom = overlap + 8; // 8px gap above footer
+        bar.style.bottom = baseBottom + 'px';
+      } else {
+        bar.style.bottom = '0px';
+      }
+      // Also update proof position after bar position changed
+      if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
+    }
+
     function attachPackListeners() {
         document.querySelectorAll('.pack-card').forEach(card => {
             card.addEventListener('click', function(){
@@ -5110,61 +5178,13 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
                 this.appendChild(checkMark);
                 
                 selectedPack = JSON.parse(decodeURIComponent(this.dataset.pack));
-                var nextBtn = document.getElementById('next2');
-                if(nextBtn) nextBtn.disabled = false;
-                
-                // Show sticky purchase bar with price
-                var stickyBar = document.getElementById('stickyPurchaseBar');
-                var stickyUc = document.getElementById('stickyPackUc');
-                var stickyPrice = document.getElementById('stickyPackPrice');
-                var stickyBtnPrice = document.getElementById('stickyBtnPrice');
-                if(stickyBar && stickyUc && stickyPrice && selectedPack) {
-                    var ucText = (typeof getPackDisplayText === 'function') ? getPackDisplayText(selectedPack.uc) : (selectedPack.uc + ' UC');
-                    stickyUc.textContent = ucText;
-                    var priceVal = parseFloat(selectedPack.price);
-                    if(priceVal === 0 || isNaN(priceVal)) {
-                        stickyPrice.textContent = 'FREE';
-                        if(stickyBtnPrice) stickyBtnPrice.textContent = '';
-                    } else {
-                        stickyPrice.textContent = '₹' + selectedPack.price;
-                        if(stickyBtnPrice) stickyBtnPrice.textContent = '- ₹' + selectedPack.price;
-                    }
-                    stickyBar.classList.add('show');
-                }
+                try{ if(typeof updateStickyPurchaseBar === 'function') updateStickyPurchaseBar(selectedPack); }catch(e){}
+                try{ if(typeof showStickyPurchaseBar === 'function') showStickyPurchaseBar(); }catch(e){}
+                const btn = document.getElementById('next2');
+                if(btn) btn.disabled = false;
             });
         });
     }
-    
-    // Hide sticky bar when going back
-    document.addEventListener('DOMContentLoaded', function(){
-        var backBtn = document.getElementById('backToDetails');
-        if(backBtn) {
-            backBtn.addEventListener('click', function(){
-                var bar = document.getElementById('stickyPurchaseBar');
-                if(bar) bar.classList.remove('show');
-            });
-        }
-        // Also hide on history back button in step2
-        var step2Back = document.querySelector('#step2 .btn-row .btn-secondary');
-        if(step2Back) {
-            step2Back.addEventListener('click', function(){
-                var bar = document.getElementById('stickyPurchaseBar');
-                if(bar) bar.classList.remove('show');
-            });
-        }
-    });
-
-
-    // Sync purchase button text to sticky button
-    (function(){
-        var orig = document.getElementById('dispBtnCheckout');
-        var sticky = document.getElementById('dispBtnCheckoutSticky');
-        if(orig && sticky) {
-            var observer = new MutationObserver(function(){ sticky.textContent = orig.textContent; });
-            observer.observe(orig, {childList:true, characterData:true, subtree:true});
-            sticky.textContent = orig.textContent;
-        }
-    })();
 
     function initParticles(){
       const container = document.getElementById('floatingParticles');
@@ -5328,19 +5348,21 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
     function updateSocialProofPosition(){
       const proof = document.getElementById('socialProof');
       const footer = document.querySelector('.site-footer');
+      const stickyBar = document.getElementById('stickyPurchaseBar');
       if(!proof || !footer) return;
-      if(proof.style.display === 'none' || proof.style.display === '') {
-        // keep default bottom for next show, but still calculate if needed
-      }
       const footerRect = footer.getBoundingClientRect();
       const viewportH = window.innerHeight;
+      let stickyHeight = 0;
+      if(stickyBar && stickyBar.classList.contains('visible')){
+        stickyHeight = stickyBar.offsetHeight + 12;
+      }
       if(footerRect.top < viewportH){
-        // Footer is visible - push popup above the 2026 UCify line (top of footer)
+        // Footer is visible - push popup above footer + sticky if needed
         const overlap = viewportH - footerRect.top;
         const extraGap = 12;
-        proof.style.bottom = (overlap + extraGap) + 'px';
+        proof.style.bottom = (overlap + extraGap + stickyHeight) + 'px';
       } else {
-        proof.style.bottom = '20px';
+        proof.style.bottom = (20 + stickyHeight) + 'px';
       }
     }
 
@@ -5350,6 +5372,7 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
         requestAnimationFrame(function(){
           if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
           if(typeof updatePaymentWaitingPosition === 'function') updatePaymentWaitingPosition();
+          if(typeof updateStickyBarPosition === 'function') updateStickyBarPosition();
           socialProofScrollTicking = false;
         });
         socialProofScrollTicking = true;
@@ -5358,6 +5381,7 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
     window.addEventListener('resize', function(){
       if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
       if(typeof updatePaymentWaitingPosition === 'function') updatePaymentWaitingPosition();
+      if(typeof updateStickyBarPosition === 'function') updateStickyBarPosition();
     }, {passive: true});
     // Also observe footer size changes for both popups
     if('ResizeObserver' in window){
@@ -5457,14 +5481,28 @@ t.step4Subtitle = document.getElementById('adminTextStep4Subtitle').value.trim()
     function triggerHaptic(type='light'){ if(!navigator.vibrate) return; const patterns = { light:[10], medium:[20], heavy:[30], success:[10,20,10] }; navigator.vibrate(patterns[type] || [10]); }
     function generateOrderId(){ return `UCF-${Date.now().toString().slice(-6)}-${Math.floor(100 + Math.random()*900)}`; }
 
-    function hideStickyBar(){ var b=document.getElementById('stickyPurchaseBar'); if(b) b.classList.remove('show'); }
     function showStep(step, isBack = false){
       if (step === currentStep) return; 
 
       if (!isBack) { history.pushState({ step: step, type: 'step' }, document.title, window.location.href); }
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById(`step${step}`).classList.add('active'); currentStep = step; updateProgress();
-      if(step !== 2) { hideStickyBar(); }
+      // === STICKY BAR LOGIC ===
+      try{
+        const bar = document.getElementById('stickyPurchaseBar');
+        if(step === 2){
+          if(selectedPack){
+            if(typeof updateStickyPurchaseBar === 'function') updateStickyPurchaseBar(selectedPack);
+            if(typeof showStickyPurchaseBar === 'function') showStickyPurchaseBar();
+          } else {
+            // No pack selected yet, keep hidden until selection
+            if(typeof hideStickyPurchaseBar === 'function') hideStickyPurchaseBar();
+          }
+        } else {
+          if(typeof hideStickyPurchaseBar === 'function') hideStickyPurchaseBar();
+        }
+      }catch(e){}
+      
       // FIX: If returning to step1 via back navigation, ensure verify button is not stuck in Verifying/Loading
       if (step === 1 && isBack) {
           try {
