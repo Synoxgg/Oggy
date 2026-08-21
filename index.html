@@ -1874,101 +1874,155 @@
 
 </style>
 
-<style>
-    /* ===== UCIFY FLOATING HEADER - NEW ===== */
-    .ucify-float-header {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 24px);
-      max-width: 480px;
-      background: rgba(14, 14, 18, 0.85);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 16px;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 9999;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05) inset, 0 0 20px rgba(255,184,0,0.08);
-      animation: floatHover 3.2s ease-in-out infinite;
+
+  <style>
+  /* ===== UCify Floating Header - New Design ===== */
+  .ucify-float-header {
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    background: rgba(10, 10, 14, 0.72);
+    backdrop-filter: blur(22px) saturate(1.4);
+    -webkit-backdrop-filter: blur(22px) saturate(1.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.05) inset;
+    animation: floatHeaderSlide 0.6s ease-out;
+  }
+  @keyframes floatHeaderSlide {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .ucify-float-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .ucify-float-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    pointer-events: auto !important;
+  }
+  .ucify-float-logo {
+    height: 28px;
+    width: auto;
+    max-width: 92px;
+    object-fit: contain;
+    display: block;
+    pointer-events: auto !important;
+    filter: drop-shadow(0 0 8px rgba(255,184,0,0.25));
+    transition: transform 0.2s ease;
+  }
+  .ucify-float-left:hover .ucify-float-logo {
+    transform: scale(1.05);
+  }
+  .ucify-float-divider {
+    color: rgba(255,255,255,0.25);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .ucify-float-auth {
+    font-family: var(--font-display, 'Rajdhani', sans-serif);
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    white-space: nowrap;
+  }
+  .ucify-float-right {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,184,0,0.10);
+    border: 1px solid rgba(255,184,0,0.22);
+    padding: 6px 12px;
+    border-radius: 100px;
+    backdrop-filter: blur(8px);
+  }
+  .ucify-float-instant {
+    font-family: var(--font-display, 'Rajdhani', sans-serif);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--primary, #FFB800);
+  }
+  .ucify-float-lightning {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary, #FFB800);
+    font-size: 13px;
+    animation: lightningPulse 1.4s infinite ease-in-out;
+    filter: drop-shadow(0 0 6px rgba(255,184,0,0.7));
+  }
+  @keyframes lightningPulse {
+    0%, 100% { 
+      transform: scale(1) rotate(0deg); 
+      opacity: 1; 
+      filter: drop-shadow(0 0 6px rgba(255,184,0,0.7));
     }
-    @keyframes floatHover {
-      0%, 100% { transform: translateX(-50%) translateY(0px); }
-      50% { transform: translateX(-50%) translateY(-4px); }
+    15% { 
+      transform: scale(1.25) rotate(-5deg); 
+      opacity: 1;
+      filter: drop-shadow(0 0 12px rgba(255,184,0,1));
     }
-    .ufh-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
+    30% { 
+      transform: scale(0.95) rotate(5deg); 
+      opacity: 0.9;
     }
-    .ufh-logo {
-      height: 22px;
-      width: auto;
-      max-width: 72px;
-      object-fit: contain;
-      pointer-events: auto !important;
-      display: block;
+    45% { 
+      transform: scale(1.15) rotate(-3deg); 
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255,184,0,0.9));
     }
-    .ufh-divider {
-      color: rgba(255,255,255,0.25);
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1;
+    60% { 
+      transform: scale(1) rotate(0deg); 
     }
-    .ufh-auth {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 12.5px;
-      letter-spacing: 0.6px;
-      color: #fff;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .ufh-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-body);
-      font-size: 11.5px;
-      font-weight: 700;
-      color: #fff;
-      background: rgba(255, 184, 0, 0.12);
-      border: 1px solid rgba(255, 184, 0, 0.22);
-      padding: 6px 12px;
-      border-radius: 100px;
-      letter-spacing: 0.4px;
-      white-space: nowrap;
-    }
-    .ufh-lightning {
-      color: var(--primary);
-      font-size: 12px;
-      animation: lightningPulse 1.1s ease-in-out infinite;
-      filter: drop-shadow(0 0 4px var(--primary));
-    }
-    @keyframes lightningPulse {
-      0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 4px var(--primary)); }
-      50% { transform: scale(1.25); opacity: 0.9; filter: drop-shadow(0 0 10px var(--primary)) drop-shadow(0 0 16px var(--primary)); }
-    }
-    /* Add top padding to container to avoid overlap */
-    .container {
-      padding-top: 72px !important;
-    }
-    @media (max-width: 480px) {
-      .ucify-float-header { top: 10px; width: calc(100% - 16px); padding: 9px 12px; }
-      .ufh-logo { height: 20px; }
-      .ufh-auth { font-size: 11px; }
-      .ufh-right { font-size: 11px; padding: 5px 10px; }
-      .container { padding-top: 68px !important; }
-    }
-</style>
+  }
+  /* Make container top padding adjust since header is sticky */
+  body {
+    padding-top: 0 !important;
+  }
+  /* Mobile tweaks */
+  @media (max-width: 360px) {
+    .ucify-float-inner { padding: 10px 14px; }
+    .ucify-float-logo { height: 24px; max-width: 80px; }
+    .ucify-float-auth { font-size: 11px; }
+    .ucify-float-right { padding: 5px 10px; }
+  }
+  </style>
+
 </head>
 
 <body oncontextmenu="return false;">
+  <!-- ========== NEW FLOATING HEADER (Requested Change) ========== -->
+  <header class="ucify-float-header">
+    <div class="ucify-float-inner">
+      <div class="ucify-float-left" onclick="handleLogoClick()">
+        <img src="ucify.webp" id="dispSiteLogo" alt="UCify Logo" class="ucify-float-logo" draggable="false" onerror="this.onerror=null; this.src='ucify.webp';">
+        <span class="ucify-float-divider">|</span>
+        <span class="ucify-float-auth">Authorized Store</span>
+      </div>
+      <div class="ucify-float-right">
+        <span class="ucify-float-instant">Instant</span>
+        <span class="ucify-float-lightning">
+          <i class="fa-solid fa-bolt"></i>
+        </span>
+      </div>
+    </div>
+  </header>
+
 
   
   
@@ -2011,20 +2065,6 @@
   
   <div class="floating-particles" id="floatingParticles"></div>
 
-  <!-- ===== NEW FLOATING HEADER ===== -->
-  <div class="ucify-float-header" id="ucifyFloatHeader">
-    <div class="ufh-left">
-      <img src="ucify.webp" alt="UCify" class="ufh-logo" onerror="this.onerror=null; this.src='ucify.png'" onclick="handleLogoClick(event)" style="cursor:pointer; pointer-events:auto !important;">
-      <span class="ufh-divider">|</span>
-      <span class="ufh-auth">Authorized Store</span>
-    </div>
-    <div class="ufh-right">
-      <span>Instant</span>
-      <i class="fa-solid fa-bolt ufh-lightning"></i>
-    </div>
-  </div>
-
-
   <div class="social-proof" id="socialProof">
     <div class="social-proof-avatar" id="socialAvatar"><img src="profile-pic.webp" alt="Profile" onerror="this.onerror=null; if(this.src.endsWith('.webp')){this.src=this.src.replace('.webp','.png');}else{this.style.display='none';}"></div>
     <div class="social-proof-text">
@@ -2040,19 +2080,9 @@
 
   <div class="container">
     
-    <div class="top-card">
-      <div class="header">
-        <!-- UCify logo removed from top-card as per request -->
-        <p class="tagline" id="dispTagline">Instant game top-ups at affordable rates</p>
-
-        <div class="trust-strip" id="dispTrustStrip">
-          <div class="trust-pill" id="pillSecure"><i class="fa-solid fa-lock"></i> <span id="dispSecureBadge">Secure</span></div>
-          <div class="trust-pill" id="pillInstant"><i class="fa-solid fa-bolt"></i> <span id="dispInstantBadge">Instant</span></div>
-          <div class="trust-pill" id="pillSupport"><i class="fa-solid fa-headset"></i> <span id="dispSupportBadge">24/7</span></div>
-        </div>
-      
-      </div>
-    </div>
+    
+    <!-- top-card removed as per request - replaced with floating header -->
+    
 
     <div class="game-info-card">
       <div class="game-info-main">
