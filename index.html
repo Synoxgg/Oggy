@@ -1980,8 +1980,8 @@
   <!-- UCify Full-Width Top Bar - 70% Transparent -->
   <div class="ucify-topbar">
     <div class="ucify-topbar-inner">
-      <div class="utb-left">
-        <img src="ucify.webp" alt="UCify" class="utb-logo">
+      <div class="utb-left" onclick="handleLogoClick(event)" style="cursor:pointer;">
+        <img src="ucify.webp" alt="UCify" class="utb-logo" id="dispSiteLogo" onclick="handleLogoClick(event)" style="cursor:pointer; pointer-events:auto !important; touch-action: manipulation;" draggable="false">
         <span class="utb-divider">|</span>
         <span class="utb-authorized">Authorized Store <i class="fa-solid fa-circle-check utb-tick"></i></span>
       </div>
