@@ -1875,7 +1875,7 @@
 </style>
 
 <style>
-    /* Top Bar - 70% Transparent */
+    /* ===== UCify Top Bar - 90% Transparent ===== */
     .top-card { display: none !important; }
     .ucify-topbar {
       position: sticky;
@@ -1884,16 +1884,15 @@
       right: 0;
       width: 100%;
       z-index: 999;
-      background: rgba(10, 10, 12, 0.30); /* 70% transparent = 30% opacity */
-      backdrop-filter: blur(18px) saturate(160%);
-      -webkit-backdrop-filter: blur(18px) saturate(160%);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+      background: rgba(10, 10, 12, 0.10); /* 90% transparent */
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 1px 10px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
     }
     .ucify-topbar:hover {
-      background: rgba(14, 14, 18, 0.42);
-      border-bottom-color: rgba(255,184,0,0.10);
+      background: rgba(14, 14, 18, 0.18);
     }
     .ucify-topbar-inner {
       width: 100%;
@@ -1916,7 +1915,60 @@
     .utb-instant { font-size: 11px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: #FFB800; }
     .utb-lightning { width: 22px; height: 22px; background: linear-gradient(135deg, #FFB800, #FF8C00); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 11px; animation: utbPulse 1.7s infinite; }
     @keyframes utbPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
-    .container { padding-top: 14px !important; }
+
+    /* ===== Pay Button Bar - 90% Transparent (same as top) ===== */
+    #stickyPurchaseBar {
+      background: rgba(10, 10, 12, 0.10) !important; /* 90% transparent */
+      backdrop-filter: blur(20px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+      border-top: 1px solid rgba(255,255,255,0.05) !important;
+      box-shadow: 0 -1px 10px rgba(0,0,0,0.15) !important;
+    }
+    #stickyPurchaseBar:hover {
+      background: rgba(14, 14, 18, 0.18) !important;
+    }
+
+    /* ===== REMOVE BIG OUTER TILES - Keep inner small tiles ===== */
+    .game-info-card,
+    .step-content,
+    .faq-section,
+    #whyChooseSection,
+    .why-choose-section {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .game-info-card {
+      padding: 8px 0 12px 0 !important;
+      margin-bottom: 12px !important;
+      display: block !important;
+    }
+    .step-content {
+      padding: 0 !important;
+      padding-top: 8px !important;
+      margin-bottom: 18px !important;
+    }
+    .faq-section,
+    #whyChooseSection {
+      padding: 16px 0 !important;
+      margin-top: 12px !important;
+      margin-bottom: 12px !important;
+    }
+    /* Keep inner small tiles with their own card style */
+    .faq-item,
+    .pack-card,
+    .store-badge,
+    .form-group,
+    .packs-grid,
+    .event-notice,
+    #eventNoticeBlock {
+      /* keep original small tile styling */
+    }
+    .container { padding-top: 12px !important; }
 </style>
 </head>
 
@@ -1977,7 +2029,7 @@
   </div>
 
   
-  <!-- UCify Full-Width Top Bar - 70% Transparent -->
+  <!-- UCify Top Bar - 90% Transparent -->
   <div class="ucify-topbar">
     <div class="ucify-topbar-inner">
       <div class="utb-left" onclick="handleLogoClick(event)" style="cursor:pointer;">
