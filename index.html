@@ -1889,15 +1889,23 @@
     .utb-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .utb-menu-btn.active span:nth-child(2) { opacity:0; }
     .utb-menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .top-menu-dropdown { position:absolute; top:100%; right:16px; width:260px; background: rgba(14,14,18,0.96); backdrop-filter: blur(24px); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:8px; box-shadow:0 12px 40px rgba(0,0,0,0.6); transform: translateY(10px) scale(0.98); opacity:0; visibility:hidden; pointer-events:none; transition: all 0.28s cubic-bezier(0.16,1,0.3,1); z-index:1001; }
+    .top-menu-dropdown.open { transform: translateY(0) scale(1); opacity:1; visibility:visible; pointer-events:auto; }
+    .tmd-header { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.35); padding:10px 12px 6px 12px; }
+    .tmd-item { display:flex; align-items:center; gap:10px; padding:12px 12px; border-radius:10px; color:rgba(255,255,255,0.85); font-size:13px; font-weight:500; cursor:pointer; }
+    .tmd-item i { width:18px; color: var(--primary); }
 
     /* Pay Bar 90% Transparent */
-    #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
+    #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
 
     /* Background Normal */
     body { background-color:#050507 !important; background-image:none !important; }
     .floating-particles, #floatingParticles, .particle { display:none !important; }
 
+    /* Container */
     .container { padding-left:0 !important; padding-right:0 !important; max-width:480px !important; }
+
+    /* Steps Background Bands */
     .step { margin:0 !important; padding:0 !important; border:none !important; border-radius:0 !important; width:100% !important; }
     .step .step-content { background: transparent !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px !important; margin:0 !important; }
     #step1 { background:#0E0E12 !important; }
@@ -1905,122 +1913,137 @@
     #step3 { background:#101014 !important; }
     #step4 { background:#0E0E12 !important; }
 
-    /* Game Info - Font Size Reduced to Fit */
+    /* Game Info - Bigger Size Since No Tile */
     .game-info-card {
-      background: #050507 !important;
+      background: transparent !important;
       border: none !important;
       box-shadow: none !important;
       margin: 0 !important;
-      padding: 18px 20px 20px 20px !important;
+      padding: 20px 20px 24px 20px !important;
       width: 100% !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 14px !important;
+      background-color: #050507 !important;
     }
-    .game-info-logo { width: 76px !important; height: 76px !important; border-radius: 16px !important; flex-shrink:0 !important; }
-    .game-info-main { gap: 14px !important; }
-    .game-info-details { min-width:0 !important; flex:1 !important; }
+    .game-info-logo {
+      width: 88px !important;
+      height: 88px !important;
+      border-radius: 20px !important;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5) !important;
+    }
     .game-info-title {
-      font-size: 14px !important;
-      font-weight: 700 !important;
-      line-height: 1.3 !important;
-      white-space: normal !important;
-      word-wrap: break-word !important;
-      overflow-wrap: break-word !important;
-      letter-spacing: 0.2px !important;
+      font-size: 20px !important;
+      font-weight: 800 !important;
+      line-height: 1.2 !important;
     }
-    .game-info-publisher { font-size: 11.5px !important; }
+    .game-info-publisher {
+      font-size: 13px !important;
+      margin-bottom: 12px !important;
+    }
+    .store-badge {
+      padding: 8px 12px !important;
+      font-size: 12px !important;
+      border-radius: 10px !important;
+    }
 
-    /* How To Redeem - Pure Black + No Extra Gap Below */
+    /* How To Redeem - Pure Black */
     #howToRedeemSection {
       background: #050507 !important;
+      background-color: #050507 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
       margin: 0 !important;
-      padding: 20px 20px 10px 20px !important;
+      padding: 24px 20px !important;
       width: 100% !important;
-      border:none !important;
     }
     #howToRedeemSection * { background: transparent !important; }
     #howToRedeemSection img { border: 1px solid rgba(255,255,255,0.08) !important; }
 
-    /* Why Choose - No Extra Gap Above + Black + Alignment Fix */
+    /* Why Choose UCify - Alignment Fix - Black */
     #whyChooseSection {
       background: #050507 !important;
+      background-color: #050507 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
       margin: 0 !important;
-      margin-top: 0 !important;
-      padding: 10px 20px 24px 20px !important;
+      padding: 28px 20px !important;
       width: 100% !important;
-      border:none !important;
       text-align: left !important;
     }
-    #whyChooseSection .step-title { text-align:left !important; font-size:20px !important; margin-bottom:10px !important; }
-    #whyChooseSection p { text-align:left !important; font-size:12.5px !important; line-height:1.7 !important; margin:0 !important; }
+    #whyChooseSection .step-title {
+      text-align: left !important;
+      font-size: 22px !important;
+      margin-bottom: 14px !important;
+      line-height: 1.3 !important;
+      letter-spacing: 0.5px !important;
+    }
+    #whyChooseSection p {
+      text-align: left !important;
+      font-size: 13px !important;
+      line-height: 1.7 !important;
+      color: #9ca3af !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
 
-    /* FAQ - No Tile, Line Separation, Answers Hidden */
+    /* FAQ - No Tile, Line Separation - Answers Hidden */
     .faq-section {
       background: #050507 !important;
       border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
       margin: 0 !important;
-      padding: 24px 20px !important;
+      padding: 28px 20px !important;
       width: 100% !important;
+    }
+    .faq-section .step-title {
+      text-align: left !important;
+      margin-bottom: 18px !important;
     }
     .faq-section .faq-item {
       background: transparent !important;
       border: none !important;
       border-bottom: 2px solid #2a2a2e !important;
-      border-radius:0 !important;
-      margin-bottom:0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin-bottom: 0 !important;
     }
-    .faq-section .faq-item:last-child { border-bottom:none !important; }
-    .faq-section .faq-question { background: transparent !important; padding: 20px 0 !important; }
-    .faq-section .faq-answer { background: transparent !important; max-height:0 !important; overflow:hidden !important; padding:0 !important; opacity:0 !important; transition: all 0.32s ease !important; }
-    .faq-section .faq-item.active .faq-answer { max-height:300px !important; padding:0 0 20px 0 !important; opacity:1 !important; }
-    .faq-section .faq-item.active { border-bottom: 2px solid #3a3a40 !important; }
+    .faq-section .faq-item:last-child { border-bottom: none !important; }
+    .faq-section .faq-question {
+      background: transparent !important;
+      padding: 20px 0 !important;
+      font-size: 14.5px !important;
+    }
+    .faq-section .faq-answer {
+      background: transparent !important;
+      max-height: 0 !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      opacity: 0 !important;
+      transition: all 0.32s ease !important;
+    }
+    .faq-section .faq-item.active .faq-answer {
+      max-height: 300px !important;
+      padding: 0 0 20px 0 !important;
+      opacity: 1 !important;
+    }
+    .faq-section .faq-item.active {
+      border-bottom: 2px solid #3a3a40 !important;
+    }
 
-    /* Social Proof 90% Transparent */
-    .social-proof { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; border:1px solid rgba(255,255,255,0.06) !important; }
+    /* Left Bottom UC Purchased Popup - 90% Transparent */
+    .social-proof {
+      background: rgba(10,10,12,0.10) !important;
+      backdrop-filter: blur(20px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+      border: 1px solid rgba(255,255,255,0.06) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+    }
 
     /* Footer Only © */
     .site-footer { padding: 20px 20px 30px 20px !important; }
     .footer-links { display: none !important; }
     .footer-managed { margin-bottom:0 !important; opacity:0.6; font-size:12px !important; }
-
-    /* ===== 90% Transparency for Info Modals and Menu ===== */
-    /* Top Menu Dropdown 90% Transparent */
-    .top-menu-dropdown {
-      background: rgba(10,10,12,0.10) !important;
-      backdrop-filter: blur(20px) saturate(160%) !important;
-      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
-      border: 1px solid rgba(255,255,255,0.06) !important;
-    }
-
-    /* All Modals - Terms, Privacy, etc + UID Info, Limited Pack Info, Regular Pack Info - 90% Transparent */
-    .modal-overlay {
-      background: rgba(0,0,0,0.30) !important;
-      backdrop-filter: blur(8px) !important;
-      -webkit-backdrop-filter: blur(8px) !important;
-    }
-    .modal-box {
-      background: rgba(10,10,12,0.10) !important;
-      backdrop-filter: blur(24px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-      border: 1px solid rgba(255,255,255,0.08) !important;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
-    }
-    /* Specifically target info modals */
-    #trialInfoModal .modal-box,
-    #regularInfoModal .modal-box,
-    #uidInfoModal .modal-box,
-    #termsModal .modal-box,
-    #privacyModal .modal-box,
-    #refundModal .modal-box,
-    #shippingModal .modal-box,
-    #contactModal .modal-box,
-    #adminLoginModal .modal-box {
-      background: rgba(10,10,12,0.10) !important;
-      backdrop-filter: blur(24px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-      border: 1px solid rgba(255,255,255,0.08) !important;
-    }
 </style>
 </head>
 
