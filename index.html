@@ -849,7 +849,7 @@
     
     .form-input {
       width: 100%;
-      background: rgba(255, 255, 255, 0.07); 
+      background: #131313; 
       border: 1px solid var(--surface-border);
       color: #fff;
       padding: 16px;
@@ -874,7 +874,7 @@
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 30px #1C1D1F inset !important;
+      -webkit-box-shadow: 0 0 0 30px #131313 inset !important;
       -webkit-text-fill-color: #fff !important;
       caret-color: #fff !important;
       transition: background-color 5000s ease-in-out 0s !important;
@@ -884,7 +884,7 @@
     input:autofill:focus,
     input:autofill:active {
       filter: none !important;
-      background: rgba(255,255,255,0.07) !important;
+      background: #131313 !important;
       color: #fff !important;
     }
     
@@ -2179,7 +2179,7 @@
       </div>
     </div>
     <div id="topMenuDropdown" class="top-menu-dropdown">
-      <div class="tmd-header">Menu</div>
+      <div class="tmd-header" style="display:none !important;">Menu</div>
       <a class="tmd-item" onclick="openModal('termsModal'); closeTopMenu();"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
       <a class="tmd-item" onclick="openModal('privacyModal'); closeTopMenu();"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
       <a class="tmd-item" onclick="openModal('refundModal'); closeTopMenu();"><i class="fa-solid fa-rotate-left"></i> Refund & Cancellation</a>
@@ -2497,23 +2497,23 @@
                     
                     <div style="margin-bottom:12px;">
                       <label style="font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:6px;">Card Number</label>
-                      <input type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19" id="demoCardNumber" style="width:100%; background: rgba(255,255,255,0.07); border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; letter-spacing:1px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'" oninput="formatCardNumber(this)">
+                      <input type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19" id="demoCardNumber" style="width:100%; background: #131313; border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; letter-spacing:1px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'" oninput="formatCardNumber(this)">
                     </div>
                     
                     <div style="display:flex; gap:12px; margin-bottom:12px;">
                       <div style="flex:1;">
                         <label style="font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:6px;">Expiry Date</label>
-                        <input type="text" placeholder="MM / YY" maxlength="7" id="demoExpiry" style="width:100%; background: rgba(255,255,255,0.07); border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'" oninput="formatExpiry(this)">
+                        <input type="text" placeholder="MM / YY" maxlength="7" id="demoExpiry" style="width:100%; background: #131313; border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'" oninput="formatExpiry(this)">
                       </div>
                       <div style="flex:1;">
                         <label style="font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:6px;">CVV</label>
-                        <input type="text" inputmode="numeric" placeholder="123" maxlength="4" id="demoCvv" style="width:100%; background: rgba(255,255,255,0.07); border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; letter-spacing:2px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'">
+                        <input type="text" inputmode="numeric" placeholder="123" maxlength="4" id="demoCvv" style="width:100%; background: #131313; border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; letter-spacing:2px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'">
                       </div>
                     </div>
                     
                     <div style="margin-bottom:14px;">
                       <label style="font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:6px;">Cardholder Name</label>
-                      <input type="text" placeholder="Name on card" id="demoName" style="width:100%; background: rgba(255,255,255,0.07); border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'">
+                      <input type="text" placeholder="Name on card" id="demoName" style="width:100%; background: #131313; border:1px solid var(--surface-border); color:#fff; padding:12px 14px; border-radius:10px; font-family:var(--font-body); font-size:14px; outline:none; transition:0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--surface-border)'">
                     </div>
                     <div style="margin-bottom:4px;">
                       <button type="button" id="verifyCardBtn" style="width:100%; background: var(--primary); color:#000; border:none; padding:11px 14px; border-radius:10px; font-family:var(--font-display); font-size:14px; font-weight:700; letter-spacing:0.8px; cursor:pointer; transition:0.2s; text-transform:uppercase;">Verify</button>
@@ -3040,7 +3040,7 @@
           <div class="admin-subsection">
               <label style="font-size:12px; color:var(--primary); font-weight:600;">Step 1: Player Details Texts</label>
               <div class="flex-row-center"><input type="checkbox" id="tgl_step1Title" class="admin-toggle-box"><input type="text" class="form-input" id="adminTextStep1" placeholder="Step 1 Title" style="font-size:12px; padding:8px;"></div>
-              <div class="flex-row-center"><input type="checkbox" id="tgl_grpUid" class="admin-toggle-box"><input type="text" class="form-input" id="adminTextLblUidInput" placeholder="BGMI Character ID (UID)" style="font-size:12px; padding:8px;"></div>
+              <div class="flex-row-center"><input type="checkbox" id="tgl_grpUid" class="admin-toggle-box"><input type="text" class="form-input" id="adminTextLblUidInput" placeholder="BGMI User ID (UID)" style="font-size:12px; padding:8px;"></div>
               <div class="flex-row-center"><input type="text" class="form-input" id="adminTextPhUid" placeholder="Placeholder UID" style="font-size:12px; padding:8px; width:100%; margin-left: 26px;"></div>
               <div class="flex-row-center"><input type="text" class="form-input" id="adminTextErrUid" placeholder="Error: Invalid UID" style="font-size:12px; padding:8px; width:100%; margin-left: 26px;"></div>
               
@@ -3560,14 +3560,14 @@ tryInitRemote();
             loaderText: "UCify", tagline: "Instant game top-ups at affordable rates", partnerBadge: "BGMI Authorised Seller",
             secureBadge: "Secure", instantBadge: "Instant", supportBadge: "24/7", ordersToday: "Packs Delivered Today", 
             
-            step1Title: "Player Details", lblUidInput: "BGMI Character ID (UID)", phUid: "Enter UID", errUid: "Invalid UID Format",
+            step1Title: "Player Details", lblUidInput: "BGMI User ID (UID)", phUid: "Enter UID", errUid: "Invalid UID Format",
             lblIgnInput: "BGMI ID Name", phIgn: "Enter IGN", errIgn: "Name Required",
             
             howToRedeemTitle: "How to redeem",
             howToQ1: "How do I find my BGMI User ID (UID)?", howToA1: "Open BGMI and enter the lobby. Tap on the profile picture and navigate to Basic Info. You will see a numeric User ID above the profile picture. Make sure to copy or enter the correct numbers before making the purchase, instead of using your in-game name.",
             howToQ2: "How do I find my BGMI ID name (IGN)?", howToA2: "Open BGMI and enter the lobby. Tap on the profile picture and navigate to Basic Info. You will see a BGMI ID name (IGN) above or beside the profile picture. Make sure to copy or enter the correct name before making the purchase.",
             
-            step2Title: "SELECT OPTIONS", lblTrial: "Limited Packs", lblRegular: "Regular Packs", eventNotice: "Note: UC purchased through UCify fully counts towards all in-game events, including the BGMI UC UP Event.",
+            step2Title: "SELECT OPTIONS", lblTrial: "Limited Packs", lblRegular: "Regular Packs", eventNotice: "UC purchased through UCify fully counts towards all in-game events, including the BGMI UC UP Event.",
             
             btnVerify: "Verify & Continue", btnCheckout: "Purchase", btnChange: "Change", btnBack: "Back",
             
