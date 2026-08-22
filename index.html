@@ -3029,6 +3029,11 @@
           <p style="font-size: 11px; color: #aaa; margin-bottom: 10px;">Check/Uncheck the box to Hide/Show. Edit text to update website.</p>
           
           <div class="admin-subsection">
+              <label style="font-size:12px; color:var(--primary); font-weight:600;">Global Footer / FAQ Texts</label>
+                                          <div class="flex-row-center"><input type="checkbox" id="tgl_faq" class="admin-toggle-box"><input type="text" class="form-input" id="adminTextFaq" placeholder="FAQ Title" style="font-size:12px; padding:8px;"></div>
+          </div>
+
+          <div class="admin-subsection">
               <label style="font-size:12px; color:var(--primary); font-weight:600;">FAQ Questions & Answers</label>
               <p style="font-size:10px; color:#aaa;">Manage dynamically added FAQs</p>
               
@@ -3041,27 +3046,6 @@
               </div>
           </div>
           
-          <div class="admin-subsection">
-              <label style="font-size:12px; color:var(--primary); font-weight:600;">Modal Texts Edit</label>
-              <p style="font-size:10px; color:#aaa;">Edit popup content texts</p>
-              
-              <input type="text" class="form-input" id="admTxtTrialModT" placeholder="Trial Info Title" style="font-size:11px; padding:6px; margin-top:5px;">
-              <textarea class="form-input" id="admTxtTrialModD" rows="2" style="font-size:11px; padding:6px; margin-top:2px;" placeholder="Trial Info Desc"></textarea>
-              
-              <input type="text" class="form-input" id="admTxtRegModT" placeholder="Regular Info Title" style="font-size:11px; padding:6px; margin-top:10px;">
-              <textarea class="form-input" id="admTxtRegModD" rows="2" style="font-size:11px; padding:6px; margin-top:2px;" placeholder="Regular Info Desc"></textarea>
-              
-              <input type="text" class="form-input" id="admTxtUidModT" placeholder="UID Modal Title" style="font-size:11px; padding:6px; margin-top:10px;">
-              <input type="text" class="form-input" id="admTxtUidMod1" placeholder="Line 1" style="font-size:11px; padding:6px; margin-top:2px;">
-              <input type="text" class="form-input" id="admTxtUidMod2" placeholder="Line 2" style="font-size:11px; padding:6px; margin-top:2px;">
-              <input type="text" class="form-input" id="admTxtUidMod3" placeholder="Line 3" style="font-size:11px; padding:6px; margin-top:2px;">
-
-              <input type="text" class="form-input" id="admTxtIgnModT" placeholder="IGN Modal Title" style="font-size:11px; padding:6px; margin-top:10px;">
-              <input type="text" class="form-input" id="admTxtIgnMod1" placeholder="Line 1" style="font-size:11px; padding:6px; margin-top:2px;">
-              <input type="text" class="form-input" id="admTxtIgnMod2" placeholder="Line 2" style="font-size:11px; padding:6px; margin-top:2px;">
-              <input type="text" class="form-input" id="admTxtIgnMod3" placeholder="Line 3" style="font-size:11px; padding:6px; margin-top:2px;">
-          </div>
-
           <h4 class="admin-section-title">👁️ General Component Toggles</h4>
           <div class="form-group" style="display: flex; flex-direction: column; gap: 12px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
 
@@ -3075,30 +3059,6 @@
              </div>
           </div>
 
-          <h4 class="admin-section-title">📄 Legal & Policies (Plain Text - No HTML needed)</h4>
-          <p style="font-size: 11px; color: #aaa; margin-bottom: 10px;">Type normally. Use enter for new lines. HTML tags required nahi hain.</p>
-          
-          <div class="form-group" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
-             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox" id="adminShowTerms" class="admin-toggle-box"><label for="adminShowTerms" style="color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">Show Terms & Conditions</label></div>
-             <textarea class="form-input" id="adminContentTerms" rows="4" style="font-size:13px; padding:10px; line-height: 1.4; resize: vertical;"></textarea>
-          </div>
-          <div class="form-group" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
-             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox" id="adminShowPrivacy" class="admin-toggle-box"><label for="adminShowPrivacy" style="color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">Show Privacy Policy</label></div>
-             <textarea class="form-input" id="adminContentPrivacy" rows="4" style="font-size:13px; padding:10px; line-height: 1.4; resize: vertical;"></textarea>
-          </div>
-          <div class="form-group" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
-             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox" id="adminShowRefund" class="admin-toggle-box"><label for="adminShowRefund" style="color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">Show Refund & Cancellation</label></div>
-             <textarea class="form-input" id="adminContentRefund" rows="4" style="font-size:13px; padding:10px; line-height: 1.4; resize: vertical;"></textarea>
-          </div>
-          <div class="form-group" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
-             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox" id="adminShowShipping" class="admin-toggle-box"><label for="adminShowShipping" style="color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">Show Delivery Policy</label></div>
-             <textarea class="form-input" id="adminContentShipping" rows="4" style="font-size:13px; padding:10px; line-height: 1.4; resize: vertical;"></textarea>
-          </div>
-          <div class="form-group" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
-             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;"><input type="checkbox" id="adminShowContact" class="admin-toggle-box"><label for="adminShowContact" style="color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">Show Contact Us</label></div>
-             <textarea class="form-input" id="adminContentContact" rows="4" style="font-size:13px; padding:10px; line-height: 1.4; resize: vertical;"></textarea>
-          </div>
-          
           <h4 class="admin-section-title">🌟 Creator UIDs (For Secondary Webhook)</h4>
           <div id="adminCreatorUidsList" style="margin-bottom: 10px;"></div>
           <div class="admin-input-group">
@@ -4640,27 +4600,11 @@ document.getElementById('previewGameLogo').src = window.siteConfig.images.gameLo
         const t = window.siteConfig.texts;        // partnerBadge removed        // ordersToday removed - pillStats not in website        // howToQ2 removed - howToBlock2 not in website
         // howToA2 removed        // freeClaimTitle removed - not in website
         // btnClaimFree removed
-        // freeClaimSubtitle removed        // successTitle removed - dispSuccessTitle not in website
-        document.getElementById('adminTextWhyChoose').value = t.whyChooseTitle;
-        document.getElementById('adminTextWhyChooseDesc').value = t.whyChooseDesc;
-        document.getElementById('admTxtTrialModT').value = t.trialModalTitle;
-        document.getElementById('admTxtTrialModD').value = t.trialModalDesc;
-        document.getElementById('admTxtRegModT').value = t.regModalTitle;
-        document.getElementById('admTxtRegModD').value = t.regModalDesc;
-        
-        document.getElementById('admTxtUidModT').value = t.uidModalTitle;
-        document.getElementById('admTxtUidMod1').value = t.uidModalL1;
-        document.getElementById('admTxtUidMod2').value = t.uidModalL2;
-        document.getElementById('admTxtUidMod3').value = t.uidModalL3;
-        document.getElementById('admTxtIgnModT').value = t.ignModalTitle;
-        document.getElementById('admTxtIgnMod1').value = t.ignModalL1;
-        document.getElementById('admTxtIgnMod2').value = t.ignModalL2;
-        document.getElementById('admTxtIgnMod3').value = t.ignModalL3;
-
-        // Populate Toggles
+        // freeClaimSubtitle removed        // successTitle removed - dispSuccessTitle not in website        document.getElementById('adminTextFaq').value = t.faqTitle;        // Populate Toggles
         const tg = window.siteConfig.toggles;
         document.getElementById('adminSiteActive').checked = tg.siteActive !== false; if(window.updateSiteToggleUI) setTimeout(window.updateSiteToggleUI, 50);        
-        // tgl_ordersToday removed - ordersToday feature not in website        // tgl_howToQ2 removed        // tgl_successTitle removed        document.getElementById('tgl_whyChoose').checked = tg.showWhyChoose;        // adminShowLogo removed - partnerBlock not in website
+        // tgl_ordersToday removed - ordersToday feature not in website        // tgl_howToQ2 removed        // tgl_successTitle removed        document.getElementById('tgl_faq').checked = tg.showFaq;
+        // adminShowLogo removed - partnerBlock not in website
 document.getElementById('adminShowProof').checked = tg.showSocialProof; 
         document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
 
@@ -4682,18 +4626,7 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
         setPrev('previewUpiAmazonPay','upiAmazonPay','amazonpay.webp');
         setPrev('previewUpiMobiKwik','upiMobiKwik','mobikwik.webp');
         setPrev('previewUpiWhatsapp','upiWhatsapp','whatsapp.webp');
-        setPrev('previewUpiOther','upiOther','other.webp');
-
-        document.getElementById('adminShowTerms').checked = window.siteConfig.policies.showTerms; document.getElementById('adminShowPrivacy').checked = window.siteConfig.policies.showPrivacy;
-        document.getElementById('adminShowRefund').checked = window.siteConfig.policies.showRefund; document.getElementById('adminShowShipping').checked = window.siteConfig.policies.showShipping;
-        document.getElementById('adminShowContact').checked = window.siteConfig.policies.showContact;
-        document.getElementById('adminContentTerms').value = window.siteConfig.policies.contentTerms || defaultAdminConfig.policies.contentTerms;
-        document.getElementById('adminContentPrivacy').value = window.siteConfig.policies.contentPrivacy || defaultAdminConfig.policies.contentPrivacy;
-        document.getElementById('adminContentRefund').value = window.siteConfig.policies.contentRefund || defaultAdminConfig.policies.contentRefund;
-        document.getElementById('adminContentShipping').value = window.siteConfig.policies.contentShipping || defaultAdminConfig.policies.contentShipping;
-        document.getElementById('adminContentContact').value = window.siteConfig.policies.contentContact || defaultAdminConfig.policies.contentContact;
-        
-        window.renderAdminRzpLinksList(); window.renderAdminCreatorUidsList(); window.renderAdminPacksList(); window.renderAdminFaqsList(); window.openModal('adminPanelModal', isReplaced);
+        setPrev('previewUpiOther','upiOther','other.webp');        window.renderAdminRzpLinksList(); window.renderAdminCreatorUidsList(); window.renderAdminPacksList(); window.renderAdminFaqsList(); window.openModal('adminPanelModal', isReplaced);
     }
 
     window.renderAdminCreatorUidsList = function() {
@@ -4979,22 +4912,9 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
         try {        // partnerBadge removed        // ordersToday removed        // howToQ2 removed
         // howToA2 removed        t.cardTileText = document.getElementById('adminTextCardTile') ? document.getElementById('adminTextCardTile').value.trim() || defaultAdminConfig.texts.cardTileText : (t.cardTileText || defaultAdminConfig.texts.cardTileText);        // freeClaimTitle removed
         // btnClaimFree removed
-        // freeClaimSubtitle removed        // successTitle removed
-        t.whyChooseTitle = document.getElementById('adminTextWhyChoose').value.trim() || defaultAdminConfig.texts.whyChooseTitle;
-        t.whyChooseDesc = document.getElementById('adminTextWhyChooseDesc').value.trim() || defaultAdminConfig.texts.whyChooseDesc;        
-        t.trialModalTitle = document.getElementById('admTxtTrialModT').value.trim() || defaultAdminConfig.texts.trialModalTitle;
-        t.trialModalDesc = document.getElementById('admTxtTrialModD').value.trim() || defaultAdminConfig.texts.trialModalDesc;
-        t.regModalTitle = document.getElementById('admTxtRegModT').value.trim() || defaultAdminConfig.texts.regModalTitle;
-        t.regModalDesc = document.getElementById('admTxtRegModD').value.trim() || defaultAdminConfig.texts.regModalDesc;
+        // freeClaimSubtitle removed        // successTitle removed        t.faqTitle = document.getElementById('adminTextFaq').value.trim() || defaultAdminConfig.texts.faqTitle;
         
-        t.uidModalTitle = document.getElementById('admTxtUidModT').value.trim() || defaultAdminConfig.texts.uidModalTitle;
-        t.uidModalL1 = document.getElementById('admTxtUidMod1').value.trim() || defaultAdminConfig.texts.uidModalL1;
-        t.uidModalL2 = document.getElementById('admTxtUidMod2').value.trim() || defaultAdminConfig.texts.uidModalL2;
-        t.uidModalL3 = document.getElementById('admTxtUidMod3').value.trim() || defaultAdminConfig.texts.uidModalL3;
-        t.ignModalTitle = document.getElementById('admTxtIgnModT').value.trim() || defaultAdminConfig.texts.ignModalTitle;
-        t.ignModalL1 = document.getElementById('admTxtIgnMod1').value.trim() || defaultAdminConfig.texts.ignModalL1;
-        t.ignModalL2 = document.getElementById('admTxtIgnMod2').value.trim() || defaultAdminConfig.texts.ignModalL2;
-        t.ignModalL3 = document.getElementById('admTxtIgnMod3').value.trim() || defaultAdminConfig.texts.ignModalL3;
+        
         } catch(e) { console.log('Text save error', e); }
 
         const tg = window.siteConfig.toggles;
