@@ -4457,7 +4457,9 @@ tryInitRemote();
         document.getElementById('dispStep2Title').textContent = getText('step2Title');
         document.getElementById('dispLblTrial').textContent = getText('lblTrial');
         document.getElementById('dispLblRegular').textContent = getText('lblRegular');
-        document.getElementById('dispEventNotice').innerHTML = `<span style="color: #fff; font-weight: 600;">Note:</span> ${getText('eventNotice')}`;
+        let _evNotice = getText('eventNotice') || "";
+        _evNotice = _evNotice.replace(/^Note:\s*/i, "");
+        document.getElementById('dispEventNotice').innerHTML = `<span style="color: #fff; font-weight: 600;">Note:</span> ${_evNotice}`;
         
         document.getElementById('dispBtnVerify').textContent = getText('btnVerify');
         document.getElementById('dispBtnCheckout').textContent = getText('btnCheckout');
