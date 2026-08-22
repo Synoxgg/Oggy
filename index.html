@@ -1884,115 +1884,99 @@
     .utb-divider { color:rgba(255,255,255,0.18); }
     .utb-authorized { display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; text-transform:uppercase; color:rgba(255,255,255,0.88); }
     .utb-tick { color:#22c55e; font-size:13px; }
-    .utb-right { display:flex; align-items:center; }
-
-    /* Hamburger Menu Button - 3 dande */
-    .utb-menu-btn {
-      width: 42px; height: 42px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      padding: 0;
-    }
-    .utb-menu-btn span {
-      display: block;
-      width: 18px; height: 2px;
-      background: #fff;
-      border-radius: 2px;
-      transition: all 0.25s ease;
-    }
-    .utb-menu-btn:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.18); transform: scale(1.03); }
+    .utb-menu-btn { width:42px; height:42px; background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; }
+    .utb-menu-btn span { display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition: all 0.25s ease; }
     .utb-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .utb-menu-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .utb-menu-btn.active span:nth-child(2) { opacity:0; }
     .utb-menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* Dropdown Menu */
-    .top-menu-dropdown {
-      position: absolute;
-      top: 100%;
-      right: 16px;
-      width: 260px;
-      background: rgba(14,14,18,0.96);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 8px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04) inset;
-      transform: translateY(10px) scale(0.98);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: all 0.28s cubic-bezier(0.16,1,0.3,1);
-      z-index: 1001;
-    }
-    .top-menu-dropdown.open {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    .tmd-header {
-      font-size: 11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
-      color: rgba(255,255,255,0.35); padding: 10px 12px 6px 12px;
-    }
-    .tmd-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 12px 12px;
-      border-radius: 10px;
-      color: rgba(255,255,255,0.85);
-      font-size: 13px; font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s ease;
-      text-decoration: none;
-    }
-    .tmd-item i { width:18px; color: var(--primary); font-size:13px; }
-    .tmd-item:hover { background: rgba(255,255,255,0.06); color:#fff; transform: translateX(2px); }
+    .top-menu-dropdown { position:absolute; top:100%; right:16px; width:260px; background: rgba(14,14,18,0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:8px; box-shadow:0 12px 40px rgba(0,0,0,0.6); transform: translateY(10px) scale(0.98); opacity:0; visibility:hidden; pointer-events:none; transition: all 0.28s cubic-bezier(0.16,1,0.3,1); z-index:1001; }
+    .top-menu-dropdown.open { transform: translateY(0) scale(1); opacity:1; visibility:visible; pointer-events:auto; }
+    .tmd-header { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.35); padding:10px 12px 6px 12px; }
+    .tmd-item { display:flex; align-items:center; gap:10px; padding:12px 12px; border-radius:10px; color:rgba(255,255,255,0.85); font-size:13px; font-weight:500; cursor:pointer; }
+    .tmd-item i { width:18px; color: var(--primary); }
 
     /* Pay Bar 90% Transparent */
-    #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
+    #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
 
-    /* Background Normal - No Animation */
+    /* Background Normal */
     body { background-color:#050507 !important; background-image:none !important; }
     .floating-particles, #floatingParticles, .particle { display:none !important; }
 
-    /* Separation via Background Colour Bands - NO Tile Look */
+    /* Container */
     .container { padding-left:0 !important; padding-right:0 !important; max-width:480px !important; }
-    .game-info-card, .faq-section, #whyChooseSection, #howToRedeemSection {
-      background: transparent !important;
-      background-color: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    /* Keep black for How to redeem and Why Choose and FAQ and Game Info */
-    #howToRedeemSection, #whyChooseSection, .faq-section, .game-info-card {
-      margin-left: 20px !important;
-      margin-right: 20px !important;
-      background: transparent !important;
-    }
-    /* Main Steps - Background Colour Bands */
-    .step { margin:0 !important; padding:0 !important; border:none !important; border-radius:0 !important; box-shadow:none !important; width:100% !important; }
-    .step .step-content { background: transparent !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px !important; margin:0 !important; }
+    .game-info-card, #whyChooseSection { background: transparent !important; border:none !important; box-shadow:none !important; margin-left:20px !important; margin-right:20px !important; }
 
+    /* Steps - Background Bands No Tile */
+    .step { margin:0 !important; padding:0 !important; border:none !important; border-radius:0 !important; width:100% !important; }
+    .step .step-content { background: transparent !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px !important; margin:0 !important; }
     #step1 { background:#0E0E12 !important; }
     #step2 { background:#14141A !important; }
     #step3 { background:#101014 !important; }
     #step4 { background:#0E0E12 !important; }
-    #howToRedeemSection { background: transparent !important; }
 
-    /* Footer - Only © UCify */
+    /* ===== HOW TO REDEEM - Pure Black #050507 ===== */
+    #howToRedeemSection {
+      background: #050507 !important;
+      background-color: #050507 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 24px 20px !important;
+      width: 100% !important;
+    }
+    #howToRedeemSection * {
+      background: transparent !important;
+    }
+    #howToRedeemSection img {
+      background: transparent !important;
+      border: 1px solid rgba(255,255,255,0.08) !important;
+    }
+
+    /* ===== FAQ - No Tile, Only Lines for Separation ===== */
+    .faq-section {
+      background: #050507 !important;
+      background-color: #050507 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 24px 20px !important;
+      width: 100% !important;
+    }
+    .faq-section .faq-item {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      margin-bottom: 0 !important;
+    }
+    .faq-section .faq-item:last-child {
+      border-bottom: none !important;
+    }
+    .faq-section .faq-question {
+      background: transparent !important;
+      padding: 18px 0 !important;
+    }
+    .faq-section .faq-answer {
+      background: transparent !important;
+      padding: 0 0 18px 0 !important;
+    }
+    .faq-section .faq-item.active {
+      background: transparent !important;
+      border-bottom: 1px solid rgba(255,184,0,0.18) !important;
+    }
+
+    /* Footer Only © */
     .site-footer { padding: 20px 20px 30px 20px !important; }
     .footer-links { display: none !important; }
-    .footer-managed { margin-bottom: 0 !important; opacity: 0.6; font-size: 12px !important; }
+    .footer-managed { margin-bottom:0 !important; opacity:0.6; font-size:12px !important; }
 </style>
 </head>
 
@@ -7437,13 +7421,8 @@ function toggleTopMenu(e){
   var dd = document.getElementById('topMenuDropdown');
   if(!btn || !dd) return;
   var isOpen = dd.classList.contains('open');
-  if(isOpen){
-    dd.classList.remove('open');
-    btn.classList.remove('active');
-  } else {
-    dd.classList.add('open');
-    btn.classList.add('active');
-  }
+  if(isOpen){ dd.classList.remove('open'); btn.classList.remove('active'); }
+  else { dd.classList.add('open'); btn.classList.add('active'); }
 }
 function closeTopMenu(){
   var btn = document.getElementById('topMenuBtn');
@@ -7455,9 +7434,7 @@ document.addEventListener('click', function(ev){
   var dd = document.getElementById('topMenuDropdown');
   var btn = document.getElementById('topMenuBtn');
   if(!dd || !btn) return;
-  if(!dd.contains(ev.target) && !btn.contains(ev.target)){
-    closeTopMenu();
-  }
+  if(!dd.contains(ev.target) && !btn.contains(ev.target)){ closeTopMenu(); }
 });
 </script>
 
