@@ -2152,8 +2152,18 @@
         max-width:640px !important;
         margin:0 auto !important;
       }
-      /* Sticky purchase bar centered in landscape */
-      #stickyPurchaseBar, .social-proof {
+      /* Sticky purchase bar centered in landscape - FIXED to respect active/hidden state */
+      #stickyPurchaseBar {
+        max-width:640px !important;
+        left:50% !important;
+        right:auto !important;
+        width:calc(100% - 32px) !important;
+        transform:translateX(-50%) translateY(110%) !important;
+      }
+      #stickyPurchaseBar.active {
+        transform:translateX(-50%) translateY(0%) !important;
+      }
+      .social-proof {
         max-width:640px !important;
         left:50% !important;
         transform:translateX(-50%) !important;
