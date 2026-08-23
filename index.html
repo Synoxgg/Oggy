@@ -207,7 +207,7 @@
   <title>UCify - BGMI UC Shop</title>
   <meta name="title" content="UCify - BGMI UC Shop - Official BGMI UC Topup | Instant & Affordable">
   <meta name="description" content="UCify Shop is one of the fastest ways to top up BGMI UC at the cheapest price in India.">
-  <meta name="keywords" content="UCify, ucify.shop, bgmi, bgmi uc, bgmi uc topup, bgmi uc purchase, bgmi uc buy, cheap bgmi uc, swag bgmi, unipin bgmi, bgmi uc store India, bgmi uc cheapest">
+  <meta name="keywords" content="UCify, ucify.shop, bgmi, bgmi uc, bgmi uc topup, bgmi uc purchase, bgmi uc buy, cheap bgmi uc, ucify bgmi, unipin bgmi, bgmi uc store India, bgmi uc cheapest">
   <meta name="author" content="UCify">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://ucify.shop/">
@@ -346,7 +346,7 @@
       "@type": "Country",
       "name": "India"
     },
-    "keywords": "bgmi uc, bgmi uc topup, bgmi uc purchase, UCify, swag bgmi, unipin bgmi",
+    "keywords": "bgmi uc, bgmi uc topup, bgmi uc purchase, UCify, ucify bgmi, unipin bgmi",
     "offers": {
       "@type": "AggregateOffer",
       "category": "BGMI UC Topup",
@@ -1945,6 +1945,34 @@
       margin-top: 6px !important;
     }
 
+    /* Why Choose UCify - Alignment Fix - Black */
+    #whyChooseSection {
+      background: #131313 !important;
+      background-color: #131313 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      padding: 12px 20px 28px 20px !important;
+      width: 100% !important;
+      text-align: left !important;
+    }
+    #whyChooseSection .step-title {
+      text-align: left !important;
+      font-size: 26px !important;
+      margin-bottom: 16px !important;
+      line-height: 1.3 !important;
+      letter-spacing: 0.5px !important;
+    }
+    #whyChooseSection p {
+      text-align: left !important;
+      font-size: 15px !important;
+      line-height: 1.8 !important;
+      color: #9ca3af !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+
     /* FAQ - No Tile, Line Separation - Answers Hidden */
     .faq-section {
       background: #131313 !important;
@@ -2406,6 +2434,7 @@ html, body {
       
       
       <div class="step-content" style="margin-top: 20px; background:#131313 !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px 16px 20px !important;" id="buyUcInfoSection">
+          <!-- Title removed as per request -->
           <div style="color: var(--text-muted); font-size: 15px; line-height: 1.8; text-align:left;">
             <span id="buyUcShortText">Buy BGMI UC online with instant top-up on UCify, the official partner of BGMI for purchasing UC. Enter your numeric BGMI User ID, choose a UC pack that suits your budget, and complete your payment securely. Your UC is credited directly to the BGMI account linked to that User ID, so no voucher redemption, account password, OTP, Google login or Facebook login is required. Eligible packs may also include bonus UC and cashback.</span>
             <span id="buyUcDots">..</span>
@@ -2453,6 +2482,19 @@ html, body {
         </div>
 
         <!-- EVENT NOTICE -->
+        
+        <!-- Buy UC Info - Also in Packs Section (added as per request) -->
+        <div class="step-content" style="margin-top: 20px; background:#131313 !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px 16px 20px !important;" id="buyUcInfoSectionPacks">
+          <div style="color: var(--text-muted); font-size: 15px; line-height: 1.8; text-align:left;">
+            <span id="buyUcShortTextPacks">Buy BGMI UC online with instant top-up on UCify, the official partner of BGMI for purchasing UC. Enter your numeric BGMI User ID, choose a UC pack that suits your budget, and complete your payment securely. Your UC is credited directly to the BGMI account linked to that User ID, so no voucher redemption, account password, OTP, Google login or Facebook login is required. Eligible packs may also include bonus UC and cashback.</span>
+            <span id="buyUcDotsPacks">..</span>
+            <span id="buyUcMoreTextPacks" style="display:none;"> Use your UC for Royale Pass upgrades, outfits, weapon skins, crates, emotes and other eligible in-game items. Most BGMI UC top-ups are completed within a few minutes. Before paying, check your User ID carefully because UC sent to an incorrect account may not be reversible or transferable.</span>
+          </div>
+          <button id="buyUcToggleBtnPacks" onclick="toggleBuyUcInfoPacks()" style="background:none; border:none; color:var(--primary); font-weight:600; font-size:14px; cursor:pointer; margin-top:10px; padding:0; text-align:left; display:inline-flex; align-items:center; gap:4px;">
+            Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>
+          </button>
+        </div>
+
         <div id="eventNoticeBlock" style="background: rgba(255, 184, 0, 0.05); border: 1px solid rgba(255, 184, 0, 0.2); border-radius: var(--radius-sm); padding: 12px 15px; margin-bottom: 20px; text-align: left; display: flex; align-items: flex-start; gap: 10px;">
             <i class="fa-solid fa-bullhorn" style="color: var(--primary); font-size: 14px; margin-top: 2px;"></i>
             <p style="color: var(--text-muted); font-size: 12px; line-height: 1.5; margin: 0;" id="dispEventNotice">
@@ -2460,71 +2502,7 @@ html, body {
             </p>
         </div>
 
-        
-<div class="step-content">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 25px;">
-            <h2 class="step-title" id="dispStep1Title" style="margin-bottom: 0;">Player Details</h2>
-        </div>
-
-        <div class="form-group" id="grpUid">
-          <label class="form-label">
-            <span id="dispLblUidInput">Enter your BGMI user id (UID)</span>
-            <i class="fa-solid fa-circle-info info-icon" onclick="openModal('uidModal')"></i>
-          </label>
-          <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
-            <div class="form-input-wrapper" style="width:100%; position:relative;">
-              <input type="tel" class="form-input" id="uid" placeholder="BGMI user ID (UID)" maxlength="12" inputmode="numeric">
-            </div>
-            <div id="verify-result" style="display:none; font-size:12px; padding:8px 12px; border-radius:8px;"></div>
-            <button type="button" id="changeUidBtn" style="display:none; width:100%; padding:0 18px; height:42px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:12px; font-family:var(--font-display); font-weight:600; font-size:12px; letter-spacing:0.5px; cursor:pointer; transition:all 0.2s;"><i class="fa-solid fa-pen-to-square" style="margin-right:6px;"></i> Change BGMI user ID</button>
-            <button type="button" id="verifyUidBtn" disabled style="width:100%; padding:0 18px; height:46px; background:var(--primary); color:#000; border:none; border-radius:12px; font-family:var(--font-display); font-weight:800; font-size:13px; letter-spacing:0.5px; cursor:not-allowed; opacity:0.4; white-space:nowrap; transition:all 0.2s;">Verify</button>
-          </div>
-          <div class="error-message" id="uidError"><span id="dispErrUid">Invalid UID Format</span></div>
-        </div>
-
-        <!-- Verify Popup - Same as NextLevel -->
-        <div id="verify-popup" style="display:none !important; position:fixed; inset:0; z-index:99999; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px);">
-          <div style="background:#1C1D1F; border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:28px 24px; max-width:340px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
-            <div id="verify-popup-icon" style="width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;"></div>
-            <h3 id="verify-popup-title" style="font-family:var(--font-display); font-weight:800; font-size:18px; margin-bottom:8px;"></h3>
-            <p id="verify-popup-msg" style="color:#9ca3af; font-size:13px; line-height:1.5; margin-bottom:20px;"></p>
-            <button type="button" id="verify-popup-btn" onclick="closeVerifyPopup()" style="width:100%; padding:12px; font-weight:800; font-size:13px; border-radius:12px; border:none; cursor:pointer; transition:all 0.2s;">OK</button>
-          </div>
-        </div>
-
-        <div class="form-group" id="grpIgn" style="display:none;">
-          <label class="form-label">
-            <span id="dispLblIgnInput">BGMI ID Name (Auto-Filled)</span>
-            <span style="color:var(--success); font-size:11px; margin-left:6px;"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto</span>
-          </label>
-          <div class="form-input-wrapper">
-            <input type="text" class="form-input" id="ign" placeholder="Will auto-fill after UID verify" maxlength="20" readonly style="background:rgba(0,255,157,0.05); border-color:rgba(0,255,157,0.3); color:#fff;">
-            <i class="input-icon" id="ignIcon"></i>
-          </div>
-          <div class="error-message" id="ignError"><span id="dispErrIgn">Name Required</span></div>
-          <div id="autoIgnHint" style="margin-top:6px; font-size:11px; color:var(--success); display:none;"><i class="fa-solid fa-circle-check"></i> <span id="autoIgnText"></span></div>
-        </div>
-
-        <div class="btn-row" style="display:none;">
-          <button type="button" class="btn btn-primary" id="next1" disabled><span id="dispBtnVerify">Verify & Continue</span> <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-
-      
-      
-      <div class="step-content" style="margin-top: 24px; margin-bottom: 16px; background:#131313 !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px 16px 20px !important;" id="buyUcInfoSectionStep2">
-          <div style="color: var(--text-muted); font-size: 15px; line-height: 1.8; text-align:left;">
-            <span id="buyUcShortText2">Buy BGMI UC online with instant top-up on UCify, the official partner of BGMI for purchasing UC. Enter your numeric BGMI User ID, choose a UC pack that suits your budget, and complete your payment securely. Your UC is credited directly to the BGMI account linked to that User ID, so no voucher redemption, account password, OTP, Google login or Facebook login is required. Eligible packs may also include bonus UC and cashback.</span>
-            <span id="buyUcDots2">..</span>
-            <span id="buyUcMoreText2" style="display:none;"> Use your UC for Royale Pass upgrades, outfits, weapon skins, crates, emotes and other eligible in-game items. Most BGMI UC top-ups are completed within a few minutes. Before paying, check your User ID carefully because UC sent to an incorrect account may not be reversible or transferable.</span>
-          </div>
-          <button id="buyUcToggleBtn2" onclick="toggleBuyUcInfo2()" style="background:none; border:none; color:var(--primary); font-weight:600; font-size:14px; cursor:pointer; margin-top:10px; padding:0; text-align:left; display:inline-flex; align-items:center; gap:4px;">
-            Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>
-          </button>
-      </div>
-
-    </div>
-<div class="btn-row" id="step2BtnRow" style="margin-top: 20px;">
+        <div class="btn-row" id="step2BtnRow" style="margin-top: 20px;">
            <button type="button" class="btn btn-secondary" onclick="history.back()" style="width:100%; flex:1 1 100%;"><span id="dispBtnBack">Back</span></button>
            <button type="button" class="btn btn-primary" id="next2" disabled style="display:none !important;"><span id="dispBtnCheckout">Purchase</span></button>
         </div>
@@ -2821,7 +2799,18 @@ html, body {
     </div>
     
     <!-- GLOBAL INFO SECTION (APPEARS ON ALL PAGES) -->
-    </div> 
+    <!-- Why Choose UCify section removed as per request -->
+
+    <!-- GLOBAL FAQ SECTION (APPEARS ON ALL PAGES) -->
+    <div class="faq-section" id="faqSectionGlob">
+        <h2 class="step-title" id="dispFaq" style="font-size: 26px; margin-bottom: 18px; text-align: left;">Frequently Asked Questions</h2>
+        
+        <div id="faqListContainer">
+            <!-- Dynamically populated FAQs go here -->
+        </div>
+    </div>
+
+  </div> 
 
   <!-- SITE FOOTER -->
   <div class="site-footer">
@@ -2836,7 +2825,7 @@ html, body {
     </div>
   </div>
 
-  <!-- UCify Footer Graphic - Full Screen with Bubble Animation like SWAG -->
+  <!-- UCify Footer Graphic - Full Screen with Bubble Animation like UCify -->
   <style>
     .ucify-footer-wrap{position:relative;width:100vw;margin-left:calc(-50vw + 50%);margin-top:24px;overflow:hidden;background:#131313;line-height:0}
     .ucify-footer-wrap img{width:100%;height:auto;display:block;object-fit:cover}
@@ -3587,6 +3576,7 @@ tryInitRemote();
             
             receiptTitle: "RECEIPT", lblPack: "Pack", lblAmount: "Amount Paid", lblUid: "UID", lblIgn: "IGN", lblTime: "Time",
             
+            whyChooseTitle: "Why Choose UCify?", whyChooseDesc: "Top up your BGMI account with Unknown Cash (UC) directly through UCify. No voucher codes, no redeem steps. Just enter your BGMI User ID and BGMI ID name, pick a UC pack, and the credits land in your account instantly. UCify offers both one-time bonus packs (with up to 100% bonus UC) and standard packs, so you can grab skins, the Royale Pass, outfits, and weapon upgrades without the hassle. All transactions are digital, single-use, and processed in real time.",
             faqTitle: "Frequently Asked Questions",
             
             trialModalTitle: "Limited Packs Info", trialModalDesc: "These special offer packs are strictly limited to one purchase per BGMI User ID. Once purchased, you cannot buy them again for the same account.",
@@ -3601,7 +3591,7 @@ tryInitRemote();
             showStep2Title: true, showLblTrial: true, showLblRegular: true, showEventNotice: true,
             showStep3Title: true, showStep3Subnote: true, showAwaitingStatus: true, showCancelBtn: true,
             showSuccessTitle: true, showFinalOrderDetails: true, showReceipt: true,
-            showFaq: true,
+            showWhyChoose: true, showFaq: true,
             showPartnerLogo: true, showFooterKrafton: true,
             enableNightMode: false,
             showUpiGrid: true,
@@ -4472,6 +4462,7 @@ tryInitRemote();
         document.getElementById('dispLblTime').textContent = getText('lblTime');
         document.getElementById('dispBtnNewOrder').textContent = getText('btnNewOrder');
         
+        try { var el1=document.getElementById('dispWhyChoose'); if(el1) el1.textContent=getText('whyChooseTitle'); var el2=document.getElementById('dispWhyChooseDesc'); if(el2) el2.textContent=getText('whyChooseDesc'); } catch(e){}
         document.getElementById('dispFaq').textContent = getText('faqTitle');
 
         window.renderSiteFaqs();
@@ -5519,10 +5510,13 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         }
       } catch(e) {}
 
+      const globalWhyChoose = document.getElementById('whyChooseSection');
       const globalFAQ = document.getElementById('faqSectionGlob');
       if (step === 4) {
+          if (globalWhyChoose) globalWhyChoose.style.display = 'none';
           if (globalFAQ) globalFAQ.style.display = 'none';
       } else {
+          if (globalWhyChoose) globalWhyChoose.style.display = getTgl('showWhyChoose') ? 'block' : 'none';
           if (globalFAQ) globalFAQ.style.display = getTgl('showFaq') ? 'block' : 'none';
       }
 
@@ -7206,6 +7200,24 @@ function toggleBuyUcInfo(){
   var dots = document.getElementById('buyUcDots');
   var more = document.getElementById('buyUcMoreText');
   var btn = document.getElementById('buyUcToggleBtn');
+  if(!dots || !more || !btn) return;
+  if(more.style.display === 'none' || more.style.display === ''){
+    more.style.display = 'inline';
+    dots.style.display = 'none';
+    btn.innerHTML = 'Read less <i class="fa-solid fa-chevron-up" style="font-size:12px;"></i>';
+  } else {
+    more.style.display = 'none';
+    dots.style.display = 'inline';
+    btn.innerHTML = 'Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>';
+  }
+}
+</script>
+
+<script>
+function toggleBuyUcInfoPacks(){
+  var dots = document.getElementById('buyUcDotsPacks');
+  var more = document.getElementById('buyUcMoreTextPacks');
+  var btn = document.getElementById('buyUcToggleBtnPacks');
   if(!dots || !more || !btn) return;
   if(more.style.display === 'none' || more.style.display === ''){
     more.style.display = 'inline';
