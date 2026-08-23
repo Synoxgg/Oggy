@@ -2164,11 +2164,11 @@
         transform:translateX(-50%) translateY(0%) !important;
       }
       .social-proof {
-        max-width:640px !important;
-        left:50% !important;
-        transform:translateX(-50%) !important;
-        right:auto !important;
-        width:calc(100% - 32px) !important;
+        max-width: 320px !important;
+        width: auto !important;
+        left: 20px !important;
+        right: auto !important;
+        transform: none !important;
       }
       /* Modal centered */
       .modal-box {
@@ -2188,6 +2188,56 @@
     @media screen and (min-width: 768px) {
       .container { max-width:680px !important; }
       .ucify-topbar-inner { max-width:680px !important; }
+    }
+  </style>
+
+
+  <style id="ucify-fix-3issues">
+    /* Fix 1: Left bottom UC purchased popup - prevent full width in landscape */
+    .social-proof {
+      max-width: 340px !important;
+      width: auto !important;
+    }
+    @media screen and (orientation: landscape) {
+      .social-proof {
+        max-width: 320px !important;
+        width: auto !important;
+        left: 20px !important;
+        right: auto !important;
+        transform: none !important;
+        max-width: 320px !important;
+      }
+    }
+
+    /* Fix 2: Remove extra blank gap below © 2026 UCify in packs section (step2) */
+    .site-footer {
+      padding: 12px 20px 12px 20px !important;
+      padding-bottom: 12px !important;
+    }
+    body.has-sticky-purchase .site-footer {
+      padding-bottom: 12px !important;
+    }
+    body.has-sticky-purchase #step2 .step-content {
+      padding-bottom: 16px !important;
+    }
+    #step2 .step-content {
+      padding-bottom: 16px !important;
+    }
+    .ucify-footer-wrap {
+      margin-top: 8px !important;
+    }
+    #step2 {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Fix 3 preparation: Ensure sticky bar and popups have proper bottom transition for footer overlap */
+    #stickyPurchaseBar {
+      transition: transform 0.35s cubic-bezier(0.25,0.8,0.25,1), bottom 0.3s ease !important;
+      will-change: bottom, transform;
+    }
+    .social-proof {
+      will-change: bottom !important;
     }
   </style>
 
@@ -7258,5 +7308,110 @@ document.addEventListener('click', function(ev){
 });
 </script>
 
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
+<script id="ucify-fix-footer-overlap">
+(function(){
+  function fixBarsPosition(){
+    var footer = document.querySelector('.site-footer');
+    var social = document.getElementById('socialProof');
+    var sticky = document.getElementById('stickyPurchaseBar');
+    var capsule = document.getElementById('paymentWaitingLoader');
+    if(!footer) return;
+
+    var footerRect = footer.getBoundingClientRect();
+    var viewportH = window.innerHeight;
+    var footerVisible = footerRect.top < viewportH;
+    var overlap = footerVisible ? (viewportH - footerRect.top) : 0;
+    // Add small gap so bars don't touch footer text
+    var gap = 8;
+
+    var stickyActive = sticky && sticky.classList.contains('active');
+
+    // Sticky purchase bar should sit exactly above footer when footer visible, otherwise at bottom 0
+    if(sticky){
+      if(footerVisible && stickyActive){
+        sticky.style.bottom = (overlap + gap) + 'px';
+      } else {
+        sticky.style.bottom = '0px';
+      }
+    }
+
+    // Social proof popup - should be above sticky bar when sticky active, and above footer
+    if(social){
+      var stickyH = (stickyActive && sticky) ? (sticky.offsetHeight || 68) : 0;
+      if(footerVisible){
+        // Above footer + above sticky if active
+        var base = stickyActive ? (stickyH + 16) : 12;
+        social.style.bottom = (overlap + base + gap) + 'px';
+      } else {
+        // Default positions when footer not visible
+        social.style.bottom = stickyActive ? '80px' : '20px';
+      }
+    }
+
+    // Payment waiting loader capsule - above social + sticky
+    if(capsule){
+      var socialH = 0;
+      if(social && social.style.display !== 'none' && social.style.display !== ''){
+        socialH = 50; // approx height of social proof
+      }
+      var stickyH2 = (stickyActive && sticky) ? (sticky.offsetHeight || 68) : 0;
+      if(footerVisible){
+        var baseCapsule = stickyH2 + (socialH ? socialH + 16 : 0) + 16;
+        capsule.style.bottom = (overlap + baseCapsule + gap + 8) + 'px';
+      } else {
+        // Default 80px when not overlapping footer
+        var defBase = (stickyActive ? stickyH2 + (socialH ? 56 : 0) + 20 : 80);
+        // If social visible, keep capsule above it
+        if(socialH && stickyActive){
+          capsule.style.bottom = (80 + socialH + 12) + 'px';
+        } else {
+          capsule.style.bottom = '80px';
+        }
+      }
+    }
+  }
+
+  // Run on scroll, resize, and when bars change
+  var ticking = false;
+  function requestFix(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        fixBarsPosition();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestFix, {passive: true});
+  window.addEventListener('resize', requestFix, {passive: true});
+  window.addEventListener('orientationchange', function(){ setTimeout(fixBarsPosition, 300); });
+
+  // Observe sticky bar class changes (active toggle)
+  var stickyEl = document.getElementById('stickyPurchaseBar');
+  if(stickyEl && 'MutationObserver' in window){
+    var mo = new MutationObserver(function(){ setTimeout(fixBarsPosition, 50); });
+    mo.observe(stickyEl, {attributes: true, attributeFilter: ['class', 'style']});
+  }
+  var socialEl = document.getElementById('socialProof');
+  if(socialEl && 'MutationObserver' in window){
+    var mo2 = new MutationObserver(function(){ setTimeout(fixBarsPosition, 50); });
+    mo2.observe(socialEl, {attributes: true, attributeFilter: ['style', 'class']});
+  }
+
+  // Also run periodically and on load
+  setInterval(fixBarsPosition, 500);
+  window.addEventListener('load', function(){ setTimeout(fixBarsPosition, 200); setTimeout(fixBarsPosition, 1000); });
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(fixBarsPosition, 200); });
+
+  // Expose for existing functions to call
+  window.updateSocialProofPosition = fixBarsPosition;
+  window.updateFooterOverlap = fixBarsPosition;
+  window.updatePaymentWaitingPosition = fixBarsPosition;
+  window.fixBarsPosition = fixBarsPosition;
+})();
+</script>
+
+</body>
 </html>
