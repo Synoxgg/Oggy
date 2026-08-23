@@ -269,7 +269,7 @@
         "name": "What is UCify?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "UCify is India's most trusted BGMI UC Store located at ucify.shop. UCify provides instant Battlegrounds Mobile India (BGMI) UC top-ups at the cheapest and most affordable rates. UC purchased from UCify fully counts for all official BGMI events including UC UP Event and Royale Pass."
+          "text": "UCify is India's most trusted BGMI UC Store located at ucify.shop. UCify provides instant BATTLEGROUNDS MOBILE INDIA UC top-ups at the cheapest and most affordable rates. UC purchased from UCify fully counts for all official BGMI events including UC UP Event and Royale Pass."
         }
       },
       {
@@ -635,10 +635,24 @@
       text-align: left;
       min-width: 0;
     }
+    
+    /* SF Pro Display Semibold for Game Info - Added as per request */
+    @font-face {
+      font-family: 'SF Pro Display';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: local('SF Pro Display Semibold'), local('SFProDisplay-Semibold'), local('SF Pro Display'), 
+           url('https://fonts.cdnfonts.com/css/sf-pro-display') format('woff2');
+    }
+
     .game-info-title {
-      font-family: var(--font-display);
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
       color: #fff;
       line-height: 1.2;
       margin-bottom: 4px;
@@ -1894,8 +1908,11 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.5) !important;
     }
     .game-info-title {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
       font-size: 18px !important;
-      font-weight: 800 !important;
+      font-weight: 600 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.2px !important;
       line-height: 1.25 !important;
       white-space: nowrap !important;
       overflow: hidden !important;
@@ -1986,6 +2003,9 @@
     .faq-section .step-title {
       text-align: left !important;
       margin-bottom: 18px !important;
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.2px !important;
     }
     .faq-section .faq-item {
       background: transparent !important;
@@ -1999,8 +2019,12 @@
     .faq-section .faq-question {
       background: transparent !important;
       padding: 20px 0 !important;
-      font-size: 17px !important;
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.1px !important;
       line-height: 1.5 !important;
+      color: #e5e7eb !important;
     }
     .faq-section .faq-answer {
       background: transparent !important;
@@ -2009,15 +2033,20 @@
       padding: 0 !important;
       opacity: 0 !important;
       transition: all 0.32s ease !important;
-      font-size: 15px !important;
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-size: 14.5px !important;
+      font-weight: 400 !important;
       line-height: 1.7 !important;
       color: #9ca3af !important;
+      letter-spacing: 0.1px !important;
     }
     .faq-section .faq-item.active .faq-answer {
       max-height: 400px !important;
       padding: 0 0 20px 0 !important;
       opacity: 1 !important;
-      font-size: 15px !important;
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-size: 14.5px !important;
+      font-weight: 400 !important;
       line-height: 1.7 !important;
     }
     .faq-section .faq-item.active {
@@ -2270,6 +2299,7 @@ html, body {
 }
 </style>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body oncontextmenu="return false;">
@@ -2278,7 +2308,7 @@ html, body {
   <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
     <h1>UCify - BGMI UC Shop - Official BGMI UC Topup at ucify.shop</h1>
     <h2>What is UCify?</h2>
-    <p>UCify is India's most trusted BGMI UC Store. UCify is located at ucify.shop. UCify provides instant Battlegrounds Mobile India (BGMI) UC top-ups at the cheapest price in India. Buy BGMI UC instantly at affordable rates.</p>
+    <p>UCify is India's most trusted BGMI UC Store. UCify is located at ucify.shop. UCify provides instant BATTLEGROUNDS MOBILE INDIA UC top-ups at the cheapest price in India. Buy BGMI UC instantly at affordable rates.</p>
     <h2>UCify.shop - BGMI UC Buy</h2>
     <p>UCify.shop is the official website to buy BGMI UC in India. At UCify.shop you can purchase BGMI UC using UPI, Credit Card, Debit Card, Net Banking. UC purchased through UCify fully counts towards all in-game events including BGMI UC UP Event and Royale Pass.</p>
     <h2>Why UCify is Best BGMI UC Store?</h2>
@@ -2360,7 +2390,7 @@ html, body {
       <div class="game-info-main">
         <img src="bgmi.webp" id="dispGameLogo" alt="Game Logo" class="game-info-logo" draggable="false" style="pointer-events: auto !important;">
         <div class="game-info-details">
-          <div class="game-info-title" id="dispGameTitle">Battlegrounds Mobile India (BGMI)</div>
+          <div class="game-info-title" id="dispGameTitle">BATTLEGROUNDS MOBILE INDIA</div>
           <div class="game-info-publisher"><i class="fa-solid fa-building"></i> <span id="dispGamePublisher">KRAFTON, Inc.</span></div>
           <div class="store-links">
             <a href="https://play.google.com/store/apps/details?id=com.pubg.imobile" id="dispPlayStoreLink" target="_blank" rel="noopener" class="store-badge playstore">
@@ -3050,7 +3080,7 @@ html, body {
               </div>
               <div>
                   <label style="font-size:11px; color:#aaa; margin-bottom:5px; display:block;">Game Name</label>
-                  <input type="text" id="adminGameName" class="form-input" placeholder="Battlegrounds Mobile India (BGMI)" style="font-size:12px; padding:10px;">
+                  <input type="text" id="adminGameName" class="form-input" placeholder="BATTLEGROUNDS MOBILE INDIA" style="font-size:12px; padding:10px;">
               </div>
               <div>
                   <label style="font-size:11px; color:#aaa; margin-bottom:5px; display:block;">Developer / Publisher Name</label>
@@ -3532,7 +3562,7 @@ tryInitRemote();
             gameLogo: "bgmi.webp"
         },
         gameInfo: {
-            name: "Battlegrounds Mobile India (BGMI)",
+            name: "BATTLEGROUNDS MOBILE INDIA",
             publisher: "KRAFTON, Inc.",
             logo: "bgmi.webp",
             playStoreLink: "https://play.google.com/store/apps/details?id=com.pubg.imobile",
@@ -4621,7 +4651,7 @@ tryInitRemote();
             var dispGameLogo = document.getElementById('dispGameLogo');
             if(dispGameLogo) dispGameLogo.src = gameLogoSrc;
             var dispGameTitle = document.getElementById('dispGameTitle');
-            if(dispGameTitle) dispGameTitle.textContent = gi.name || 'Battlegrounds Mobile India (BGMI)';
+            if(dispGameTitle) dispGameTitle.textContent = gi.name || 'BATTLEGROUNDS MOBILE INDIA';
             var dispGamePublisher = document.getElementById('dispGamePublisher');
             if(dispGamePublisher) dispGamePublisher.textContent = gi.publisher || 'KRAFTON, Inc.';
             var dispPlayStore = document.getElementById('dispPlayStoreLink');
