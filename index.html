@@ -1785,13 +1785,6 @@
     /* === FIX: Footer + Social Proof Overlap === */
     
     /* Default footer padding */
-    .site-footer {
-      padding-bottom: 80px !important; /* space for social proof */
-      transition: padding-bottom 0.3s ease;
-    }
-    body.has-sticky-purchase .site-footer {
-      padding-bottom: 170px !important; /* space for sticky + popup */
-    }
     /* When footer is in viewport, lift popup above footer */
     body.footer-visible 
 
@@ -1814,12 +1807,6 @@
       white-space: nowrap;
     }
     /* Prevent footer hide + keep social proof visible */
-    body.has-sticky-purchase #step2 .step-content {
-      padding-bottom: 90px;
-    }
-    body.has-sticky-purchase .site-footer {
-      padding-bottom: 90px;
-    }
     body.has-sticky-purchase 
     @media (max-width: 360px) {
       #stickyTotalUc { color: #a0a0a0; font-family: var(--font-body); font-size: 11px; font-weight: 500; margin-top: -1px; }
@@ -2137,17 +2124,9 @@
 
 <style>
 /* === FIX 1: Footer gap remove - Packs section === */
-.site-footer {
-  padding: 12px 20px 14px 20px !important;
-  padding-bottom: 14px !important;
-  margin-bottom: 0 !important;
-}
 .footer-managed {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
-}
-body.has-sticky-purchase .site-footer {
-  padding-bottom: 90px !important;
 }
 .ucify-footer-wrap {
   margin-top: 10px !important;
@@ -2166,10 +2145,6 @@ html {
 #step2 .step-content {
   padding-bottom: 16px !important;
 }
-body.has-sticky-purchase #step2 .step-content {
-  padding-bottom: 90px !important;
-}
-
 /* === FIX 2: Top bar - always sticky on scroll === */
 .ucify-topbar {
   position: fixed !important;
@@ -2251,6 +2226,64 @@ body {
   }
   </script>
 
+
+<style>
+/* === FINAL FIX: Footer gap + Sticky bar - No gap below ©, footer image visible === */
+.site-footer {
+  width: 100% !important;
+  max-width: 480px !important;
+  text-align: center !important;
+  padding: 12px 20px 14px 20px !important;
+  margin: 0 auto !important;
+  margin-bottom: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+.footer-managed {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.4 !important;
+}
+.footer-links {
+  margin-top: 8px !important;
+  padding-bottom: 0 !important;
+}
+.ucify-footer-wrap {
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 0 !important;
+}
+.ucify-footer-wrap img {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  vertical-align: bottom !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+}
+/* When pack selected, NO gap below ©, but extra space after footer image so it is not hidden by sticky bar */
+body.has-sticky-purchase .site-footer {
+  padding-bottom: 14px !important;
+  margin-bottom: 0 !important;
+}
+body.has-sticky-purchase #step2 .step-content {
+  padding-bottom: 16px !important;
+}
+body.has-sticky-purchase .ucify-footer-wrap {
+  padding-bottom: 90px !important; /* 85-90px = sticky bar height + safe area, ensures ucify-footer.webp fully visible when scrolled to bottom */
+  margin-bottom: 0 !important;
+}
+/* Also ensure container doesn't add extra gap */
+#step2 .step-content {
+  padding-bottom: 16px !important;
+}
+html, body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+</style>
+
 </head>
 
 <body oncontextmenu="return false;">
@@ -2317,7 +2350,6 @@ body {
       <a class="tmd-item" onclick="openModal('termsModal'); closeTopMenu();"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
       <a class="tmd-item" onclick="openModal('privacyModal'); closeTopMenu();"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
       <a class="tmd-item" onclick="openModal('refundModal'); closeTopMenu();"><i class="fa-solid fa-rotate-left"></i> Refund & Cancellation</a>
-      <a class="tmd-item" onclick="openModal('shippingModal'); closeTopMenu();"><i class="fa-solid fa-truck-fast"></i> Delivery Policy</a>
       <a class="tmd-item" onclick="openModal('contactModal'); closeTopMenu();"><i class="fa-solid fa-headset"></i> Contact Us</a>
     </div>
   </div>
@@ -2788,7 +2820,6 @@ body {
       <a id="linkTerms" onclick="openModal('termsModal')">Terms & Conditions</a>
       <a id="linkPrivacy" onclick="openModal('privacyModal')">Privacy Policy</a>
       <a id="linkRefund" onclick="openModal('refundModal')">Refund & Cancellation</a>
-      <a id="linkShipping" onclick="openModal('shippingModal')">Delivery Policy</a>
       <a id="linkContact" onclick="openModal('contactModal')">Contact Us</a>
     </div>
   </div>
@@ -2818,7 +2849,6 @@ body {
   <div class="modal-overlay" id="termsModal" onclick="closeModalOutside(event, 'termsModal')"><div class="modal-box"><div class="modal-header"><h3>Terms & Conditions</h3><button class="close-btn" onclick="closeModal('termsModal')"><i class="fas fa-times"></i></button></div><div class="modal-body modal-body-policy" id="bodyTerms"></div></div></div>
   <div class="modal-overlay" id="privacyModal" onclick="closeModalOutside(event, 'privacyModal')"><div class="modal-box"><div class="modal-header"><h3>Privacy Policy</h3><button class="close-btn" onclick="closeModal('privacyModal')"><i class="fas fa-times"></i></button></div><div class="modal-body modal-body-policy" id="bodyPrivacy"></div></div></div>
   <div class="modal-overlay" id="refundModal" onclick="closeModalOutside(event, 'refundModal')"><div class="modal-box"><div class="modal-header"><h3>Refund & Cancellation</h3><button class="close-btn" onclick="closeModal('refundModal')"><i class="fas fa-times"></i></button></div><div class="modal-body modal-body-policy" id="bodyRefund"></div></div></div>
-  <div class="modal-overlay" id="shippingModal" onclick="closeModalOutside(event, 'shippingModal')"><div class="modal-box"><div class="modal-header"><h3>Delivery Policy</h3><button class="close-btn" onclick="closeModal('shippingModal')"><i class="fas fa-times"></i></button></div><div class="modal-body modal-body-policy" id="bodyShipping"></div></div></div>
   <div class="modal-overlay" id="contactModal" onclick="closeModalOutside(event, 'contactModal')"><div class="modal-box"><div class="modal-header"><h3>Contact Us</h3><button class="close-btn" onclick="closeModal('contactModal')"><i class="fas fa-times"></i></button></div><div class="modal-body modal-body-policy" id="bodyContact"></div></div></div>
   
   <div class="modal-overlay" id="trialInfoModal" onclick="closeModalOutside(event, 'trialInfoModal')">
@@ -3575,7 +3605,6 @@ tryInitRemote();
             showTerms: true, contentTerms: "1. BGMI UC purchased through UCify is delivered directly to the BGMI account associated with the User ID provided at the time of purchase. UCify is not responsible for incorrect User IDs entered by the buyer.\n\n2. All purchases are final and non-refundable once UC has been credited to the recipient's BGMI account.\n\n3. One-time offer packs are limited to a single purchase per BGMI User ID. Attempting to repurchase will not be processed.\n\n4. UC delivery timelines are typically instant but may take up to 24 hours depending on server load and payment confirmation.\n\n5. Pricing, bonus UC amounts, and offer availability are subject to change without prior notice and are determined by KRAFTON and UCify.\n\n6. UC can only be used within BGMI for in-game purchases (Royale Pass, outfits, skins, crates, etc.) and holds no real-world monetary value. UC cannot be withdrawn, exchanged, or transferred outside the game.\n\n7. UCify acts as an authorized distribution channel. All UC usage within BGMI is governed by KRAFTON's terms of service and BGMI's end-user license agreement.\n\n8. For any disputes or delivery issues, contact support within 7 days of purchase with your order ID and transaction details.\n\n9. By completing a purchase, you confirm that you agree to these terms and UCify's general terms of service.",
             showPrivacy: true, contentPrivacy: "1. Information We Collect\nWe collect your BGMI Player ID (UID) and In-Game Name (IGN) solely for the purpose of delivering the digital product. We process payments securely and do not store financial data.\n\n2. How We Use Your Data\nYour data is used strictly for order fulfillment, customer support, and transaction verification.\n\n3. Data Sharing\nWe do not sell, trade, or rent user data to third parties. Information is only shared with our payment provider as required to process your transaction.",
             showRefund: true, contentRefund: "1. Digital Goods Policy\nBecause the products we sell are strictly digital in-game currency, all sales are final. Once the UC is successfully transferred to the provided UID, no refunds or cancellations can be processed.\n\n2. Failed Transactions\nIf your payment is deducted but the order fails on our end, a full refund will be automatically initiated to your original payment method within 5-7 business days.\n\n3. Incorrect UID\nWe are not responsible for UC sent to an incorrect UID provided by the user. No refunds will be issued in such cases.",
-            showShipping: true, contentShipping: "1. Delivery Method\nAll deliveries are purely digital. No physical product will be shipped to your address.\n\n2. Delivery Time\nUC is typically credited to your account instantly or within 10-15 minutes. In case of server delays, please allow up to 24 hours for the transaction to reflect in your BGMI account.",
             showContact: true, contentContact: "Get in Touch\nIf you face any issues with your order, please contact our support team. Have your Order ID and Transaction ID ready.\n\n1. Business Name: UCify (INDIA) PRIVATE LIMITED\n\n2. Email Support: ucify.support@gmail.com\n\n3. Registered Address: 102, Plot No 54, Vohra Chamber, Sect 19c, Vashi, Navi Mumbai, Maharashtra, 400705\n\n4. Business Address: 102, Plot No 54, Vohra Chamber, Sect 19c, Vashi, Navi Mumbai, Maharashtra, 400705"
         },
         trialPacks: [ 
@@ -4498,13 +4527,11 @@ tryInitRemote();
         document.getElementById('linkTerms').style.display = window.siteConfig.policies.showTerms ? 'inline-block' : 'none';
         document.getElementById('linkPrivacy').style.display = window.siteConfig.policies.showPrivacy ? 'inline-block' : 'none';
         document.getElementById('linkRefund').style.display = window.siteConfig.policies.showRefund ? 'inline-block' : 'none';
-        document.getElementById('linkShipping').style.display = window.siteConfig.policies.showShipping ? 'inline-block' : 'none';
         document.getElementById('linkContact').style.display = window.siteConfig.policies.showContact ? 'inline-block' : 'none';
 
         document.getElementById('bodyTerms').textContent = window.siteConfig.policies.contentTerms || defaultAdminConfig.policies.contentTerms;
         document.getElementById('bodyPrivacy').textContent = window.siteConfig.policies.contentPrivacy || defaultAdminConfig.policies.contentPrivacy;
         document.getElementById('bodyRefund').textContent = window.siteConfig.policies.contentRefund || defaultAdminConfig.policies.contentRefund;
-        document.getElementById('bodyShipping').textContent = window.siteConfig.policies.contentShipping || defaultAdminConfig.policies.contentShipping;
         document.getElementById('bodyContact').textContent = window.siteConfig.policies.contentContact || defaultAdminConfig.policies.contentContact;
 
         // Image Adjustments
