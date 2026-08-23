@@ -2463,8 +2463,17 @@ html, body {
 
       
       
-      
-      <!-- buyUcInfoSection removed - now only above FAQ to avoid duplicate in Step1 -->
+      <div class="step-content" style="margin-top: 20px; background:#131313 !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px 16px 20px !important;" id="buyUcInfoSection">
+          <!-- Title removed as per request -->
+          <div style="color: var(--text-muted); font-size: 15px; line-height: 1.8; text-align:left;">
+            <span id="buyUcShortText">Buy BGMI UC online with instant top-up on UCify, the official partner of BGMI for purchasing UC. Enter your numeric BGMI User ID, choose a UC pack that suits your budget, and complete your payment securely. Your UC is credited directly to the BGMI account linked to that User ID, so no voucher redemption, account password, OTP, Google login or Facebook login is required. Eligible packs may also include bonus UC and cashback.</span>
+            <span id="buyUcDots">..</span>
+            <span id="buyUcMoreText" style="display:none;"> Use your UC for Royale Pass upgrades, outfits, weapon skins, crates, emotes and other eligible in-game items. Most BGMI UC top-ups are completed within a few minutes. Before paying, check your User ID carefully because UC sent to an incorrect account may not be reversible or transferable.</span>
+          </div>
+          <button id="buyUcToggleBtn" onclick="toggleBuyUcInfo()" style="background:none; border:none; color:var(--primary); font-weight:600; font-size:14px; cursor:pointer; margin-top:10px; padding:0; text-align:left; display:inline-flex; align-items:center; gap:4px;">
+            Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>
+          </button>
+      </div>
 
     </div>
     </div>
@@ -2502,10 +2511,7 @@ html, body {
           <!-- Rendered dynamically -->
         </div>
 
-        <!-- EVENT NOTICE -->
-        
-        
-<div id="eventNoticeBlock" style="background: rgba(255, 184, 0, 0.05); border: 1px solid rgba(255, 184, 0, 0.2); border-radius: var(--radius-sm); padding: 12px 15px; margin-bottom: 20px; text-align: left; display: flex; align-items: flex-start; gap: 10px;">
+        <div id="eventNoticeBlock" style="background: rgba(255, 184, 0, 0.05); border: 1px solid rgba(255, 184, 0, 0.2); border-radius: var(--radius-sm); padding: 12px 15px; margin-bottom: 20px; text-align: left; display: flex; align-items: flex-start; gap: 10px;">
             <i class="fa-solid fa-bullhorn" style="color: var(--primary); font-size: 14px; margin-top: 2px;"></i>
             <p style="color: var(--text-muted); font-size: 12px; line-height: 1.5; margin: 0;" id="dispEventNotice">
                 <span style="color: #fff; font-weight: 600;">Note:</span> UC purchased through UCify fully counts towards all in-game events, including the BGMI UC UP Event.
@@ -2528,7 +2534,21 @@ html, body {
             <button type="button" class="btn btn-primary" id="stickyPurchaseBtn"><span id="stickyBtnText">Pay - ₹--</span></button>
           </div>
         </div>
+
       </div>
+
+      <!-- Buy UC Info - Also in Packs Section (added as per request) -->
+        <div class="step-content" style="margin-top: 20px; background:#131313 !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px 16px 20px !important;" id="buyUcInfoSectionPacks">
+          <div style="color: var(--text-muted); font-size: 15px; line-height: 1.8; text-align:left;">
+            <span id="buyUcShortTextPacks">Buy BGMI UC online with instant top-up on UCify, the official partner of BGMI for purchasing UC. Enter your numeric BGMI User ID, choose a UC pack that suits your budget, and complete your payment securely. Your UC is credited directly to the BGMI account linked to that User ID, so no voucher redemption, account password, OTP, Google login or Facebook login is required. Eligible packs may also include bonus UC and cashback.</span>
+            <span id="buyUcDotsPacks">..</span>
+            <span id="buyUcMoreTextPacks" style="display:none;"> Use your UC for Royale Pass upgrades, outfits, weapon skins, crates, emotes and other eligible in-game items. Most BGMI UC top-ups are completed within a few minutes. Before paying, check your User ID carefully because UC sent to an incorrect account may not be reversible or transferable.</span>
+          </div>
+          <button id="buyUcToggleBtnPacks" onclick="toggleBuyUcInfoPacks()" style="background:none; border:none; color:var(--primary); font-weight:600; font-size:14px; cursor:pointer; margin-top:10px; padding:0; text-align:left; display:inline-flex; align-items:center; gap:4px;">
+            Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>
+          </button>
+        </div>
+
     </div>
 
     <!-- STEP 3: PAYMENT -->
@@ -2812,19 +2832,6 @@ html, body {
     <!-- Why Choose UCify section removed as per request -->
 
     <!-- GLOBAL FAQ SECTION (APPEARS ON ALL PAGES) -->
-    
-    <!-- Buy BGMI UC Info - Above FAQ (Fixed as per request) -->
-    <div class="faq-section" id="buyUcInfoAboveFaq" style="background:#131313 !important; border:none !important; box-shadow:none !important; border-radius:0 !important; padding:24px 20px 16px 20px !important; margin:0 !important; width:100% !important;">
-      <div style="color: var(--text-muted); font-size: 15px; line-height: 1.8; text-align:left;">
-        <span id="buyUcShortTextAboveFaq">Buy BGMI UC online with instant top-up on UCify, the official partner of BGMI for purchasing UC. Enter your numeric BGMI User ID, choose a UC pack that suits your budget, and complete your payment securely. Your UC is credited directly to the BGMI account linked to that User ID, so no voucher redemption, account password, OTP, Google login or Facebook login is required. Eligible packs may also include bonus UC and cashback.</span>
-        <span id="buyUcDotsAboveFaq">..</span>
-        <span id="buyUcMoreTextAboveFaq" style="display:none;"> Use your UC for Royale Pass upgrades, outfits, weapon skins, crates, emotes and other eligible in-game items. Most BGMI UC top-ups are completed within a few minutes. Before paying, check your User ID carefully because UC sent to an incorrect account may not be reversible or transferable.</span>
-      </div>
-      <button id="buyUcToggleBtnAboveFaq" onclick="toggleBuyUcInfoAboveFaq()" style="background:none; border:none; color:var(--primary); font-weight:600; font-size:14px; cursor:pointer; margin-top:10px; padding:0; text-align:left; display:inline-flex; align-items:center; gap:4px;">
-        Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>
-      </button>
-    </div>
-
     <div class="faq-section" id="faqSectionGlob">
         <h2 class="step-title" id="dispFaq" style="font-size: 26px; margin-bottom: 18px; text-align: left;">Frequently Asked Questions</h2>
         
@@ -7223,6 +7230,24 @@ function toggleBuyUcInfo(){
   var dots = document.getElementById('buyUcDots');
   var more = document.getElementById('buyUcMoreText');
   var btn = document.getElementById('buyUcToggleBtn');
+  if(!dots || !more || !btn) return;
+  if(more.style.display === 'none' || more.style.display === ''){
+    more.style.display = 'inline';
+    dots.style.display = 'none';
+    btn.innerHTML = 'Read less <i class="fa-solid fa-chevron-up" style="font-size:12px;"></i>';
+  } else {
+    more.style.display = 'none';
+    dots.style.display = 'inline';
+    btn.innerHTML = 'Read more <i class="fa-solid fa-chevron-down" style="font-size:12px;"></i>';
+  }
+}
+</script>
+
+<script>
+function toggleBuyUcInfoPacks(){
+  var dots = document.getElementById('buyUcDotsPacks');
+  var more = document.getElementById('buyUcMoreTextPacks');
+  var btn = document.getElementById('buyUcToggleBtnPacks');
   if(!dots || !more || !btn) return;
   if(more.style.display === 'none' || more.style.display === ''){
     more.style.display = 'inline';
