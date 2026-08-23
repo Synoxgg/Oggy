@@ -2192,8 +2192,9 @@
   </style>
 
 
+
 <style>
-/* === FIX: Packs section (step2) - Remove extra gap below © 2026 UCify. All Rights Reserved === */
+/* === FIX 1: Footer gap remove - Packs section === */
 .site-footer {
   padding: 12px 20px 14px 20px !important;
   padding-bottom: 14px !important;
@@ -2210,14 +2211,13 @@ body.has-sticky-purchase .site-footer {
   margin-top: 10px !important;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
-  margin-left: calc(-50vw + 50%) !important;
 }
 .ucify-footer-wrap img {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
   vertical-align: bottom !important;
 }
-html, body {
+html {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
@@ -2226,6 +2226,40 @@ html, body {
 }
 body.has-sticky-purchase #step2 .step-content {
   padding-bottom: 90px !important;
+}
+
+/* === FIX 2: Top bar - always sticky on scroll === */
+.ucify-topbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  z-index: 1000 !important;
+  transform: none !important;
+}
+body {
+  padding-top: 52px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.container {
+  padding-bottom: 0 !important;
+}
+@media screen and (orientation: landscape) {
+  .ucify-topbar {
+    position: fixed !important;
+    transform: none !important;
+  }
+  body {
+    padding-top: 52px !important;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  body {
+    padding-top: 46px !important;
+  }
 }
 </style>
 
