@@ -2301,7 +2301,12 @@ html, body {
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* === UCify PERFECT FIT FIX FOR BGMI TITLE === */
+  /* === UCify PERFECT FIT FIX V2 - BGMI TITLE 1 LINE TILL BANNER === */
+  .game-info-details {
+    min-width: 0 !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+  }
   .game-info-title {
     white-space: nowrap !important;
     overflow: hidden !important;
@@ -2309,11 +2314,8 @@ html, body {
     max-width: 100% !important;
     width: 100% !important;
     display: block !important;
-    /* font-size will be calculated by JS to fit exactly till banner width */
-  }
-  .game-info-details {
-    min-width: 0 !important;
-    overflow: hidden !important;
+    letter-spacing: 0.15px !important; /* slightly reduced for better fit */
+    /* font-size set by JS */
   }
 </style>
 </head>
@@ -7279,86 +7281,106 @@ function toggleBuyUcInfoPacks(){
 
 
 <script>
-// === PERFECT FIT: BATTLEGROUNDS MOBILE INDIA in 1 line till banner width ===
+// === PERFECT FIT V2: BATTLEGROUNDS MOBILE INDIA - 1 line exact till banner ===
 (function(){
-  function fitGameTitleToBanner(){
-    var titleEl = document.getElementById('dispGameTitle');
-    var detailsEl = document.querySelector('.game-info-details');
-    var cardEl = document.querySelector('.game-info-card');
-    if(!titleEl || !detailsEl || !cardEl) return;
-    
-    var availableWidth = detailsEl.clientWidth;
-    if(availableWidth <= 10) return;
-    
-    // Ensure nowrap and clip (no ellipsis)
-    titleEl.style.whiteSpace = 'nowrap';
-    titleEl.style.overflow = 'hidden';
-    titleEl.style.textOverflow = 'clip';
-    titleEl.style.display = 'block';
-    titleEl.style.width = '100%';
-    
-    // Calculate perfect font size - start from 18px and reduce till it fits
-    var maxFont = 18;
-    var minFont = 8.5;
-    var best = minFont;
-    
-    // Binary search for max font that fits in availableWidth
-    var low = minFont, high = maxFont;
-    for(var i=0;i < 30; i++){
-      var mid = (low + high) / 2;
-      titleEl.style.fontSize = mid + 'px';
-      // Force reflow
-      var scrollW = titleEl.scrollWidth;
-      if(scrollW <= availableWidth - 1){ // fits with 1px buffer
-        best = mid;
-        low = mid; // try bigger
+  function getAvailableWidth(){
+    var details = document.querySelector('.game-info-details');
+    var card = document.querySelector('.game-info-card');
+    if(!details) return 0;
+    // details clientWidth is the real space for title
+    // Also consider card padding to ensure title never exceeds banner
+    return details.clientWidth;
+  }
+  function fitAllTitles(){
+    var titles = document.querySelectorAll('#dispGameTitle, .game-info-title');
+    var avail = getAvailableWidth();
+    if(avail < 10) return;
+    titles.forEach(function(titleEl){
+      if(!titleEl) return;
+      // Reset styles for measurement
+      titleEl.style.whiteSpace = 'nowrap';
+      titleEl.style.overflow = 'hidden';
+      titleEl.style.textOverflow = 'clip';
+      titleEl.style.display = 'block';
+      titleEl.style.width = '100%';
+      
+      var text = titleEl.textContent.trim();
+      if(!text) return;
+      
+      // Start from 18px down to 7px - binary search for perfect fit
+      var minFont = 7;
+      var maxFont = 18;
+      var best = minFont;
+      
+      // Quick check: try max first
+      titleEl.style.fontSize = maxFont + 'px';
+      if(titleEl.scrollWidth <= avail - 2){
+        best = maxFont;
       } else {
-        high = mid; // too big
+        var low = minFont, high = maxFont;
+        for(var i=0;i<40;i++){
+          var mid = (low + high) / 2;
+          titleEl.style.fontSize = mid + 'px';
+          var sw = titleEl.scrollWidth;
+          if(sw <= avail - 1){
+            best = mid;
+            low = mid;
+          } else {
+            high = mid;
+          }
+          if(high - low < 0.05) break;
+        }
       }
-      if(high - low < 0.05) break;
-    }
-    titleEl.style.fontSize = best.toFixed(2) + 'px';
-    
-    // Debug: ensure it aligns with banner width
-    // banner width = card inner width, details right edge = same as banner right edge
-    // So fitting to details automatically means title goes till banner horizontally
+      titleEl.style.fontSize = best.toFixed(2) + 'px';
+      // Ensure line-height tight
+      titleEl.style.lineHeight = '1.15';
+    });
   }
   
-  function initFit(){
-    fitGameTitleToBanner();
-    // retry for fonts loading
-    setTimeout(fitGameTitleToBanner, 100);
-    setTimeout(fitGameTitleToBanner, 400);
-    setTimeout(fitGameTitleToBanner, 1000);
+  function init(){
+    fitAllTitles();
+    // Multiple retries for font loading and banner image loading
+    setTimeout(fitAllTitles, 50);
+    setTimeout(fitAllTitles, 150);
+    setTimeout(fitAllTitles, 300);
+    setTimeout(fitAllTitles, 600);
+    setTimeout(fitAllTitles, 1200);
+    setTimeout(fitAllTitles, 2500);
   }
   
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initFit);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    initFit();
+    init();
   }
-  window.addEventListener('resize', fitGameTitleToBanner);
-  window.addEventListener('load', fitGameTitleToBanner);
+  window.addEventListener('load', init);
+  window.addEventListener('resize', function(){ 
+    // debounce
+    clearTimeout(window._fitResizeTimer);
+    window._fitResizeTimer = setTimeout(fitAllTitles, 80);
+  });
   window.addEventListener('orientationchange', function(){
-    setTimeout(fitGameTitleToBanner, 200);
-    setTimeout(fitGameTitleToBanner, 600);
+    setTimeout(fitAllTitles, 200);
+    setTimeout(fitAllTitles, 500);
   });
   
-  // Observe title text changes (admin panel edits)
-  var titleNode = document.getElementById('dispGameTitle');
-  if(titleNode && window.MutationObserver){
-    var obs = new MutationObserver(function(){
-      setTimeout(fitGameTitleToBanner, 50);
+  // Observe any change in title
+  if(window.MutationObserver){
+    var obs = new MutationObserver(function(){ setTimeout(fitAllTitles, 30); });
+    document.querySelectorAll('#dispGameTitle, .game-info-title').forEach(function(el){
+      obs.observe(el, {childList:true, characterData:true, subtree:true, characterData:true});
     });
-    obs.observe(titleNode, {childList:true, characterData:true, subtree:true, attributes:true});
-  }
-  
-  // Also observe card resize
-  if(window.ResizeObserver){
+    // Also observe details resize
     var details = document.querySelector('.game-info-details');
-    if(details){
-      var ro = new ResizeObserver(fitGameTitleToBanner);
-      ro.observe(details);
+    if(details) obs.observe(details, {attributes:true});
+  }
+  if(window.ResizeObserver){
+    var details2 = document.querySelector('.game-info-details');
+    var card = document.querySelector('.game-info-card');
+    if(details2){
+      var ro = new ResizeObserver(fitAllTitles);
+      ro.observe(details2);
+      if(card) ro.observe(card);
     }
   }
 })();
