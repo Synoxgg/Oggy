@@ -1896,8 +1896,8 @@
     /* Top Bar 90% Transparent */
     .top-card { display:none !important; }
     .ucify-topbar { position:sticky; top:0; left:0; right:0; width:100%; z-index:1000; background: rgba(10,10,12,0.10); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom:1px solid rgba(255,255,255,0.05); }
-    .ucify-topbar-inner { width:100%; max-width:480px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; height:52px; }
-    .utb-left { display:flex; align-items:center; gap:10px; }
+    .ucify-topbar-inner { width:100%; max-width:480px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:10px 20px; height:52px; }
+    .utb-left { display:flex; align-items:center; gap:12px; }
     .utb-logo { width:72px; height:30px; object-fit:contain; }
     .utb-divider { color:rgba(255,255,255,0.18); }
     .utb-authorized { display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; text-transform:uppercase; color:rgba(255,255,255,0.88); }
@@ -2170,7 +2170,7 @@
       <div class="utb-left" onclick="handleLogoClick(event)" style="cursor:pointer;">
         <img src="ucify.webp" alt="UCify" class="utb-logo" id="dispSiteLogo" onclick="handleLogoClick(event)" style="cursor:pointer; pointer-events:auto !important;" draggable="false">
         <span class="utb-divider">|</span>
-        <span class="utb-authorized">Authorized Store <i class="fa-solid fa-circle-check utb-tick"></i></span>
+        <span class="utb-authorized">ucify.shop <i class="fa-solid fa-circle-check utb-tick"></i></span>
       </div>
       <div class="utb-right">
         <button class="utb-menu-btn" id="topMenuBtn" onclick="toggleTopMenu(event)" aria-label="Menu">
