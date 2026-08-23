@@ -2108,17 +2108,6 @@
 </style>
 
   <style>
-    
-  <style>
-    /* ===== FIX: Remove extra gap below © in packs section (step2) ===== */
-    .site-footer { padding: 16px 20px 16px 20px !important; }
-    body.has-sticky-purchase .site-footer { padding-bottom: 90px !important; }
-    .ucify-footer-wrap { margin-top: 12px !important; }
-    /* Ensure pay bar and popups never go below © - stay above footer */
-    #stickyPurchaseBar { z-index: 95 !important; }
-    .social-proof { z-index: 96 !important; }
-  </style>
-
     /* ===== LANDSCAPE / HORIZONTAL TILT FIX ===== */
     html, body { overflow-x:hidden; }
     @media screen and (orientation: landscape) {
@@ -2175,11 +2164,11 @@
         transform:translateX(-50%) translateY(0%) !important;
       }
       .social-proof {
-        max-width:320px !important;
-        left:16px !important;
+        max-width:640px !important;
+        left:50% !important;
+        transform:translateX(-50%) !important;
         right:auto !important;
-        transform:none !important;
-        width:auto !important;
+        width:calc(100% - 32px) !important;
       }
       /* Modal centered */
       .modal-box {
@@ -5614,19 +5603,16 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
           // Footer is visible in viewport
           document.body.classList.add('footer-visible');
           var overlap = windowHeight - rect.top; // how much footer overlaps bottom
-          var baseBottom = (sticky && sticky.classList.contains('active')) ? 90 : 20;
+          var baseBottom = (sticky && sticky.classList.contains('active')) ? 80 : 20;
           
           if(overlap > 0) {
-            // Lift BOTH popups and sticky bar above © line, not below it
+            // Lift popup above footer, so it appears OVER footer empty space, not over links
+            // Links are at top of footer, so we lift by overlap + base
             social.style.bottom = (overlap + baseBottom + 10) + 'px';
-            if(sticky && sticky.classList.contains('active')){
-              sticky.style.bottom = (overlap + 12) + 'px';
-            }
           }
         } else {
           document.body.classList.remove('footer-visible');
           social.style.bottom = '';
-          if(sticky) sticky.style.bottom = '';
         }
       }
       
