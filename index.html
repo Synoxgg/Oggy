@@ -420,8 +420,8 @@
 
 <style>
     :root {
-      --primary: #06B6D4; /* UC Gold */
-      --primary-glow: rgba(6, 182, 212, 0.5);
+      --primary: #FFB800; /* UC Gold */
+      --primary-glow: rgba(0,0,0,0); /* yellow glow removed */
       --accent: #00E0FF; /* Tech Cyan */
       --bg-dark: #131313;
       --bg-panel: #1C1D1F;
@@ -501,7 +501,7 @@
       border-top: 4px solid var(--primary);
       border-radius: 50%;
       animation: spin 0.9s linear infinite;
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+      box-shadow: none /* glow removed */;
     }
     .loader-logo {
       margin-top: 18px;
@@ -509,7 +509,7 @@
       max-height: 60px;
       object-fit: contain;
       animation: pulse 1.5s infinite;
-      filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.35));
+      filter: none; /* yellow glow removed */
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -877,7 +877,7 @@
     .form-input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+      box-shadow: none /* glow removed */;
       background: rgba(255, 255, 255, 0.1) !important;
     }
     /* Fix: UID input white background on paste/autofill - keep dark */
@@ -954,14 +954,14 @@
 
     .pack-card:hover:not(.purchased) {
       transform: translateY(-3px);
-      border-color: rgba(6, 182, 212, 0.4);
+      border-color: rgba(255,184,0,0.4);
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
 
     .pack-card.selected {
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(255, 184, 0, 0.1);
       border: 1px solid var(--primary);
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+      box-shadow: none /* glow removed */;
     }
     
     .pack-card.purchased { display: none !important; }
@@ -1089,13 +1089,13 @@
     .btn-primary {
       background: var(--primary);
       color: #000;
-      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3) /* yellow glow removed */;
     }
     
     .btn-primary:hover:not(:disabled) {
       background: #ffc42e;
       transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+      box-shadow: none /* yellow glow removed */;
     }
     
     .btn-primary:disabled {
@@ -1181,9 +1181,9 @@
     }
 
     @keyframes pulseBtn {
-      0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
-      70% { box-shadow: 0 0 0 12px rgba(6, 182, 212, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+      0% { box-shadow: none; /* yellow glow removed */ }
+      70% { box-shadow: none; /* yellow glow removed */ }
+      100% { box-shadow: none; /* yellow glow removed */ }
     }
     .pay-btn-animated {
       animation: pulseBtn 2s infinite;
@@ -1200,7 +1200,7 @@
       position: absolute;
       top: 0; left: 0; width: 100%; height: 2px;
       background: var(--primary);
-      box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      box-shadow: none /* yellow glow removed */;
       animation: scan 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       opacity: 0.6;
       z-index: 1;
@@ -1253,7 +1253,7 @@
     .lock-ui-box {
       margin-top: 20px; 
       padding: 20px; 
-      background: rgba(6, 182, 212, 0.05); 
+      background: rgba(255, 184, 0, 0.05); 
       border: 1px solid var(--primary); 
       border-radius: var(--radius-md); 
       text-align: center;
@@ -1278,11 +1278,11 @@
       font-weight: 800;
       font-size: 28px;
       line-height: 1.15;
-      background: linear-gradient(100deg, #ffffff 20%, #06B6D4 80%);
+      background: linear-gradient(100deg, #ffffff 20%, #FFB800 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 2px 12px rgba(6, 182, 212, 0.25));
+      filter: none; /* yellow glow removed */
       letter-spacing: 0.3px;
       margin-bottom: 18px;
       text-transform: uppercase;
@@ -1301,7 +1301,7 @@
       height: 100%;
       background: linear-gradient(90deg, var(--primary), #ff6b00);
       width: 0%;
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+      box-shadow: none /* yellow glow removed */;
       border-radius: 5px;
       transition: width 1s linear;
     }
@@ -1331,7 +1331,7 @@
       top: 50%;
       left: 0%;
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.9));
+      filter: none; /* yellow glow removed */
       transition: left 1s linear;
       z-index: 3;
       pointer-events: none;
@@ -1363,7 +1363,7 @@
     .tv-track-line {
       width: 100%;
       height: 2px;
-      background: repeating-linear-gradient(90deg, rgba(6, 182, 212, 0.6) 0 8px, transparent 8px 12px);
+      background: repeating-linear-gradient(90deg, rgba(255,184,0,0.6) 0 8px, transparent 8px 12px);
       position: relative;
     }
     .tv-track-line::after {
@@ -1383,7 +1383,7 @@
       left: 0;
       top: 50%;
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.7));
+      filter: none; /* yellow glow removed */
       animation: ucTravel 2.2s linear infinite;
       z-index: 2;
     }
@@ -1500,7 +1500,7 @@
     }
 
     .night-msg {
-       display: none; background: rgba(6, 182, 212, 0.05); border: 1px solid #996e00;
+       display: none; background: rgba(255, 184, 0, 0.05); border: 1px solid #996e00;
        color: var(--primary); padding: 15px; border-radius: var(--radius-md);
        font-size: 13px; margin-top: 15px;
     }
@@ -1522,7 +1522,7 @@
     .faq-item { background: rgba(255,255,255,0.03); border: 1px solid var(--surface-border); border-radius: var(--radius-md); margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease; }
     .faq-question { padding: 15px; display: flex; justify-content: space-between; align-items: center; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; }
     .faq-answer { padding: 0 15px; max-height: 0; overflow: hidden; color: var(--text-muted); font-size: 13px; line-height: 1.6; transition: max-height 0.3s ease, padding 0.3s ease; }
-    .faq-item.active { border-color: var(--primary); background: rgba(6, 182, 212, 0.05); }
+    .faq-item.active { border-color: var(--primary); background: rgba(255, 184, 0, 0.05); }
     .faq-item.active .faq-answer { padding: 0 15px 15px 15px; max-height: 300px; }
     .faq-item.active .faq-question i { transform: rotate(45deg); color: var(--primary); }
     .faq-question i { transition: transform 0.3s ease; color: var(--text-muted); }
@@ -1629,7 +1629,7 @@
     }
     #cardPaymentItem:hover {
       transform: translateY(-2px);
-      border-color: rgba(6, 182, 212, 0.4) !important;
+      border-color: rgba(255,184,0,0.4) !important;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.4) 100%) !important;
     }
@@ -1725,7 +1725,7 @@
       color: var(--primary);
       font-family: var(--font-display);
       margin: 10px 0 8px 0;
-      text-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+      text-shadow: none; /* yellow glow removed */
       letter-spacing: 0.5px;
       line-height: 1;
     }
@@ -1756,7 +1756,7 @@
       background: rgba(10,10,12,0.98);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(6, 182, 212, 0.25);
+      border-top: 1px solid rgba(255,184,0,0.25);
       padding: 12px 16px;
       padding-bottom: calc(12px + env(safe-area-inset-bottom));
       z-index: 90;
@@ -2539,7 +2539,7 @@ html, body {
           <!-- Rendered dynamically -->
         </div>
 
-        <div id="eventNoticeBlock" style="background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: var(--radius-sm); padding: 12px 15px; margin-bottom: 20px; text-align: left; display: flex; align-items: flex-start; gap: 10px;">
+        <div id="eventNoticeBlock" style="background: rgba(255, 184, 0, 0.05); border: 1px solid rgba(255, 184, 0, 0.2); border-radius: var(--radius-sm); padding: 12px 15px; margin-bottom: 20px; text-align: left; display: flex; align-items: flex-start; gap: 10px;">
             <i class="fa-solid fa-bullhorn" style="color: var(--primary); font-size: 14px; margin-top: 2px;"></i>
             <p style="color: var(--text-muted); font-size: 12px; line-height: 1.5; margin: 0;" id="dispEventNotice">
                 <span style="color: #fff; font-weight: 600;">Note:</span> UC purchased through UCify fully counts towards all in-game events, including the BGMI UC UP Event.
@@ -2640,7 +2640,7 @@ html, body {
           <div id="normalPaymentUI">
             <div id="dispTotalPayable" style="display: none !important;"></div>
             
-            <div style="font-size: 36px; font-weight: 800; color: var(--primary); font-family: var(--font-display); margin-bottom: 20px; text-shadow: 0 0 20px rgba(6, 182, 212, 0.3); display: none !important;">
+            <div style="font-size: 36px; font-weight: 800; color: var(--primary); font-family: var(--font-display); margin-bottom: 20px; text-shadow: none; /* yellow glow removed */ display: none !important;">
               <span id="paymentAmount">₹0</span>
             </div>
 
@@ -2776,7 +2776,7 @@ html, body {
     <div id="step4" class="step">
       <div class="step-content success-screen">
         
-        <div class="success-icon"><img src="uc-purchased-successfully.webp" alt="UC Purchased Successfully" id="ucPurchasedSuccessImg" style="width:280px; height:auto; max-width:90%; filter: drop-shadow(0 0 24px rgba(6, 182, 212, 0.35)); animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onerror="this.style.display='none'"></div>
+        <div class="success-icon"><img src="uc-purchased-successfully.webp" alt="UC Purchased Successfully" id="ucPurchasedSuccessImg" style="width:280px; height:auto; max-width:90%; filter: none; /* yellow glow removed */ animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onerror="this.style.display='none'"></div>
         <!-- COMBINED TILE: UCify -> BGMI + User Details + Progress -->
         <div class="transfer-visual" id="transferVisual">
             <div class="tv-logos-row" id="tvLogosRow">
@@ -3100,7 +3100,7 @@ html, body {
           
           <!-- 🔥 NEW: SITE ON/OFF - TOP MOST VISIBLE -->
           <h4 class="admin-section-title" style="margin-top:0; color:#ff4757; font-size:16px; border-bottom:2px solid #ff4757; padding-bottom:8px;">🚨 SITE ON/OFF CONTROL</h4>
-          <div class="form-group" style="background: linear-gradient(145deg, rgba(255,71,87,0.15) 0%, rgba(6, 182, 212, 0.1) 100%); border: 2px solid #ff4757; padding: 18px; border-radius: 12px; margin-bottom: 22px;">
+          <div class="form-group" style="background: linear-gradient(145deg, rgba(255,71,87,0.15) 0%, rgba(255,184,0,0.1) 100%); border: 2px solid #ff4757; padding: 18px; border-radius: 12px; margin-bottom: 22px;">
             <div style="display:flex; align-items:center; justify-content:space-between;">
               <div>
                 <div style="color:#fff; font-size:15px; font-weight:800; letter-spacing:0.5px;">Website Status</div>
@@ -3224,7 +3224,7 @@ html, body {
               </div>
 
               <!-- NEW: Game Banners 2:1 Slider Control -->
-              <div style="background: rgba(6, 182, 212, 0.08); padding: 12px; border-radius: 10px; border:1px solid rgba(6, 182, 212, 0.15); margin-top:5px;">
+              <div style="background: rgba(255,184,0,0.08); padding: 12px; border-radius: 10px; border:1px solid rgba(255,184,0,0.15); margin-top:5px;">
                   <label style="font-size:12px; color:#fff; font-weight:700; margin-bottom:8px; display:block;">📸 Game Banners - 2:1 Auto Swipe Slider</label>
                   <p style="font-size:10px; color:#aaa; margin-bottom:10px; line-height:1.4;">BGMI logo ke neeche 2:1 ratio ki images dikhengi, ek ke baad ek automatic swipe hogi. Yahan se upload/delete kar sakte ho.</p>
                   <div id="adminGameBannersList" style="display:flex; flex-direction:column; gap:8px; margin-bottom:10px;"></div>
@@ -3357,7 +3357,7 @@ html, body {
                   <input type="file" accept="image/*" style="font-size: 11px; color: #ccc;" onchange="handleImageUpload(event, 'cardIcon', 'previewCardIcon')">
                   <p style="font-size:10px; color:#aaa; margin-top:5px;">Upload custom icon for Debit/Credit Card tile (card.webp). Ye tile ke left side me dikhega.</p>
               </div>
-              <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border:1px dashed rgba(6, 182, 212, 0.3);">
+              <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border:1px dashed rgba(255,184,0,0.3);">
                   <label style="font-size:12px; color:#ffaa00; font-weight:600; margin-bottom:5px; display:block;">Card Brands Banner - 4:1 Ratio - visa.webp (Editable from Admin)</label>
                   <img id="previewCardBrands" style="width: 200px; aspect-ratio: 4/1; object-fit: contain; background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 8px; display: none; border:1px solid rgba(255,255,255,0.1); padding:4px;">
                   <input type="file" accept="image/*" style="font-size: 11px; color: #ccc;" onchange="handleImageUpload(event, 'cardBrands', 'previewCardBrands')">
@@ -4939,7 +4939,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             listEl.innerHTML = `<div style="text-align:center; padding: 10px; color: #aaa; font-size: 12px; margin-bottom: 10px; border: 1px dashed #555; border-radius: var(--radius-sm);">No Creator UIDs added.</div>`;
         } else {
             listEl.innerHTML = uids.map((c, index) => `
-                <div class="admin-input-group" style="justify-content: space-between; background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2);">
+                <div class="admin-input-group" style="justify-content: space-between; background: rgba(255, 184, 0, 0.05); border: 1px solid rgba(255, 184, 0, 0.2);">
                     <div style="display: flex; align-items: center; gap: 10px; flex: 1;">
                         <span style="font-size: 13px; color: #fff; font-weight: bold;">${c.uid}</span>
                         <span style="font-size: 12px; color: var(--primary);">(${c.nickname})</span>
@@ -5044,10 +5044,10 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
                     </label>
                 </div>
 
-                <div style="background: rgba(6, 182, 212, 0.06); border: 1px solid rgba(6, 182, 212, 0.15); padding: 8px; border-radius: 6px; margin-top: 10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                <div style="background: rgba(255,184,0,0.06); border: 1px solid rgba(255,184,0,0.15); padding: 8px; border-radius: 6px; margin-top: 10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                     <img src="${p.packImage || window.siteConfig.images.ucLogo || 'uc-logo.webp'}" style="width:40px; height:40px; object-fit:contain; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:4px;">
                     <div style="flex:1; min-width:120px;">
-                        <label style="font-size:11px; color:#06B6D4; font-weight:600; margin-bottom:4px; display:block;">Pack UC Image (Separate)</label>
+                        <label style="font-size:11px; color:#FFB800; font-weight:600; margin-bottom:4px; display:block;">Pack UC Image (Separate)</label>
                         <input type="file" accept="image/*" style="font-size:11px; color:#ccc; width:100%;" onchange="handlePackImageUpload(event, '${type}', ${index})">
                     </div>
                     ${p.packImage ? `<button class="btn" style="background:rgba(255,71,87,0.15); border:1px solid rgba(255,71,87,0.3); color:#ff4757; padding:6px 10px; font-size:11px; border-radius:6px;" onclick="removePackImage('${type}', ${index})"><i class="fas fa-times"></i> Remove</button>` : ''}
@@ -5388,7 +5388,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
     }
 
     function createConfetti(){
-      const colors = ['#06B6D4', '#00E0FF', '#ffffff'];
+      const colors = ['#FFB800', '#00E0FF', '#ffffff'];
       for(let i = 0; i < 50; i++){
         setTimeout(() => {
           const confetti = document.createElement('div'); confetti.className = 'confetti';
