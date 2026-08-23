@@ -309,7 +309,6 @@
   </script>
   <!-- ==================== END ENHANCED SEO ==================== -->
 
-
   <!-- ==================== OPEN GRAPH / FACEBOOK ==================== -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ucify.shop/">
@@ -736,8 +735,6 @@
       pointer-events: none;
     }
     /* Dots removed as per request */
-
-
 
     .progress-wrap { margin-bottom: 25px; padding: 0 10px; }
     .progress-container {
@@ -1169,7 +1166,6 @@
       display: none !important;
     }
 
-    
     @keyframes pulseBtn {
       0% { box-shadow: 0 0 0 0 rgba(255, 184, 0, 0.4); }
       70% { box-shadow: 0 0 0 12px rgba(255, 184, 0, 0); }
@@ -1296,8 +1292,7 @@
       transition: width 1s linear;
     }
     .timer-text { font-family: monospace; color: var(--primary); font-size: 16px; }
-    
-    
+
     /* NEW: Transfer Visual - UCify -> UC -> BGMI */
     .transfer-visual {
       margin: 10px auto 22px auto;
@@ -1476,32 +1471,7 @@
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
     .toast i { color: var(--success); }
 
-    .social-proof {
-      position: fixed; bottom: 20px; left: 20px; background: rgba(10,10,10,0.9);
-      backdrop-filter: blur(10px); border: 1px solid var(--surface-border); padding: 10px 15px;
-      border-radius: 50px; display: none; align-items: center; gap: 10px; z-index: 99;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5); animation: slideInLeft 0.5s ease;
-      transition: bottom 0.35s cubic-bezier(0.25,0.8,0.25,1);
-      will-change: bottom;
-    }
-    @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    
-    .social-proof-avatar {
-      width: 32px; height: 32px; background: var(--primary); border-radius: 50%;
-      color: #000; display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 14px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .social-proof-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      display: block;
-    }
-    .social-proof-text { font-size: 12px; color: #ccc; }
-    .social-proof-uc { color: var(--primary); font-weight: 700; }
+     }
 
     .floating-particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .particle {
@@ -1730,7 +1700,6 @@
       .upi-app-item img, .upi-app-item .fallback-icon { width: 36px; height: 36px; }
     }
 
-    
     /* === Updated for v2: hide pay buttons, show only amount, full width back === */
     #rzpRedirectBtn { display:none !important; }
     #bottomPayBtn { display:none !important; }
@@ -1755,14 +1724,11 @@
     #verificationStatus { display:none; }
     #topAmountDisplay { display:none !important; }
 
-    
     #verify-result { display:none; font-size:12px; border-radius:12px; margin-top:2px; }
     #verifyUidBtn { width:100%; padding:0 18px; height:46px; background:var(--primary); color:#000; border:none; border-radius:12px; font-family:var(--font-display); font-weight:800; font-size:13px; letter-spacing:0.5px; cursor:not-allowed; opacity:0.4; white-space:nowrap; transition:all 0.2s; }
     #verifyUidBtn:enabled { cursor:pointer; opacity:1; }
     #changeUidBtn { display:none; width:100%; padding:0 18px; height:42px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:12px; font-family:var(--font-display); font-weight:600; font-size:12px; cursor:pointer; }
     .success-tile { display:flex; align-items:center; gap:10px; }
-    
-
 
     /* === STEP 2 STICKY PURCHASE BAR === */
     #step2BtnRow { display: flex; }
@@ -1817,10 +1783,7 @@
       text-overflow: ellipsis;
     }
     /* === FIX: Footer + Social Proof Overlap === */
-    .social-proof {
-      z-index: 95 !important; /* Above sticky bar but below modals */
-      transition: bottom 0.3s ease, transform 0.3s ease, opacity 0.3s ease !important;
-    }
+    
     /* Default footer padding */
     .site-footer {
       padding-bottom: 80px !important; /* space for social proof */
@@ -1830,9 +1793,7 @@
       padding-bottom: 170px !important; /* space for sticky + popup */
     }
     /* When footer is in viewport, lift popup above footer */
-    body.footer-visible .social-proof {
-      opacity: 0.95;
-    }
+    body.footer-visible 
 
     #stickyTotalUc { color: #a0a0a0; font-family: var(--font-body); font-size: 11px; font-weight: 500; margin-top: -1px; }
     #stickyPriceText {
@@ -1859,9 +1820,7 @@
     body.has-sticky-purchase .site-footer {
       padding-bottom: 90px;
     }
-    body.has-sticky-purchase .social-proof {
-      bottom: 80px !important;
-    }
+    body.has-sticky-purchase 
     @media (max-width: 360px) {
       #stickyTotalUc { color: #a0a0a0; font-family: var(--font-body); font-size: 11px; font-weight: 500; margin-top: -1px; }
     #stickyPriceText { font-size: 18px; }
@@ -2092,15 +2051,6 @@
       border-bottom: 2px solid #3a3a40 !important;
     }
 
-    /* Left Bottom UC Purchased Popup - 90% Transparent */
-    .social-proof {
-      background: rgba(10,10,12,0.10) !important;
-      backdrop-filter: blur(20px) saturate(160%) !important;
-      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
-      border: 1px solid rgba(255,255,255,0.06) !important;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
-    }
-
     /* Footer Only © */
     .site-footer { padding: 20px 20px 30px 20px !important; }
     .footer-links { display: none !important; }
@@ -2163,13 +2113,7 @@
       #stickyPurchaseBar.active {
         transform:translateX(-50%) translateY(0%) !important;
       }
-      .social-proof {
-        max-width:640px !important;
-        left:50% !important;
-        transform:translateX(-50%) !important;
-        right:auto !important;
-        width:calc(100% - 32px) !important;
-      }
+      
       /* Modal centered */
       .modal-box {
         max-width:600px !important;
@@ -2190,8 +2134,6 @@
       .ucify-topbar-inner { max-width:680px !important; }
     }
   </style>
-
-
 
 <style>
 /* === FIX 1: Footer gap remove - Packs section === */
@@ -2263,7 +2205,6 @@ body {
 }
 </style>
 
-
   <!-- ==================== BGMI UC PURCHASE SITELINK FOR GOOGLE SERP ==================== -->
   <script type="application/ld+json">
   {
@@ -2314,9 +2255,6 @@ body {
 
 <body oncontextmenu="return false;">
 
-  
-  
-  
   <!-- SEO content for Google AI Overview - UCify BGMI UC Store -->
   <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
     <h1>UCify - BGMI UC Shop - Official BGMI UC Topup at ucify.shop</h1>
@@ -2330,7 +2268,6 @@ body {
     <p>Keywords: UCify, ucify.shop, BGMI UC, BGMI UC Buy, BGMI UC Store, Cheap BGMI UC, BGMI UC Topup India, UCify BGMI, Buy UC BGMI, Instant BGMI UC, UCify BGMI UC Store, Official BGMI UC Store</p>
   </div>
 
-  
   <!-- BGMI UC Purchase Anchor for Google Sitelinks -->
   <section id="bgmi-uc-purchase" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
     <h2>BGMI UC Purchase</h2>
@@ -2346,11 +2283,6 @@ body {
     </article>
   </div>
 
-
-
-
-
-
   <div id="initial-loader">
     <div class="loader-spinner"></div>
     <img src="ucify.webp" alt="UCify" class="loader-logo" id="dispLoaderText">
@@ -2360,23 +2292,13 @@ body {
       <img src="ucify.webp" id="dispOfflineLogo" alt="UCify Logo" style="max-width: 180px; cursor: pointer; pointer-events: auto !important; touch-action: manipulation; -webkit-tap-highlight-color: transparent;" onclick="handleLogoClick(event)">
   </div>
 
-  
   <div class="floating-particles" id="floatingParticles"></div>
-
-  <div class="social-proof" id="socialProof">
-    <div class="social-proof-avatar" id="socialAvatar"><img src="profile-pic.webp" alt="Profile" onerror="this.onerror=null; if(this.src.endsWith('.webp')){this.src=this.src.replace('.webp','.png');}else{this.style.display='none';}"></div>
-    <div class="social-proof-text">
-      <div id="socialName" style="font-weight: 600; color: #fff;">Player</div>
-      purchased <span class="social-proof-uc" id="socialUC">660 UC</span>
-    </div>
-  </div>
 
   <div class="toast" id="toast">
     <i class="fas fa-check-circle"></i>
     <span class="toast-text" id="toastText">Copied!</span>
   </div>
 
-  
   <div class="ucify-topbar">
     <div class="ucify-topbar-inner">
       <div class="utb-left" onclick="handleLogoClick(event)" style="cursor:pointer;">
@@ -2731,7 +2653,6 @@ body {
                       <button type="button" id="verifyCardBtn" style="width:100%; background: var(--primary); color:#000; border:none; padding:11px 14px; border-radius:10px; font-family:var(--font-display); font-size:14px; font-weight:700; letter-spacing:0.8px; cursor:pointer; transition:0.2s; text-transform:uppercase;">Verify</button>
                       <div id="cardVerifyMsg" style="display:none; margin-top:10px; background: rgba(255,71,87,0.1); border:1px solid rgba(255,71,87,0.3); color:#ff8a95; padding:10px 12px; border-radius:8px; font-size:13px; font-family:var(--font-body); text-align:center;"><i class="fa-solid fa-triangle-exclamation" style="margin-right:6px;"></i>Card system is under maintenance. Please try UPI apps for payments.</div>
                     </div>
-                    
 
                   </div>
                </div>
@@ -3042,8 +2963,7 @@ body {
               }, 500);
             })();
           </script>
-          
-          
+
           <h4 class="admin-section-title" style="margin-top:0; color: var(--success);">🔐 Admin Security</h4>
           <p style="font-size: 11px; color: #aaa; margin-bottom: 10px;">Update your admin login details here. Saved securely.</p>
           <div class="admin-subsection" style="border-left: 2px solid var(--success);">
@@ -3056,8 +2976,6 @@ body {
                  <input type="text" class="form-input" id="adminSetPass" placeholder="Password" style="font-size:12px; padding:10px;">
               </div>
           </div>
-
-          
 
           <h4 class="admin-section-title" style="color: #00ffcc;">🖼️ Website Images Upload</h4>
           <p style="font-size: 11px; color: #aaa; margin-bottom: 10px;">Upload image files directly to change site images. Recommended size: under 500kb.</p>
@@ -3283,10 +3201,6 @@ body {
           <div class="form-group" style="display: flex; flex-direction: column; gap: 12px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--radius-sm);">
 
              <div style="display: flex; align-items: center; gap: 10px;">
-                 <input type="checkbox" id="adminShowProof" style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
-                 <label for="adminShowProof" style="color: #fff; font-size: 13px; cursor: pointer;">Show Fake Social Proof Popup (Bottom Left)</label>
-             </div>
-             <div style="display: flex; align-items: center; gap: 10px;">
                  <input type="checkbox" id="adminShowKrafton" style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
                  <label for="adminShowKrafton" style="color: #fff; font-size: 13px; cursor: pointer;">Show Footer Copyright Text</label>
              </div>
@@ -3341,7 +3255,6 @@ body {
     }
   </script>
 
-  
 <script>
 // EARLY DEFAULT - ensures packs always available even before Firebase
 window.__FALLBACK_PACKS = {
@@ -3571,7 +3484,6 @@ function tryInitRemote() {
 tryInitRemote();
 </script>
 
-
   <script>
     const defaultAdminConfig = {
         adminAuth: { u: "bmFydXRv", p: "aGluYXRh" },
@@ -3654,7 +3566,7 @@ tryInitRemote();
             showStep3Title: true, showStep3Subnote: true, showAwaitingStatus: true, showCancelBtn: true,
             showSuccessTitle: true, showFinalOrderDetails: true, showReceipt: true,
             showWhyChoose: true, showFaq: true,
-            showPartnerLogo: true, showSocialProof: true, showFooterKrafton: true,
+            showPartnerLogo: true, showFooterKrafton: true,
             enableNightMode: false,
             showUpiGrid: true,
             showUpiPhonePe: true, showUpiGPay: true, showUpiPaytm: true, showUpiAmazonPay: true, showUpiMobiKwik: true, showUpiWhatsapp: true, showUpiOther: true
@@ -3696,7 +3608,6 @@ tryInitRemote();
     // Always save corrected config back
     try { localStorage.setItem('ucifyAdminConfigV2', JSON.stringify(window.siteConfig)); } catch(e){}
 
-    
     // Auto-migrate new object properties safely
     if(!window.siteConfig.faqs) {
         window.siteConfig.faqs = defaultAdminConfig.faqs;
@@ -3744,8 +3655,6 @@ tryInitRemote();
     let lockWaitTimer = null;
     let currentUid = "";
     let currentIgn = "";
-    let allowSocialProofPopup = true;
-
     function getPackDisplayText(uc) {
       if (uc == null) return "--";
       const s = String(uc).trim();
@@ -3791,8 +3700,6 @@ tryInitRemote();
       // If already contains % OFF or OFF, return as is (preserve)
       return s;
     }
-
-
 
     function isUpiLink(url) {
         if(!url || typeof url !== 'string') return false;
@@ -4074,8 +3981,6 @@ tryInitRemote();
         }catch(e){ console.log('verification start error', e); }
     };
 
-
-
     // === Card Payment Demo - Display Only ===
     window.toggleCardForm = function() {
         var container = document.getElementById('cardFormContainer');
@@ -4139,7 +4044,6 @@ tryInitRemote();
         };
         reader.readAsDataURL(file);
     };
-
 
         // === NEW: Game Banners 2:1 Slider Logic - INFINITE LOOP VERSION ===
     window.gameBannerInterval = null;
@@ -4358,7 +4262,6 @@ tryInitRemote();
         if(window.updateBannerPosition) window.updateBannerPosition();
     });
 
-
     window.renderAdminGameBannersList = function() {
         var listEl = document.getElementById('adminGameBannersList');
         if(!listEl) return;
@@ -4435,7 +4338,6 @@ tryInitRemote();
             reader.readAsDataURL(file);
         });
     };
-
 
     window.renderSiteFaqs = function() {
         const container = document.getElementById('faqListContainer');
@@ -4593,8 +4495,6 @@ tryInitRemote();
 
         const _pb = document.getElementById('partnerBlock'); if(_pb) _pb.style.display = getTgl('showPartnerLogo') ? 'block' : 'none';
         document.getElementById('footerKrafton').style.display = getTgl('showFooterKrafton') ? 'block' : 'none';
-        allowSocialProofPopup = getTgl('showSocialProof');
-
         document.getElementById('linkTerms').style.display = window.siteConfig.policies.showTerms ? 'inline-block' : 'none';
         document.getElementById('linkPrivacy').style.display = window.siteConfig.policies.showPrivacy ? 'inline-block' : 'none';
         document.getElementById('linkRefund').style.display = window.siteConfig.policies.showRefund ? 'inline-block' : 'none';
@@ -4838,8 +4738,7 @@ document.getElementById('previewGameLogo').src = window.siteConfig.images.gameLo
         document.getElementById('adminSiteActive').checked = tg.siteActive !== false; if(window.updateSiteToggleUI) setTimeout(window.updateSiteToggleUI, 50);        
         // tgl_ordersToday removed - ordersToday feature not in website        // tgl_howToQ2 removed        // tgl_successTitle removed        document.getElementById('tgl_faq').checked = tg.showFaq;
         // adminShowLogo removed - partnerBlock not in website
-document.getElementById('adminShowProof').checked = tg.showSocialProof; 
-        document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
+document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
 
         // UPI Toggles Populate
         var setChk = function(id, val){ var e=document.getElementById(id); if(e) e.checked = val !== false; };
@@ -5146,8 +5045,7 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
         // howToA2 removed        t.cardTileText = document.getElementById('adminTextCardTile') ? document.getElementById('adminTextCardTile').value.trim() || defaultAdminConfig.texts.cardTileText : (t.cardTileText || defaultAdminConfig.texts.cardTileText);        // freeClaimTitle removed
         // btnClaimFree removed
         // freeClaimSubtitle removed        // successTitle removed        t.faqTitle = document.getElementById('adminTextFaq').value.trim() || defaultAdminConfig.texts.faqTitle;
-        
-        
+
         } catch(e) { console.log('Text save error', e); }
 
         const tg = window.siteConfig.toggles;
@@ -5201,7 +5099,6 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
         }
         console.log('Rendering packs:', window.siteConfig.trialPacks.length, window.siteConfig.bulkPacks.length);
 
-        
         const generatePackHTML = (pack) => {
             const badgesHtml = `
               <div class="pack-badges">
@@ -5309,9 +5206,6 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
           });
         }
     });
-
-    
-
 
     function initParticles(){
       const container = document.getElementById('floatingParticles');
@@ -5458,69 +5352,30 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
       window._tryHideLoader();
     });
 
-    const gamingNames = [ "亗『MÂFÎÂ亗", "TOXIC彡KD", "77・playzYT", "SK๛play๛Live", "千ムＩＲＹＹ", "IQōShāDøwW", "LÙÇÍFËR〆", "Mâhïmâ", "DEMØN丨DEEPAK", "亗CZxAnurag亗", "FRSTxZGOD", "FGxWONGPLAYzzz", "GÕD〤RÚSHËR", "IGメABHAY", "MR々ŁEGENÐ", "VÌNNÍ乂PLAYZ", "KGF๛OP亗×", "ROYALツKUNAL20", "『RÁGNÁR』", "GLXY丨DANGER", "SHADOW๛RIVEN", "會DAKU父", "LEGEND丶OPP", "SAʀDAʀJi", "HAWK么HARSH", "ZMCxSHREY", "K4气KALAAKAR", "『AIMGOD』1", "T乛Rex乛RAVAN", "Ē・ＶＥＮＯＭ", "๛『Vëgêtå", "4A乛M丨SNOW", "٭ɞALPHAʚ٭", "im๛PANDA", "SGLxShivam", "乛GameīxīOM", "・Ｄ卄マＵＶ・", "『EPC』KRXSNA", "ＦｒＯｚｅＮ", "๛Ðʀʌɢo", "ＹＡＳＨīě", "ＳＨＵ及Ｈ", "XT个『Farhan』", "D£ATH๛SLAYER", "『LAKSHYÀ』", "中ツWARRIORYT", "Vns๛Rahul", "EQZxJOKERyt", "ReFLeXツVENOM", "冬ＧＡBAʀ" ];
-    function getSocialUcPacks() { const tPacks = window.siteConfig.trialPacks || []; const bPacks = window.siteConfig.bulkPacks || []; return [...tPacks, ...bPacks].map(p => p.uc + " UC"); }
-    function showSocialProof(){
-      if(!allowSocialProofPopup) return; const ucPacksList = getSocialUcPacks(); if(ucPacksList.length === 0) return;
-      const randomName = gamingNames[Math.floor(Math.random() * gamingNames.length)]; const randomUC = ucPacksList[Math.floor(Math.random() * ucPacksList.length)];
-      const el = document.getElementById('socialProof'); // Avatar now uses profile-pic.webp instead of initial
-      document.getElementById('socialName').textContent = randomName; document.getElementById('socialUC').textContent = randomUC;
-      el.style.display = 'flex'; 
-      if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
-      setTimeout(() => { el.style.display = 'none'; }, 5000);
-    }
-    setInterval(() => { if(Math.random() > 0.5) showSocialProof(); }, 10000);
-
-    // --- NEW: Fix social proof overlapping footer (Terms) when scrolled to bottom ---
-    function updateSocialProofPosition(){
-      const proof = document.getElementById('socialProof');
-      const footer = document.querySelector('.site-footer');
-      if(!proof || !footer) return;
-      if(proof.style.display === 'none' || proof.style.display === '') {
-        // keep default bottom for next show, but still calculate if needed
-      }
-      const footerRect = footer.getBoundingClientRect();
-      const viewportH = window.innerHeight;
-      if(footerRect.top < viewportH){
-        // Footer is visible - push popup above the 2026 UCify line (top of footer)
-        const overlap = viewportH - footerRect.top;
-        const extraGap = 12;
-        proof.style.bottom = (overlap + extraGap) + 'px';
-      } else {
-        proof.style.bottom = '20px';
-      }
-    }
-
-    let socialProofScrollTicking = false;
+    let paymentWaitingScrollTicking = false;
     window.addEventListener('scroll', function(){
-      if(!socialProofScrollTicking){
+      if(!paymentWaitingScrollTicking){
         requestAnimationFrame(function(){
-          if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
           if(typeof updatePaymentWaitingPosition === 'function') updatePaymentWaitingPosition();
-          socialProofScrollTicking = false;
+          paymentWaitingScrollTicking = false;
         });
-        socialProofScrollTicking = true;
+        paymentWaitingScrollTicking = true;
       }
     }, {passive: true});
     window.addEventListener('resize', function(){
-      if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
       if(typeof updatePaymentWaitingPosition === 'function') updatePaymentWaitingPosition();
     }, {passive: true});
-    // Also observe footer size changes for both popups
     if('ResizeObserver' in window){
       try{
         const footerEl = document.querySelector('.site-footer');
         if(footerEl){
           const ro = new ResizeObserver(function(){
-            if(typeof updateSocialProofPosition === 'function') updateSocialProofPosition();
             if(typeof updatePaymentWaitingPosition === 'function') updatePaymentWaitingPosition();
           });
           ro.observe(footerEl);
         }
       }catch(e){}
     }
-    
-
     function getIndiaHour(){ const date = new Date(); const hourStr = date.toLocaleString("en-US", {timeZone: "Asia/Kolkata", hour: "numeric", hour12: false}); return parseInt(hourStr); }
     function animateLiveOrders(){
       const el = document.getElementById('liveOrders'); if(!el) return; let currentOrders = 1000 + Math.floor(Math.random() * 2001); el.textContent = currentOrders;
@@ -5532,21 +5387,14 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
     function updatePaymentWaitingPosition(){
       const capsule = document.getElementById('paymentWaitingLoader');
       const footer = document.querySelector('.site-footer');
-      const proof = document.getElementById('socialProof');
       if(!capsule || !footer) return;
       const footerRect = footer.getBoundingClientRect();
       const viewportH = window.innerHeight;
-      let baseBottom = 80; // above social-proof popup (which is at 20px)
-      // If social-proof is visible, ensure capsule is above it
-      if(proof && proof.style.display !== 'none' && proof.style.display !== ''){
-        const proofRect = proof.getBoundingClientRect();
-        // proof is fixed, but we can just keep baseBottom as 80 to stay above it
-        baseBottom = 80;
-      }
+      let baseBottom = 80;
       if(footerRect.top < viewportH){
         const overlap = viewportH - footerRect.top;
         const extraGap = 16;
-        capsule.style.bottom = (overlap + extraGap + 60) + 'px'; // 60 keeps it above footer text, extraGap avoids touching
+        capsule.style.bottom = (overlap + extraGap + 60) + 'px';
       } else {
         capsule.style.bottom = baseBottom + 'px';
       }
@@ -5636,7 +5484,6 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
           } catch(e) {}
       }
 
-      
       // UPDATED: Show game-info-card on step 1,2,3 - hide only on step 4 (last page)
       try {
         var gameInfoCard = document.querySelector('.game-info-card');
@@ -5714,53 +5561,6 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
         }
       } catch(e) {}
     }
-
-    /* === SOCIAL PROOF + FOOTER OVERLAP FIX === */
-    (function(){
-      function updateFooterOverlap() {
-        var footer = document.querySelector('.site-footer');
-        var social = document.querySelector('.social-proof');
-        var sticky = document.getElementById('stickyPurchaseBar');
-        if(!footer || !social) return;
-        
-        var rect = footer.getBoundingClientRect();
-        var windowHeight = window.innerHeight;
-        
-        if(rect.top < windowHeight) {
-          // Footer is visible in viewport
-          document.body.classList.add('footer-visible');
-          var overlap = windowHeight - rect.top; // how much footer overlaps bottom
-          var baseBottom = (sticky && sticky.classList.contains('active')) ? 80 : 20;
-          
-          if(overlap > 0) {
-            // Lift popup above footer, so it appears OVER footer empty space, not over links
-            // Links are at top of footer, so we lift by overlap + base
-            social.style.bottom = (overlap + baseBottom + 10) + 'px';
-          }
-        } else {
-          document.body.classList.remove('footer-visible');
-          social.style.bottom = '';
-        }
-      }
-      
-      window.addEventListener('scroll', updateFooterOverlap, {passive: true});
-      window.addEventListener('resize', updateFooterOverlap);
-      // Run initially and after popup shows
-      setInterval(updateFooterOverlap, 1000);
-      
-      // Also observe when social-proof becomes visible (display changed)
-      var observer = new MutationObserver(function(){
-        setTimeout(updateFooterOverlap, 100);
-      });
-      var socialEl = document.querySelector('.social-proof');
-      if(socialEl) {
-        observer.observe(socialEl, {attributes: true, attributeFilter: ['style', 'class']});
-      }
-      
-      // Initial call
-      setTimeout(updateFooterOverlap, 500);
-    })();
-
 
     function updateProgress(){
       const steps = document.querySelectorAll('.progress-step');
@@ -6375,8 +6175,6 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
     }
     // ===== END NEW VERIFY LOGIC =====
 
-
-
     const HARDCODED_SHEET_URL = "https://script.google.com/macros/s/AKfycbxZmmaWlqrx9ydYVfO3XkZKh25Oxa_k0XiLNBPbEVEBOwZTlE2qPxF6OEoU-I9oJzLj/exec";
     const HARDCODED_VERIFY_URL = "https://script.google.com/macros/s/AKfycbzX371w86D2MFAGkpbbpYEm5GIvuXeh9BextRnqSLfzBLENLAaIU07T0Cr0nTPNJutQxg/exec";
     const HARDCODED_WEBHOOK_URL = "https://discord.com/api/webhooks/1516406944481542185/7zyh3P5Mj1tYUDmLQfFGEfTD2KLhE-t6hK4pJA6Kk_TxpbsEPi8QiJaWrcJFmMhWsgki";
@@ -6455,7 +6253,6 @@ document.getElementById('adminShowProof').checked = tg.showSocialProof;
         }
         return { hasPurchasedAnyTrial, purchasedPacks };
     }
-
 
     document.getElementById('next1').onclick = async () => {
         // This button is disabled state in new flow, but keep for safety - just call same instant function
