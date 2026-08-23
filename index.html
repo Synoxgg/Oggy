@@ -2242,64 +2242,62 @@ body {
   </script>
 
 
-<style>
-/* === FINAL FIX: Footer gap + Sticky bar - No gap below ©, footer image visible === */
-.site-footer {
-  width: 100% !important;
-  max-width: 480px !important;
-  text-align: center !important;
-  padding: 12px 20px 14px 20px !important;
-  margin: 0 auto !important;
-  margin-bottom: 0 !important;
-  position: relative !important;
-  z-index: 2 !important;
-}
-.footer-managed {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: 1.4 !important;
-}
-.footer-links {
-  margin-top: 8px !important;
-  padding-bottom: 0 !important;
-}
-.ucify-footer-wrap {
-  margin-top: 12px !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: 0 !important;
-}
-.ucify-footer-wrap img {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  vertical-align: bottom !important;
-  display: block !important;
-  width: 100% !important;
-  height: auto !important;
-}
-/* When pack selected, NO gap below ©, but extra space after footer image so it is not hidden by sticky bar */
-body.has-sticky-purchase .site-footer {
-  padding-bottom: 14px !important;
-  margin-bottom: 0 !important;
-}
-body.has-sticky-purchase #step2 .step-content {
-  padding-bottom: 16px !important;
-}
-body.has-sticky-purchase .ucify-footer-wrap {
-  padding-bottom: 90px !important; /* 85-90px = sticky bar height + safe area, ensures ucify-footer.webp fully visible when scrolled to bottom */
-  margin-bottom: 0 !important;
-}
-/* Also ensure container doesn't add extra gap */
-#step2 .step-content {
-  padding-bottom: 16px !important;
-}
-html, body {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-</style>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+    /* === PERFECT FIT: BGMI Name single line, banner ke andar === */
+    .game-info-title,
+    #dispGameTitle.game-info-title {
+      font-size: 11px !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+      line-height: 1.2 !important;
+      letter-spacing: 0.3px !important;
+      display: block !important;
+    }
+    @media (min-width: 360px) {
+      .game-info-title,
+      #dispGameTitle.game-info-title {
+        font-size: 11.5px !important;
+      }
+    }
+    @media (min-width: 400px) {
+      .game-info-title,
+      #dispGameTitle.game-info-title {
+        font-size: 12px !important;
+      }
+    }
+    @media (min-width: 440px) {
+      .game-info-title,
+      #dispGameTitle.game-info-title {
+        font-size: 13px !important;
+      }
+    }
+    /* Ensure details container doesn't overflow */
+    .game-info-details {
+      min-width: 0 !important;
+      overflow: hidden !important;
+    }
+    /* Revert store-links to original - no extra stretch */
+    .store-links {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      width: auto !important;
+      max-width: 100% !important;
+      justify-content: flex-start !important;
+      gap: 8px !important;
+      margin-top: 6px !important;
+    }
+    .store-links .store-badge {
+      flex: 0 0 auto !important;
+      max-width: none !important;
+    }
+
+</style>
 </head>
 
 <body oncontextmenu="return false;">
