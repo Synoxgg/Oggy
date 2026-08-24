@@ -1871,7 +1871,7 @@
     .top-menu-dropdown.open { transform: translateY(0) scale(1); opacity:1; visibility:visible; pointer-events:auto; }
     .tmd-header { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.35); padding:10px 12px 6px 12px; }
     .tmd-item { display:flex; align-items:center; gap:10px; padding:12px 12px; border-radius:10px; color:rgba(255,255,255,0.85); font-size:13px; font-weight:500; cursor:pointer; }
-    .tmd-item i { width:18px; color: var(--primary); }
+    .tmd-item i { width:18px; color: #ffffff; }
 
     /* Pay Bar 90% Transparent */
     #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
@@ -2363,6 +2363,24 @@ html, body {
   font-weight: 700 !important;
   letter-spacing: -0.2px !important;
 }
+
+/* FIXED: Terms, Privacy, Refund, Contact modal titles white like FAQ */
+#termsModal .modal-header h3,
+#privacyModal .modal-header h3,
+#refundModal .modal-header h3,
+#contactModal .modal-header h3 {
+  color: #ffffff !important;
+}
+#termsModal .modal-header h3 i,
+#privacyModal .modal-header h3 i,
+#refundModal .modal-header h3 i,
+#contactModal .modal-header h3 i {
+  color: #ffffff !important;
+}
+.tmd-item i {
+  color: #ffffff !important;
+}
+
 </style>
 
 
@@ -5987,9 +6005,9 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             verifyResult.style.background = 'rgba(255,71,87,0.1)';
             verifyResult.style.border = '1px solid rgba(255,71,87,0.3)';
             verifyResult.style.color = '#ff8a95';
-            verifyResult.style.padding = '10px 12px';
-            verifyResult.style.borderRadius = '10px';
-            verifyResult.textContent = msg;
+            verifyResult.style.padding = '12px 14px';
+            verifyResult.style.borderRadius = '12px';
+            verifyResult.innerHTML = `<div style="display:flex; align-items:flex-start; gap:10px;"><div style="width:28px; height:28px; background:rgba(255,71,87,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fa-solid fa-exclamation" style="font-size:14px;"></i></div><div style="display:flex; flex-direction:column; line-height:1.4;"><span style="font-size:13px; color:#ff8a95; font-weight:500;">${msg}</span></div></div>`;
         }
     }
 
@@ -6089,7 +6107,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
 
     function onVerifySuccess(pid, playerName) {
         if (!isValidPlayerName(playerName)) {
-            showVerifyResult('error', "This BGMI user ID doesn't exist");
+            showVerifyResult('error', "The BGMI UID you entered is incorrect. To find your correct ID: open the BGMI app, tap your profile picture on the top left, and look under 'Basic Info'. Your UID is shown above your profile picture.");
             if (verifyBtn) {
                 verifyBtn.disabled = false;
                 verifyBtn.innerHTML = 'Verify';
@@ -6333,7 +6351,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
                 data.success = true;
                 onVerifySuccess(pid, finalName);
             } else {
-                showVerifyResult('error', "This BGMI user ID doesn't exist");
+                showVerifyResult('error', "The BGMI UID you entered is incorrect. To find your correct ID: open the BGMI app, tap your profile picture on the top left, and look under 'Basic Info'. Your UID is shown above your profile picture.");
                 verifyBtn.disabled = false;
                 verifyBtn.innerHTML = 'Verify';
                 verifyBtn.style.opacity = '1';
