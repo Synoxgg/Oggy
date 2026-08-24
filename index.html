@@ -1469,7 +1469,7 @@
         border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0;
         background: rgba(10,10,12,0.95); backdrop-filter: blur(10px); z-index: 2;
     }
-    .modal-header h3 { color: var(--primary); font-family: var(--font-display); font-size: 20px; margin: 0; }
+    .modal-header h3 { color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px; margin: 0; letter-spacing: -0.2px; }
     .close-btn { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; transition: 0.2s; padding: 5px; }
     .close-btn:hover { color: #fff; }
     .modal-body { padding: 20px; color: #eee; font-size: 13px; line-height: 1.6; }
@@ -2328,6 +2328,50 @@ html, body {
     text-align: left !important;
   }
 </style>
+
+<style id="ucify-font-consistency-fix">
+/* === Font Consistency Fix - Same as BGMI UC Purchase title === */
+.step-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.2px !important;
+  line-height: 1.35 !important;
+}
+#dispFaq {
+  white-space: nowrap !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.2px !important;
+}
+.modal-header h3 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.2px !important;
+}
+/* Ensure modal titles like Terms, Privacy etc use same font */
+#termsModal .modal-header h3,
+#privacyModal .modal-header h3,
+#refundModal .modal-header h3,
+#contactModal .modal-header h3,
+#uidModal .modal-header h3,
+#trialInfoModal .modal-header h3,
+#regularInfoModal .modal-header h3 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.2px !important;
+}
+</style>
+
+
+<style id="ucify-modal-body-font-fix">
+.modal-body, .modal-body-policy {
+  font-family: 'Inter', sans-serif !important;
+}
+</style>
+
 </head>
 
 <body oncontextmenu="return false;">
@@ -2510,7 +2554,7 @@ html, body {
     <div id="step2" class="step">
       <div class="step-content">
         
-        <h2 class="step-title" id="dispStep2Title" style="margin-bottom: 15px;">SELECT OPTIONS</h2>
+        <h2 class="step-title" id="dispStep2Title" style="margin-bottom: 15px;">Select Pack</h2>
 
         <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 12px 15px; border-radius: var(--radius-md); border: 1px solid var(--surface-border); margin-bottom: 20px;">
             <div style="display: flex; align-items: center; gap: 6px; font-family: var(--font-display); overflow: hidden; white-space: nowrap; flex: 1; margin-right: 10px;">
@@ -2861,7 +2905,7 @@ html, body {
 
     <!-- GLOBAL FAQ SECTION (APPEARS ON ALL PAGES) -->
     <div class="faq-section" id="faqSectionGlob">
-        <h2 class="step-title" id="dispFaq" style="font-size: 26px; margin-bottom: 18px; text-align: left;">Frequently Asked Questions</h2>
+        <h2 class="step-title" id="dispFaq" style="font-family:'Inter', sans-serif; font-weight:700; font-size:20px; margin-bottom:18px; text-align:left; white-space:nowrap; letter-spacing:-0.2px; line-height:1.35; overflow:hidden; text-overflow:clip;">Frequently Asked Questions</h2>
         
         <div id="faqListContainer">
             <!-- Dynamically populated FAQs go here -->
@@ -2954,7 +2998,7 @@ html, body {
 
       <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 16px;">
         <h4 style="font-family:'Inter', sans-serif; font-weight:600; font-size:13.5px; color:#fff; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-          <span style="font-size:14px;">🛡️</span> Buy BGMI UC safely
+         Buy BGMI UC safely
         </h4>
         <p style="font-family:'Inter', sans-serif; font-size:12.5px; color:#d4d4d8; line-height:1.65; margin-bottom:10px;">
           Always verify your BGMI User ID before completing a purchase. UC delivered to an incorrect User ID may not be reversible or transferable.
@@ -3013,7 +3057,7 @@ html, body {
   <div class="modal-overlay" id="trialInfoModal" onclick="closeModalOutside(event, 'trialInfoModal')">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 style="font-size: 18px;" id="dispTrialModalTitle">Limited Packs Info</h3>
+        <h3 style="font-family:'Inter', sans-serif; font-weight:700; font-size:20px; letter-spacing:-0.2px;" id="dispTrialModalTitle">Limited Packs Info</h3>
         <button class="close-btn" onclick="closeModal('trialInfoModal')"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
@@ -3025,7 +3069,7 @@ html, body {
   <div class="modal-overlay" id="regularInfoModal" onclick="closeModalOutside(event, 'regularInfoModal')">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 style="font-size: 18px;" id="dispRegModalTitle">Regular Packs Info</h3>
+        <h3 style="font-family:'Inter', sans-serif; font-weight:700; font-size:20px; letter-spacing:-0.2px;" id="dispRegModalTitle">Regular Packs Info</h3>
         <button class="close-btn" onclick="closeModal('regularInfoModal')"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
@@ -3037,7 +3081,7 @@ html, body {
   <div class="modal-overlay" id="uidModal" onclick="closeModalOutside(event, 'uidModal')">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 style="font-size: 18px;" id="dispUidModalTitle">How To Find Your User ID (UID) in BGMI</h3>
+        <h3 style="font-family:'Inter', sans-serif; font-weight:700; font-size:20px; letter-spacing:-0.2px;" id="dispUidModalTitle">How To Find Your User ID (UID) in BGMI</h3>
         <button class="close-btn" onclick="closeModal('uidModal')"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
@@ -3713,7 +3757,7 @@ tryInitRemote();
             step1Title: "Player Details", lblUidInput: "BGMI User ID (UID)", phUid: "Enter UID", errUid: "Invalid UID Format",
             lblIgnInput: "BGMI ID Name", phIgn: "Enter IGN", errIgn: "Name Required",
             
-            step2Title: "SELECT OPTIONS", lblTrial: "Limited Packs", lblRegular: "Regular Packs", eventNotice: "UC purchased through UCify fully counts towards all in-game events, including the BGMI UC UP Event.",
+            step2Title: "Select Pack", lblTrial: "Limited Packs", lblRegular: "Regular Packs", eventNotice: "UC purchased through UCify fully counts towards all in-game events, including the BGMI UC UP Event.",
             
             btnVerify: "Verify & Continue", btnCheckout: "Purchase", btnChange: "Change", btnBack: "Back",
             
