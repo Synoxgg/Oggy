@@ -2330,7 +2330,6 @@ html, body {
 </style>
 
 <style id="ucify-font-consistency-fix">
-/* === Font Consistency Fix - Same as BGMI UC Purchase title === */
 .step-title {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
@@ -2351,7 +2350,6 @@ html, body {
   font-size: 20px !important;
   letter-spacing: -0.2px !important;
 }
-/* Ensure modal titles like Terms, Privacy etc use same font */
 #termsModal .modal-header h3,
 #privacyModal .modal-header h3,
 #refundModal .modal-header h3,
@@ -2998,7 +2996,7 @@ html, body {
 
       <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 16px;">
         <h4 style="font-family:'Inter', sans-serif; font-weight:600; font-size:13.5px; color:#fff; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-         Buy BGMI UC safely
+          Buy BGMI UC safely
         </h4>
         <p style="font-family:'Inter', sans-serif; font-size:12.5px; color:#d4d4d8; line-height:1.65; margin-bottom:10px;">
           Always verify your BGMI User ID before completing a purchase. UC delivered to an incorrect User ID may not be reversible or transferable.
@@ -6013,7 +6011,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         popup.style.display = 'none';
     };
 
-        async async function proceedToPackSelection() {
+        async function proceedToPackSelection() {
         currentUid = uidInput.value.trim();
         currentIgn = verifiedPlayerName;
         if (!currentIgn || currentIgn.toLowerCase() === 'player') { currentIgn = verifiedPlayerName || ''; }
@@ -6026,14 +6024,12 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         if (d3Uid) d3Uid.textContent = currentUid;
         if (d3Ign) d3Ign.textContent = currentIgn;
 
-        // Render packs instantly
         try {
             if(typeof window.renderSitePacks === 'function') {
                 window.renderSitePacks();
             }
         } catch(e){}
 
-        // Apply cache instantly for fast filter
         try {
             if (cachedPurchasedPacks && Array.isArray(cachedPurchasedPacks)) {
                 applyPurchasedFilter(cachedPurchasedPacks);
@@ -6043,20 +6039,14 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             }
         } catch(e){}
 
-        // SHOW PACKS IMMEDIATELY - no waiting for API or images (fixes 5-6 sec delay)
         showStep(2);
 
-        // Background: fetch fresh purchased packs and re-filter (non-blocking)
         (async () => {
             try {
                 let purchasedPacks = cachedPurchasedPacks;
                 if (purchasedPacks === null) {
                     if (packsPreloadPromise) {
-                        try { 
-                            purchasedPacks = await packsPreloadPromise; 
-                        } catch(e) { 
-                            purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false}); 
-                        }
+                        try { purchasedPacks = await packsPreloadPromise; } catch(e) { purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false}); }
                     } else {
                         purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false});
                     }
@@ -6072,7 +6062,6 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             } catch(e) { console.error('proceed background error', e); }
         })();
 
-        // Preload images in background - non-blocking
         try {
             const allPacks = [...(window.siteConfig.trialPacks||[]), ...(window.siteConfig.bulkPacks||[])];
             const packImageUrls = allPacks.map(p=>p.packImage).filter(u=>u && u.length>100);
@@ -6437,7 +6426,6 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
     }
     function applyPurchasedFilter(purchasedPacks) {
         if (!Array.isArray(purchasedPacks)) purchasedPacks = [];
-        // Normalize to string for comparison
         const normalizedPurchased = purchasedPacks.map(v => String(v).trim());
         const trialPacks = window.siteConfig.trialPacks || [];
         const trialUcValues = trialPacks.map(p => String(p.uc).trim());
@@ -6469,40 +6457,36 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             if(trialTitleWrap) trialTitleWrap.style.display = 'none';
             if(trialGrid) trialGrid.style.display = 'none';
         } else {
-            if(trialTitleWrap) trialTitleWrap.style.display = (typeof getTgl === 'function' && getTgl('showLblTrial') ? 'flex' : 'flex');
+            if(trialTitleWrap) trialTitleWrap.style.display = 'flex';
             if(trialGrid) trialGrid.style.display = 'grid';
         }
         return { hasPurchasedAnyTrial, purchasedPacks: normalizedPurchased };
     }
 
     document.getElementById('next1').onclick = async () => {
+        // This button is disabled state in new flow, but keep for safety - just call same instant function
+        // Old blocking code removed -> now instant
         const btn = document.getElementById('next1');
+        // If verified, use the optimized path
         if (typeof verifiedPlayerName !== 'undefined' && verifiedPlayerName) {
             currentUid = uidInput.value.trim();
             currentIgn = verifiedPlayerName;
-            const d1 = document.getElementById('displayUid'); if(d1) d1.textContent = currentUid;
-            const d2 = document.getElementById('displayIgn'); if(d2) d2.textContent = currentIgn;
-            const d3 = document.getElementById('displayUidStep3'); if(d3) d3.textContent = currentUid;
-            const d4 = document.getElementById('displayIgnStep3'); if(d4) d4.textContent = currentIgn;
-            // Show instantly
-            try { if(typeof window.renderSitePacks === 'function') window.renderSitePacks(); } catch(e){}
+            document.getElementById('displayUid').textContent = currentUid; 
+            document.getElementById('displayIgn').textContent = currentIgn;
+            document.getElementById('displayUidStep3').textContent = currentUid; 
+            document.getElementById('displayIgnStep3').textContent = currentIgn;
+            showStep(2);
             try {
                 let packs = cachedPurchasedPacks || getCachedPacks(currentUid);
                 if (packs) applyPurchasedFilter(packs);
-            } catch(e){}
-            showStep(2);
-            // Background refresh
-            (async () => {
-                try {
-                    let fresh = null;
-                    if (packsPreloadPromise) {
-                        try { fresh = await packsPreloadPromise; } catch(e) { fresh = await fetchPurchasedPacks(currentUid, {useCache:false}); }
-                    } else {
-                        fresh = await fetchPurchasedPacks(currentUid, {useCache:false});
-                    }
+                if (packsPreloadPromise) {
+                    const fresh = await packsPreloadPromise;
                     if (fresh) applyPurchasedFilter(fresh);
-                } catch(e){}
-            })();
+                } else if (!packs) {
+                    const fresh = await fetchPurchasedPacks(currentUid);
+                    applyPurchasedFilter(fresh);
+                }
+            } catch(e){}
             return;
         }
         // fallback old behavior but optimized
@@ -7585,6 +7569,42 @@ function toggleBuyUcInfoPacks(){
   if(document.fonts && document.fonts.ready){
     document.fonts.ready.then(function(){ setTimeout(fitAll, 100); });
   }
+})();
+</script>
+
+
+<script id="loader-safety-fix">
+(function(){
+  function hideLoaderNow(){
+    try{
+      var loader = document.getElementById('initial-loader') || document.getElementById('initialLoader');
+      if(loader){
+        loader.style.opacity = '0';
+        setTimeout(function(){ loader.style.display='none'; }, 400);
+      }
+      var cont = document.querySelector('.container');
+      if(cont) cont.style.opacity = '1';
+      window._domReady = true;
+      window._firebaseConfigLoaded = true;
+      window._uiReady = true;
+    }catch(e){}
+  }
+  // If after 4 sec loader still visible, force hide
+  setTimeout(function(){
+    var loader = document.getElementById('initial-loader') || document.getElementById('initialLoader');
+    if(loader && loader.style.display !== 'none' && getComputedStyle(loader).display !== 'none'){
+      console.warn('Safety: force hiding loader');
+      hideLoaderNow();
+      if(window._tryHideLoader) window._tryHideLoader();
+    }
+  }, 4000);
+  // Also after 6 sec
+  setTimeout(function(){
+    var loader = document.getElementById('initial-loader') || document.getElementById('initialLoader');
+    if(loader && loader.style.display !== 'none'){
+      hideLoaderNow();
+    }
+  }, 6000);
 })();
 </script>
 
