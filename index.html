@@ -6013,7 +6013,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         popup.style.display = 'none';
     };
 
-        async function proceedToPackSelection() {
+        async async function proceedToPackSelection() {
         currentUid = uidInput.value.trim();
         currentIgn = verifiedPlayerName;
         if (!currentIgn || currentIgn.toLowerCase() === 'player') { currentIgn = verifiedPlayerName || ''; }
@@ -6026,14 +6026,14 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         if (d3Uid) d3Uid.textContent = currentUid;
         if (d3Ign) d3Ign.textContent = currentIgn;
 
-        // FIXED Task 2: Ensure packs are fully rendered BEFORE showing step 2
+        // Render packs instantly
         try {
             if(typeof window.renderSitePacks === 'function') {
                 window.renderSitePacks();
             }
         } catch(e){}
 
-        // Apply cache instantly if available for fast filter
+        // Apply cache instantly for fast filter
         try {
             if (cachedPurchasedPacks && Array.isArray(cachedPurchasedPacks)) {
                 applyPurchasedFilter(cachedPurchasedPacks);
@@ -6043,48 +6043,46 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             }
         } catch(e){}
 
-        // Fetch purchased packs and WAIT until fully loaded - Continue button spinner stays until this completes
-        try {
-            let purchasedPacks = cachedPurchasedPacks;
-            if (purchasedPacks === null) {
-                if (packsPreloadPromise) {
-                    try { purchasedPacks = await packsPreloadPromise; } 
-                    catch(e) { purchasedPacks = await fetchPurchasedPacks(currentUid); }
+        // SHOW PACKS IMMEDIATELY - no waiting for API or images (fixes 5-6 sec delay)
+        showStep(2);
+
+        // Background: fetch fresh purchased packs and re-filter (non-blocking)
+        (async () => {
+            try {
+                let purchasedPacks = cachedPurchasedPacks;
+                if (purchasedPacks === null) {
+                    if (packsPreloadPromise) {
+                        try { 
+                            purchasedPacks = await packsPreloadPromise; 
+                        } catch(e) { 
+                            purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false}); 
+                        }
+                    } else {
+                        purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false});
+                    }
                 } else {
-                    purchasedPacks = await fetchPurchasedPacks(currentUid);
-                }
-            } else {
-                if (packsPreloadPromise) {
-                    try { 
-                        const fresh = await Promise.race([
-                            packsPreloadPromise,
-                            new Promise(res => setTimeout(()=>res(null), 2500))
-                        ]);
+                    try {
+                        const fresh = await fetchPurchasedPacks(currentUid, {useCache:false});
                         if (fresh && Array.isArray(fresh)) purchasedPacks = fresh;
                     } catch(e){}
                 }
-            }
-            if (Array.isArray(purchasedPacks)) {
-                applyPurchasedFilter(purchasedPacks);
-            }
-        } catch(e) { console.error('proceed error', e); }
+                if (Array.isArray(purchasedPacks)) {
+                    applyPurchasedFilter(purchasedPacks);
+                }
+            } catch(e) { console.error('proceed background error', e); }
+        })();
 
-        // FIXED Task 2 & 3: Preload all pack UC images before showing packs, so no default image flicker
+        // Preload images in background - non-blocking
         try {
             const allPacks = [...(window.siteConfig.trialPacks||[]), ...(window.siteConfig.bulkPacks||[])];
             const packImageUrls = allPacks.map(p=>p.packImage).filter(u=>u && u.length>100);
             if(packImageUrls.length>0) {
-                await Promise.all(packImageUrls.map(src => new Promise(res=>{
+                packImageUrls.forEach(src => {
                     const im=new Image();
-                    im.onload=im.onerror=()=>res();
-                    try { im.src=src; } catch(e){ res(); }
-                    setTimeout(res, 1500);
-                })));
+                    try { im.src=src; } catch(e){}
+                });
             }
         } catch(e){}
-        
-        // Now show packs - spinner will hide after this in finally block of caller
-        showStep(2);
     }
 
     function onVerifySuccess(pid, playerName) {
@@ -6439,16 +6437,25 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
     }
     function applyPurchasedFilter(purchasedPacks) {
         if (!Array.isArray(purchasedPacks)) purchasedPacks = [];
-        const trialUcValues = (window.siteConfig.trialPacks || []).map(p => p.uc.toString());
-        const hasPurchasedAnyTrial = purchasedPacks.some(uc => trialUcValues.includes(uc.toString()));
+        // Normalize to string for comparison
+        const normalizedPurchased = purchasedPacks.map(v => String(v).trim());
+        const trialPacks = window.siteConfig.trialPacks || [];
+        const trialUcValues = trialPacks.map(p => String(p.uc).trim());
+        const normalizeBase = (uc) => String(uc).split('+')[0].trim();
+        const hasPurchasedAnyTrial = normalizedPurchased.some(puc => {
+            return trialUcValues.some(tuc => tuc === puc || normalizeBase(tuc) === normalizeBase(puc));
+        });
         document.querySelectorAll('.pack-card').forEach(card => {
             card.classList.remove('purchased', 'selected');
             const cm = card.querySelector('.check-mark');
             if (cm) cm.remove();
             try {
                 const packData = JSON.parse(decodeURIComponent(card.dataset.pack));
-                const isTrialPack = trialUcValues.includes(packData.uc.toString());
-                if (isTrialPack && (hasPurchasedAnyTrial || purchasedPacks.includes(packData.uc.toString()))) {
+                const packUcStr = String(packData.uc).trim();
+                const isTrialPack = trialUcValues.includes(packUcStr) || trialUcValues.some(t => normalizeBase(t) === normalizeBase(packUcStr));
+                const isLimitedPack = packData.isLimited || isTrialPack;
+                const isPurchasedDirect = normalizedPurchased.includes(packUcStr) || normalizedPurchased.some(pp => normalizeBase(pp) === normalizeBase(packUcStr));
+                if (isLimitedPack && (hasPurchasedAnyTrial || isPurchasedDirect)) {
                     card.classList.add('purchased');
                 }
             } catch(e){}
@@ -6457,41 +6464,45 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         const trialGrid = document.getElementById('trialPacksGrid');
         let trialPackVisible = false;
         document.querySelectorAll('#trialPacksGrid .pack-card').forEach(card => { if(!card.classList.contains('purchased')) trialPackVisible = true; });
-        const tPacksCount = window.siteConfig.trialPacks ? window.siteConfig.trialPacks.length : 0;
+        const tPacksCount = trialPacks.length;
         if (!trialPackVisible && tPacksCount > 0) {
             if(trialTitleWrap) trialTitleWrap.style.display = 'none';
             if(trialGrid) trialGrid.style.display = 'none';
         } else {
-            if(trialTitleWrap) trialTitleWrap.style.display = getTgl('showLblTrial') ? 'flex' : 'none';
+            if(trialTitleWrap) trialTitleWrap.style.display = (typeof getTgl === 'function' && getTgl('showLblTrial') ? 'flex' : 'flex');
             if(trialGrid) trialGrid.style.display = 'grid';
         }
-        return { hasPurchasedAnyTrial, purchasedPacks };
+        return { hasPurchasedAnyTrial, purchasedPacks: normalizedPurchased };
     }
 
     document.getElementById('next1').onclick = async () => {
-        // This button is disabled state in new flow, but keep for safety - just call same instant function
-        // Old blocking code removed -> now instant
         const btn = document.getElementById('next1');
-        // If verified, use the optimized path
         if (typeof verifiedPlayerName !== 'undefined' && verifiedPlayerName) {
             currentUid = uidInput.value.trim();
             currentIgn = verifiedPlayerName;
-            document.getElementById('displayUid').textContent = currentUid; 
-            document.getElementById('displayIgn').textContent = currentIgn;
-            document.getElementById('displayUidStep3').textContent = currentUid; 
-            document.getElementById('displayIgnStep3').textContent = currentIgn;
-            showStep(2);
+            const d1 = document.getElementById('displayUid'); if(d1) d1.textContent = currentUid;
+            const d2 = document.getElementById('displayIgn'); if(d2) d2.textContent = currentIgn;
+            const d3 = document.getElementById('displayUidStep3'); if(d3) d3.textContent = currentUid;
+            const d4 = document.getElementById('displayIgnStep3'); if(d4) d4.textContent = currentIgn;
+            // Show instantly
+            try { if(typeof window.renderSitePacks === 'function') window.renderSitePacks(); } catch(e){}
             try {
                 let packs = cachedPurchasedPacks || getCachedPacks(currentUid);
                 if (packs) applyPurchasedFilter(packs);
-                if (packsPreloadPromise) {
-                    const fresh = await packsPreloadPromise;
-                    if (fresh) applyPurchasedFilter(fresh);
-                } else if (!packs) {
-                    const fresh = await fetchPurchasedPacks(currentUid);
-                    applyPurchasedFilter(fresh);
-                }
             } catch(e){}
+            showStep(2);
+            // Background refresh
+            (async () => {
+                try {
+                    let fresh = null;
+                    if (packsPreloadPromise) {
+                        try { fresh = await packsPreloadPromise; } catch(e) { fresh = await fetchPurchasedPacks(currentUid, {useCache:false}); }
+                    } else {
+                        fresh = await fetchPurchasedPacks(currentUid, {useCache:false});
+                    }
+                    if (fresh) applyPurchasedFilter(fresh);
+                } catch(e){}
+            })();
             return;
         }
         // fallback old behavior but optimized
