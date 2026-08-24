@@ -2330,6 +2330,7 @@ html, body {
 </style>
 
 <style id="ucify-font-consistency-fix">
+/* === Font Consistency Fix - Same as BGMI UC Purchase title === */
 .step-title {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
@@ -2350,6 +2351,7 @@ html, body {
   font-size: 20px !important;
   letter-spacing: -0.2px !important;
 }
+/* Ensure modal titles like Terms, Privacy etc use same font */
 #termsModal .modal-header h3,
 #privacyModal .modal-header h3,
 #refundModal .modal-header h3,
@@ -2996,7 +2998,7 @@ html, body {
 
       <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px 16px;">
         <h4 style="font-family:'Inter', sans-serif; font-weight:600; font-size:13.5px; color:#fff; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-          Buy BGMI UC safely
+         Buy BGMI UC safely
         </h4>
         <p style="font-family:'Inter', sans-serif; font-size:12.5px; color:#d4d4d8; line-height:1.65; margin-bottom:10px;">
           Always verify your BGMI User ID before completing a purchase. UC delivered to an incorrect User ID may not be reversible or transferable.
@@ -6024,12 +6026,14 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         if (d3Uid) d3Uid.textContent = currentUid;
         if (d3Ign) d3Ign.textContent = currentIgn;
 
+        // FIXED Task 2: Ensure packs are fully rendered BEFORE showing step 2
         try {
             if(typeof window.renderSitePacks === 'function') {
                 window.renderSitePacks();
             }
         } catch(e){}
 
+        // Apply cache instantly if available for fast filter
         try {
             if (cachedPurchasedPacks && Array.isArray(cachedPurchasedPacks)) {
                 applyPurchasedFilter(cachedPurchasedPacks);
@@ -6039,39 +6043,48 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
             }
         } catch(e){}
 
-        showStep(2);
-
-        (async () => {
-            try {
-                let purchasedPacks = cachedPurchasedPacks;
-                if (purchasedPacks === null) {
-                    if (packsPreloadPromise) {
-                        try { purchasedPacks = await packsPreloadPromise; } catch(e) { purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false}); }
-                    } else {
-                        purchasedPacks = await fetchPurchasedPacks(currentUid, {useCache:false});
-                    }
+        // Fetch purchased packs and WAIT until fully loaded - Continue button spinner stays until this completes
+        try {
+            let purchasedPacks = cachedPurchasedPacks;
+            if (purchasedPacks === null) {
+                if (packsPreloadPromise) {
+                    try { purchasedPacks = await packsPreloadPromise; } 
+                    catch(e) { purchasedPacks = await fetchPurchasedPacks(currentUid); }
                 } else {
-                    try {
-                        const fresh = await fetchPurchasedPacks(currentUid, {useCache:false});
+                    purchasedPacks = await fetchPurchasedPacks(currentUid);
+                }
+            } else {
+                if (packsPreloadPromise) {
+                    try { 
+                        const fresh = await Promise.race([
+                            packsPreloadPromise,
+                            new Promise(res => setTimeout(()=>res(null), 2500))
+                        ]);
                         if (fresh && Array.isArray(fresh)) purchasedPacks = fresh;
                     } catch(e){}
                 }
-                if (Array.isArray(purchasedPacks)) {
-                    applyPurchasedFilter(purchasedPacks);
-                }
-            } catch(e) { console.error('proceed background error', e); }
-        })();
+            }
+            if (Array.isArray(purchasedPacks)) {
+                applyPurchasedFilter(purchasedPacks);
+            }
+        } catch(e) { console.error('proceed error', e); }
 
+        // FIXED Task 2 & 3: Preload all pack UC images before showing packs, so no default image flicker
         try {
             const allPacks = [...(window.siteConfig.trialPacks||[]), ...(window.siteConfig.bulkPacks||[])];
             const packImageUrls = allPacks.map(p=>p.packImage).filter(u=>u && u.length>100);
             if(packImageUrls.length>0) {
-                packImageUrls.forEach(src => {
+                await Promise.all(packImageUrls.map(src => new Promise(res=>{
                     const im=new Image();
-                    try { im.src=src; } catch(e){}
-                });
+                    im.onload=im.onerror=()=>res();
+                    try { im.src=src; } catch(e){ res(); }
+                    setTimeout(res, 1500);
+                })));
             }
         } catch(e){}
+        
+        // Now show packs - spinner will hide after this in finally block of caller
+        showStep(2);
     }
 
     function onVerifySuccess(pid, playerName) {
@@ -6426,24 +6439,78 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
     }
     function applyPurchasedFilter(purchasedPacks) {
         if (!Array.isArray(purchasedPacks)) purchasedPacks = [];
-        const normalizedPurchased = purchasedPacks.map(v => String(v).trim());
+        // --- FIXED: robust limited pack filtering ---
+        function normalizeUcValue(v){
+            if(v==null) return "";
+            if(typeof v==='object'){
+                if(v.uc!=null) v=v.uc;
+                else if(v.pack!=null) v=v.pack;
+                else if(v.id!=null) v=v.id;
+                else if(v.value!=null) v=v.value;
+                else {
+                    try { v=JSON.stringify(v); } catch(e){ v=""; }
+                }
+            }
+            return String(v).trim();
+        }
+        function getBaseUc(v){
+            const s = normalizeUcValue(v);
+            if(!s) return "";
+            const m = s.match(/^\d+/);
+            if(m) return m[0];
+            const num = s.match(/(\d+)/);
+            return num ? num[1] : s.toLowerCase();
+        }
+        function getAllVariants(v){
+            const raw = normalizeUcValue(v);
+            const base = getBaseUc(v);
+            let total = "";
+            try {
+                if(raw.includes('+')){
+                    const parts = raw.split('+').map(p=>parseInt(p,10)).filter(n=>!isNaN(n));
+                    if(parts.length) total = String(parts.reduce((a,b)=>a+b,0));
+                }
+            } catch(e){}
+            return [raw, raw.toLowerCase(), base, total].filter(Boolean);
+        }
+
         const trialPacks = window.siteConfig.trialPacks || [];
-        const trialUcValues = trialPacks.map(p => String(p.uc).trim());
-        const normalizeBase = (uc) => String(uc).split('+')[0].trim();
-        const hasPurchasedAnyTrial = normalizedPurchased.some(puc => {
-            return trialUcValues.some(tuc => tuc === puc || normalizeBase(tuc) === normalizeBase(puc));
+        const trialUcRaw = trialPacks.map(p => normalizeUcValue(p.uc));
+        const trialBaseValues = trialPacks.map(p => getBaseUc(p.uc));
+        const trialAllVariantsSet = new Set();
+        trialPacks.forEach(p=>{
+            getAllVariants(p.uc).forEach(v=>trialAllVariantsSet.add(v));
+            getAllVariants(p.uc).forEach(v=>trialAllVariantsSet.add(v.toLowerCase()));
         });
+
+        const purchasedVariantsSet = new Set();
+        const purchasedBaseSet = new Set();
+        purchasedPacks.forEach(p=>{
+            const variants = getAllVariants(p);
+            variants.forEach(v=>{
+                purchasedVariantsSet.add(v);
+                purchasedVariantsSet.add(v.toLowerCase());
+            });
+            const base = getBaseUc(p);
+            if(base) purchasedBaseSet.add(base);
+        });
+
+        const hasPurchasedAnyTrial = [...purchasedVariantsSet].some(v=>trialAllVariantsSet.has(v)) || [...purchasedBaseSet].some(b=>trialBaseValues.includes(b));
+
         document.querySelectorAll('.pack-card').forEach(card => {
             card.classList.remove('purchased', 'selected');
             const cm = card.querySelector('.check-mark');
             if (cm) cm.remove();
             try {
                 const packData = JSON.parse(decodeURIComponent(card.dataset.pack));
-                const packUcStr = String(packData.uc).trim();
-                const isTrialPack = trialUcValues.includes(packUcStr) || trialUcValues.some(t => normalizeBase(t) === normalizeBase(packUcStr));
-                const isLimitedPack = packData.isLimited || isTrialPack;
-                const isPurchasedDirect = normalizedPurchased.includes(packUcStr) || normalizedPurchased.some(pp => normalizeBase(pp) === normalizeBase(packUcStr));
-                if (isLimitedPack && (hasPurchasedAnyTrial || isPurchasedDirect)) {
+                const packVariants = getAllVariants(packData.uc);
+                const packBase = getBaseUc(packData.uc);
+                const packRaw = normalizeUcValue(packData.uc);
+                // isLimited flag bhi check karo + trial list
+                const isTrialPack = trialBaseValues.includes(packBase) || trialUcRaw.includes(packRaw) || packVariants.some(v=>trialAllVariantsSet.has(v)) || (packData.isLimited===true);
+                const isThisPackPurchased = packVariants.some(v=>purchasedVariantsSet.has(v) || purchasedVariantsSet.has(v.toLowerCase())) || purchasedBaseSet.has(packBase);
+                // FIX: same UID pe jo pack kharid chuka hai wo hide + agar koi bhi limited kharida to saare limited hide (one per UID policy)
+                if (isTrialPack && (hasPurchasedAnyTrial || isThisPackPurchased)) {
                     card.classList.add('purchased');
                 }
             } catch(e){}
@@ -6452,15 +6519,15 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         const trialGrid = document.getElementById('trialPacksGrid');
         let trialPackVisible = false;
         document.querySelectorAll('#trialPacksGrid .pack-card').forEach(card => { if(!card.classList.contains('purchased')) trialPackVisible = true; });
-        const tPacksCount = trialPacks.length;
+        const tPacksCount = window.siteConfig.trialPacks ? window.siteConfig.trialPacks.length : 0;
         if (!trialPackVisible && tPacksCount > 0) {
             if(trialTitleWrap) trialTitleWrap.style.display = 'none';
             if(trialGrid) trialGrid.style.display = 'none';
         } else {
-            if(trialTitleWrap) trialTitleWrap.style.display = 'flex';
+            if(trialTitleWrap) trialTitleWrap.style.display = getTgl('showLblTrial') ? 'flex' : 'none';
             if(trialGrid) trialGrid.style.display = 'grid';
         }
-        return { hasPurchasedAnyTrial, purchasedPacks: normalizedPurchased };
+        return { hasPurchasedAnyTrial, purchasedPacks };
     }
 
     document.getElementById('next1').onclick = async () => {
@@ -7569,42 +7636,6 @@ function toggleBuyUcInfoPacks(){
   if(document.fonts && document.fonts.ready){
     document.fonts.ready.then(function(){ setTimeout(fitAll, 100); });
   }
-})();
-</script>
-
-
-<script id="loader-safety-fix">
-(function(){
-  function hideLoaderNow(){
-    try{
-      var loader = document.getElementById('initial-loader') || document.getElementById('initialLoader');
-      if(loader){
-        loader.style.opacity = '0';
-        setTimeout(function(){ loader.style.display='none'; }, 400);
-      }
-      var cont = document.querySelector('.container');
-      if(cont) cont.style.opacity = '1';
-      window._domReady = true;
-      window._firebaseConfigLoaded = true;
-      window._uiReady = true;
-    }catch(e){}
-  }
-  // If after 4 sec loader still visible, force hide
-  setTimeout(function(){
-    var loader = document.getElementById('initial-loader') || document.getElementById('initialLoader');
-    if(loader && loader.style.display !== 'none' && getComputedStyle(loader).display !== 'none'){
-      console.warn('Safety: force hiding loader');
-      hideLoaderNow();
-      if(window._tryHideLoader) window._tryHideLoader();
-    }
-  }, 4000);
-  // Also after 6 sec
-  setTimeout(function(){
-    var loader = document.getElementById('initial-loader') || document.getElementById('initialLoader');
-    if(loader && loader.style.display !== 'none'){
-      hideLoaderNow();
-    }
-  }, 6000);
 })();
 </script>
 
