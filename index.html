@@ -1505,7 +1505,7 @@
        font-size: 13px; margin-top: 15px;
     }
 
-    .final-success-msg { display: none; color: var(--success); margin-top: 10px; font-weight: 600; }
+    .final-success-msg { display: none; color: var(--primary); margin-top: 10px; font-weight: 600; }
     
     .faq-section { 
       background: rgba(14, 14, 18, 0.7); 
@@ -2594,8 +2594,8 @@ html, body {
     width: 100% !important;
   }
   #step4 .success-icon img {
-    width: 220px !important;
-    max-width: 50% !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
   }
   .transfer-visual {
@@ -2632,13 +2632,13 @@ html, body {
     width: 100% !important;
   }
 
-  /* Sticky bar */
+  /* Sticky bar - FIXED: hide when no pack selected in landscape */
   #stickyPurchaseBar {
     max-width: 100% !important;
     left: 0 !important;
     right: 0 !important;
-    transform: none !important;
     width: 100% !important;
+    transform: translateY(110%) !important;
   }
   #stickyPurchaseBar.active {
     transform: translateY(0) !important;
@@ -2667,7 +2667,9 @@ html, body {
     padding: 16px !important;
   }
   #step4 .success-icon img {
-    width: 180px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
   }
   .transfer-visual {
     padding: 12px !important;
@@ -2684,6 +2686,83 @@ html, body {
     font-size: 13px !important;
     line-height: 1.6 !important;
   }
+}
+</style>
+
+
+<style id="user-fixes-2025">
+/* Fix 1: Landscape pay bar should stay hidden when no pack selected */
+@media screen and (orientation: landscape) {
+  #stickyPurchaseBar {
+    transform: translateY(110%) !important;
+  }
+  #stickyPurchaseBar.active {
+    transform: translateY(0) !important;
+  }
+  #stickyPurchaseBar:not(.active) {
+    transform: translateY(110%) !important;
+    pointer-events: none !important;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  #stickyPurchaseBar {
+    transform: translateY(110%) !important;
+  }
+  #stickyPurchaseBar.active {
+    transform: translateY(0) !important;
+  }
+  #stickyPurchaseBar:not(.active) {
+    transform: translateY(110%) !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Fix 2: UC Purchased Successfully image - bigger, horizontally fit */
+#ucPurchasedSuccessImg {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+#step4 .success-icon {
+  width: 100% !important;
+}
+#step4 .success-icon img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+.success-icon {
+  width: 100% !important;
+}
+.success-icon img {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Fix 3: UC Successfully Credited - yellow color same as website #FFB800 */
+.final-success-msg {
+  color: var(--primary) !important;
+  color: #FFB800 !important;
+}
+#dispFinalSuccessMsg {
+  color: #FFB800 !important;
+}
+
+/* Fix 4: BGMI logo without tile - normally, bina tile ke */
+#tvBgmiLogo {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  object-fit: contain !important;
+}
+#tvBgmiLogo.tv-logo {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 </style>
 
@@ -3136,7 +3215,7 @@ html, body {
     <div id="step4" class="step">
       <div class="step-content success-screen">
         
-        <div class="success-icon"><img src="uc-purchased-successfully.webp" alt="UC Purchased Successfully" id="ucPurchasedSuccessImg" style="width:280px; height:auto; max-width:90%; filter: none; /* yellow glow removed */ animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onerror="this.style.display='none'"></div>
+        <div class="success-icon"><img src="uc-purchased-successfully.webp" alt="UC Purchased Successfully" id="ucPurchasedSuccessImg" style="width:100%; height:auto; max-width:100%; filter: none; /* yellow glow removed */ animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onerror="this.style.display='none'"></div>
         <!-- COMBINED TILE: UCify -> BGMI + User Details + Progress -->
         <div class="transfer-visual" id="transferVisual">
             <div class="tv-logos-row" id="tvLogosRow">
@@ -3182,7 +3261,7 @@ html, body {
 
             <!-- UC Transfer Complete (now inside tile, hidden till 100%) -->
             <div class="final-success-msg" id="dispFinalSuccessMsg" style="display:none; text-align:center; margin-top: 14px; font-size: 16px; font-weight: 700;">
-                 UC Transfer Complete.
+                 UC Successfully Credited
             </div>
         </div>
 
@@ -4090,7 +4169,7 @@ tryInitRemote();
             finalLblUid: "BGMI User ID", finalLblIgn: "BGMI ID Name", finalLblUc: "UC Credited",
             
             nightModeTitle: "Night Mode Active", nightModeDesc: "Instant delivery paused. UC will be credited after 9:00 AM.",
-            finalSuccessMsg: "UC Transfer Complete.", btnNewOrder: "Purchase new pack",
+            finalSuccessMsg: "UC Successfully Credited", btnNewOrder: "Purchase new pack",
             
             receiptTitle: "RECEIPT", lblPack: "Pack", lblAmount: "Amount Paid", lblUid: "UID", lblIgn: "IGN", lblTime: "Time",
             
