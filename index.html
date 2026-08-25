@@ -5732,12 +5732,15 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
 
       const globalWhyChoose = document.getElementById('whyChooseSection');
       const globalFAQ = document.getElementById('faqSectionGlob');
+      const ucifyInfoTile = document.querySelector('.ucify-info-tile');
       if (step === 4) {
           if (globalWhyChoose) globalWhyChoose.style.display = 'none';
           if (globalFAQ) globalFAQ.style.display = 'none';
+          if (ucifyInfoTile) ucifyInfoTile.style.display = 'none';
       } else {
           if (globalWhyChoose) globalWhyChoose.style.display = getTgl('showWhyChoose') ? 'block' : 'none';
           if (globalFAQ) globalFAQ.style.display = getTgl('showFaq') ? 'block' : 'none';
+          if (ucifyInfoTile) ucifyInfoTile.style.display = 'block';
       }
 
       // UPDATED: Scroll to relevant tile instead of progress-wrap
