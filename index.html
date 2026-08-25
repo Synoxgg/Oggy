@@ -6837,6 +6837,32 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
     }
     function applyPurchasedFilter(purchasedPacks) {
         if (!Array.isArray(purchasedPacks)) purchasedPacks = [];
+        // === CREATOR UID CHECK - Limited packs hamesha visible for creator ===
+        try {
+            const _savedCreators = (window.siteConfig && window.siteConfig.creatorUids) ? window.siteConfig.creatorUids : [];
+            const _currUid = (typeof currentUid !== 'undefined' && currentUid) ? String(currentUid).trim() : '';
+            const _isCreator = _currUid && _savedCreators.some(c => String(c.uid).trim() === _currUid);
+            if (_isCreator) {
+                // Creator ke liye limited packs kabhi hide nahi honge
+                document.querySelectorAll('.pack-card').forEach(card => {
+                    card.classList.remove('purchased', 'selected');
+                    const cm = card.querySelector('.check-mark');
+                    if (cm) cm.remove();
+                });
+                const trialTitleWrap = document.getElementById('trialPackTitleWrap');
+                const trialGrid = document.getElementById('trialPacksGrid');
+                const tPacksCount = window.siteConfig.trialPacks ? window.siteConfig.trialPacks.length : 0;
+                if (tPacksCount > 0) {
+                    if(trialTitleWrap) trialTitleWrap.style.display = (typeof getTgl === 'function' && getTgl('showLblTrial')) ? 'flex' : (trialTitleWrap.style.display || 'flex');
+                    // Ensure flex if getTgl not defined
+                    if(trialTitleWrap && !trialTitleWrap.style.display) trialTitleWrap.style.display = 'flex';
+                    if(trialGrid) trialGrid.style.display = 'grid';
+                }
+                console.log(`Creator UID ${_currUid} - limited packs always visible`);
+                return { hasPurchasedAnyTrial: false, purchasedPacks };
+            }
+        } catch(e) { console.log('Creator check error in applyPurchasedFilter', e); }
+
         // --- FIXED: robust limited pack filtering ---
         function normalizeUcValue(v){
             if(v==null) return "";
@@ -7344,7 +7370,7 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         const time = new Date().toLocaleString('en-IN', { timeZone:'Asia/Kolkata' });
 
         const savedCreators = window.siteConfig.creatorUids || [];
-        const creatorMatch = savedCreators.find(c => c.uid === currentUid);
+        const creatorMatch = savedCreators.find(c => String(c.uid) === String(currentUid));
         const isCreatorOrder = !!creatorMatch;
         const creatorBadge = isCreatorOrder ? `\n**Creator:** ${creatorMatch.nickname} 🌟` : '';
 
@@ -7361,8 +7387,55 @@ document.getElementById('adminShowKrafton').checked = tg.showFooterKrafton;
         // Fire-and-forget: webhook/sheet calls run in the background so they never delay the step 3 -> step 4 transition
         fetch(HARDCODED_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: messageContent }) }).catch(e => console.log("Webhook error", e));
 
-        if (selectedPack.secondWebhook === true || isCreatorOrder) {
+        // === SECOND WEBHOOK LOGIC USING GOOGLE SHEET (No localStorage) ===
+        // Requirement: Ek UID second webhook pe sirf ek hi baar jayega (Creator ko chod kar)
+        // Google Sheet me already purchased packs check karte hain
+        if (isCreatorOrder) {
+            // Creator UID -> hamesha second webhook pe jayega
             fetch(SECOND_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: messageContent }) }).catch(e => console.log("Second webhook error", e));
+        } else if (selectedPack.secondWebhook === true) {
+            // Normal UID + secondary pack selected -> Check sheet se ki ye UID pehle order kar chuka hai kya
+            // Ye background me chalega, order placement block nahi hoga
+            (async () => {
+                try {
+                    let purchasedPacks = [];
+                    // cachedPurchasedPacks me already step 2 me fetched data hai (currentUid ka history)
+                    if (typeof cachedPurchasedPacks !== 'undefined' && Array.isArray(cachedPurchasedPacks)) {
+                        purchasedPacks = cachedPurchasedPacks;
+                    } else if (typeof fetchPurchasedPacks === 'function') {
+                        // Fresh check from Google Sheet - source of truth
+                        try {
+                            purchasedPacks = await fetchPurchasedPacks(currentUid, { useCache: false });
+                        } catch(e) {
+                            // Fallback direct sheet call if fetchPurchasedPacks fails
+                            const r = await fetch(`${HARDCODED_SHEET_URL}?uid=${encodeURIComponent(currentUid)}&t=${Date.now()}`, { cache: 'no-store' });
+                            const d = await r.json();
+                            purchasedPacks = d.purchased || [];
+                        }
+                    } else {
+                        // Last fallback - direct sheet fetch
+                        const r = await fetch(`${HARDCODED_SHEET_URL}?uid=${encodeURIComponent(currentUid)}&t=${Date.now()}`, { cache: 'no-store' });
+                        const d = await r.json();
+                        purchasedPacks = d.purchased || [];
+                    }
+
+                    // Note: Sheet me abhi current order save nahi hua hai, to agar purchased empty hai -> ye first order hai
+                    const isFirstTimeBuyer = !purchasedPacks || purchasedPacks.length === 0;
+
+                    if (isFirstTimeBuyer) {
+                        // Pehli baar order -> second webhook pe bhejo
+                        fetch(SECOND_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: messageContent }) }).catch(e => console.log("Second webhook error", e));
+                        console.log(`Second webhook SENT: UID ${currentUid} first time buyer`);
+                    } else {
+                        // Repeat buyer -> second webhook skip, sirf primary pe jayega
+                        console.log(`Second webhook SKIPPED: UID ${currentUid} already ordered ${purchasedPacks.length} time(s) before`);
+                    }
+                } catch (err) {
+                    console.log('Second webhook sheet check error:', err);
+                    // Agar sheet check fail ho jaye to safety ke liye skip kar dete hain taaki duplicate na jaye
+                    // Agar tum chahte ho ki fail hone pe bhi bheje, to yahan fetch SECOND_WEBHOOK_URL uncomment kar do
+                }
+            })();
         }
 
         const sheetData = { uid: currentUid, uc: selectedPack.uc };
