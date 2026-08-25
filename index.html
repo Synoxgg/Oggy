@@ -3226,7 +3226,7 @@ html, body {
     <div id="step4" class="step">
       <div class="step-content success-screen">
         
-        <div class="success-icon"><img src="uc-purchased-successfully.webp" alt="UC Purchased Successfully" id="ucPurchasedSuccessImg" style="width:100%; height:auto; max-width:100%; filter: none; /* yellow glow removed */ animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onerror="this.style.display='none'"></div>
+        <div class="success-icon" style="width:100%; max-width:600px; margin:0 auto 16px auto; border-radius:16px; overflow:hidden; background:transparent; border:none; padding:0; line-height:0; box-shadow:none;"><img src="uc-purchased-successfully.webp" alt="UC Purchased Successfully" id="ucPurchasedSuccessImg" style="width:100%; height:auto; max-width:100%; display:block; border-radius:16px; filter: none; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); object-fit:cover;" onerror="this.style.display='none'"></div>
         <!-- COMBINED TILE: UCify -> BGMI + User Details + Progress -->
         <div class="transfer-visual" id="transferVisual">
             <div class="tv-logos-row" id="tvLogosRow">
@@ -8204,6 +8204,33 @@ function toggleBuyUcInfoPacks(){
   backdrop-filter: blur(5px) !important;
   -webkit-backdrop-filter: blur(5px) !important;
   z-index: 999 !important;
+}
+</style>
+
+
+<style id="fix-success-image-as-tile">
+/* === FIX: Order confirmation image as tile (image itself is tile) === */
+#step4 .success-icon{
+  width:100% !important;
+  max-width:600px !important;
+  margin:0 auto 16px auto !important;
+  border-radius:16px !important;
+  overflow:hidden !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  line-height:0 !important;
+  box-shadow:none !important;
+}
+#step4 .success-icon img,
+#ucPurchasedSuccessImg{
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  display:block !important;
+  border-radius:16px !important;
+  object-fit:cover !important;
+  filter:none !important;
 }
 </style>
 
