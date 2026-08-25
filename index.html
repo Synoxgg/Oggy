@@ -1895,6 +1895,30 @@
     .tmd-item { display:flex; align-items:center; gap:10px; padding:12px 12px; border-radius:10px; color:rgba(255,255,255,0.85); font-size:13px; font-weight:500; cursor:pointer; }
     .tmd-item i { width:18px; color: #ffffff; }
 
+    /* === MENU BLUR BACKDROP - When menu opens, blur website below like UID info modal === */
+    #topMenuBackdrop {
+      position: fixed;
+      inset: 0;
+      top: 0;
+      background: rgba(0,0,0,0.60);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+    #topMenuBackdrop.active {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Ensure topbar stays above backdrop */
+    .ucify-topbar { z-index: 1000; }
+    .top-menu-dropdown { z-index: 1001; }
+    
+
     /* Pay Bar 90% Transparent */
     #stickyPurchaseBar { background: rgba(10,10,12,0.10) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important; border-top:1px solid rgba(255,255,255,0.05) !important; }
 
@@ -2390,15 +2414,35 @@ html, body {
 #termsModal .modal-header h3,
 #privacyModal .modal-header h3,
 #refundModal .modal-header h3,
-#contactModal .modal-header h3 {
+#contactModal .modal-header h3,
+#uidModal .modal-header h3,
+#trialInfoModal .modal-header h3,
+#regularInfoModal .modal-header h3 {
   color: #ffffff !important;
 }
 #termsModal .modal-header h3 i,
 #privacyModal .modal-header h3 i,
 #refundModal .modal-header h3 i,
-#contactModal .modal-header h3 i {
+#contactModal .modal-header h3 i,
+#uidModal .modal-header h3 i,
+#trialInfoModal .modal-header h3 i,
+#regularInfoModal .modal-header h3 i {
   color: #ffffff !important;
 }
+
+/* === ALL INFO TITLES - YELLOW REMOVED - Make all modal titles white === */
+.modal-header h3 {
+  color: #ffffff !important;
+}
+.modal-header h3 i {
+  color: #ffffff !important;
+}
+#uidModal .modal-header h3,
+#trialInfoModal .modal-header h3,
+#regularInfoModal .modal-header h3 {
+  color: #ffffff !important;
+}
+
 .tmd-item i {
   color: #ffffff !important;
 }
@@ -2712,6 +2756,7 @@ html, body {
       <a class="tmd-item" onclick="openModal('contactModal'); closeTopMenu();"><i class="fa-solid fa-headset"></i> Contact Us</a>
     </div>
   </div>
+  <div id="topMenuBackdrop" onclick="closeTopMenu()"></div>
 
   <div class="container">
     
@@ -7714,25 +7759,33 @@ function toggleTopMenu(e){
   var btn = document.getElementById('topMenuBtn');
   var dd = document.getElementById('topMenuDropdown');
   var topbar = document.querySelector('.ucify-topbar');
+  var backdrop = document.getElementById('topMenuBackdrop');
   if(!btn || !dd) return;
   var isOpen = dd.classList.contains('open');
   if(isOpen){ 
     dd.classList.remove('open'); 
     btn.classList.remove('active'); 
     if(topbar) topbar.classList.remove('menu-open');
+    if(backdrop) backdrop.classList.remove('active');
+    document.body.style.overflow = '';
   } else { 
     dd.classList.add('open'); 
     btn.classList.add('active'); 
     if(topbar) topbar.classList.add('menu-open');
+    if(backdrop) backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 }
 function closeTopMenu(){
   var btn = document.getElementById('topMenuBtn');
   var dd = document.getElementById('topMenuDropdown');
   var topbar = document.querySelector('.ucify-topbar');
+  var backdrop = document.getElementById('topMenuBackdrop');
   if(dd) dd.classList.remove('open');
   if(btn) btn.classList.remove('active');
   if(topbar) topbar.classList.remove('menu-open');
+  if(backdrop) backdrop.classList.remove('active');
+  document.body.style.overflow = '';
 }
 document.addEventListener('click', function(ev){
   var dd = document.getElementById('topMenuDropdown');
@@ -7922,6 +7975,41 @@ function toggleBuyUcInfoPacks(){
   }
 })();
 </script>
+
+
+<style id="final-fix-yellow-remove-and-menu-blur">
+/* === FINAL FIX: Remove yellow from ALL info/modal titles === */
+.modal-header h3,
+#termsModal .modal-header h3,
+#privacyModal .modal-header h3,
+#refundModal .modal-header h3,
+#contactModal .modal-header h3,
+#uidModal .modal-header h3,
+#trialInfoModal .modal-header h3,
+#regularInfoModal .modal-header h3 {
+  color: #ffffff !important;
+}
+.modal-header h3 i,
+#termsModal .modal-header h3 i,
+#privacyModal .modal-header h3 i,
+#refundModal .modal-header h3 i,
+#contactModal .modal-header h3 i,
+#uidModal .modal-header h3 i,
+#trialInfoModal .modal-header h3 i,
+#regularInfoModal .modal-header h3 i {
+  color: #ffffff !important;
+}
+
+/* Ensure backdrop blur is correctly layered */
+#topMenuBackdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.60) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  z-index: 999 !important;
+}
+</style>
 
 </body>
 </html>
